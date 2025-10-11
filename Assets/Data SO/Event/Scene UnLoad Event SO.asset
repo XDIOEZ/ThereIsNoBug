@@ -9,12 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0af2a360c73960c4082397cd9f6d0ce1, type: 3}
-  m_Name: SceneTest
+  m_Script: {fileID: 11500000, guid: 78912aacde6077b4b9d910a6d39af249, type: 3}
+  m_Name: Scene UnLoad Event SO
   m_EditorClassIdentifier: 
-  sceneType: 1
-  sceneReference:
-    m_AssetGUID: abbb2c5e34eecdc44933a274b81f3ea6
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
