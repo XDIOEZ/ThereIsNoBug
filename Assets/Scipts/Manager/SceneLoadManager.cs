@@ -22,6 +22,7 @@ public class SceneLoadManager : MonoBehaviour
     [Header("事件广播")]
     public SceneLoadEventSO unloadedSceneEvent;
     public VoidEventSO afterScneLoadEvent;
+    public FadeEventSO fadeEvent;
     
     [Header("场景设置")]
     public GameSceneSO firstLoadScene;
@@ -80,11 +81,12 @@ public class SceneLoadManager : MonoBehaviour
         if (_isFade)
         {
             //TODO:渐出
+            fadeEvent.FadeIn(fadeDuration);
         }
         
         yield return new WaitForSeconds(fadeDuration);
 
-        //当前场景卸载后广播事件
+        //当前场景卸载后广播事件,执行黑屏后的逻辑
         unloadedSceneEvent.RaiseEvent(_sceneToLoad,_positionToGo,true);
         
         yield return _currentScene.sceneReference.UnLoadScene();
@@ -113,8 +115,8 @@ public class SceneLoadManager : MonoBehaviour
         
         if (_isFade)
         {
-            //TODO:渐入
-            //fadeEvent.FadeOut(fadeDuration);
+            //渐入
+            fadeEvent.FadeOut(fadeDuration);
         }
         
         _isLoading = false;
