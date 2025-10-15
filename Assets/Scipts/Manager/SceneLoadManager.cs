@@ -5,19 +5,22 @@ using UnityEngine;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
+
 public class SceneLoadManager : MonoBehaviour
 {
+    public Transform player;
     
     public Vector3 menuPosition;
     public Vector3 firstPosition;
     
-    private bool _isFade;
+    private bool _isFade = true;
     private bool _isLoading;
     
     
     [Header("事件监听")]
     public SceneLoadEventSO loadEventSO;
-    public VoidEventSO newGameEvent;
+    public VoidEventSO dayJumpEvent;
     
     [Header("事件广播")]
     public SceneLoadEventSO unloadedSceneEvent;
@@ -25,7 +28,7 @@ public class SceneLoadManager : MonoBehaviour
     public FadeEventSO fadeEvent;
     
     [Header("场景设置")]
-    public GameSceneSO firstLoadScene;
+    public GameSceneSO menuLoadScene;
     public GameSceneSO menuScene;
     private GameSceneSO _currentScene;
     private GameSceneSO _sceneToLoad;
@@ -35,24 +38,24 @@ public class SceneLoadManager : MonoBehaviour
     
     private void Start()
     {
+        if (player) player.gameObject.SetActive(false);
         loadEventSO.RaiseEvent(menuScene,menuPosition,true);//加载主菜单
     }
-
     private void OnEnable()
     {
         loadEventSO.LoadRequestEvent += LoadScene;
-        newGameEvent.OnEventRaised += NewGame;
+        dayJumpEvent.OnEventRaised += DayJump;
     }
     private void OnDisable()
     {
         loadEventSO.LoadRequestEvent -= LoadScene;
-        newGameEvent.OnEventRaised -= NewGame;
+        dayJumpEvent.OnEventRaised -= DayJump;
     }
 
     //新游戏（主菜单加载初始场景）
-    private void NewGame()
+    private void DayJump()
     {
-        _sceneToLoad = firstLoadScene;
+        _sceneToLoad = menuLoadScene;
         loadEventSO.RaiseEvent(_sceneToLoad,firstPosition,true);
     }
     
@@ -62,7 +65,7 @@ public class SceneLoadManager : MonoBehaviour
         //防止重复加载
         if(_isLoading)
             return;
-        
+        Debug.Log("new scene load");
         _isLoading = true;
         this._sceneToLoad = sceneToLoad;
         this._positionToGo = positionToGo;
@@ -85,6 +88,9 @@ public class SceneLoadManager : MonoBehaviour
         }
         
         yield return new WaitForSeconds(fadeDuration);
+        
+        // 黑屏中隐藏玩家，防止瞬移
+        if (player) player.gameObject.SetActive(false);
 
         //当前场景卸载后广播事件,执行黑屏后的逻辑
         unloadedSceneEvent.RaiseEvent(_sceneToLoad,_positionToGo,true);
@@ -108,10 +114,19 @@ public class SceneLoadManager : MonoBehaviour
     {
         _currentScene = _sceneToLoad;
 
-        //player.position = positionToGo;
-
-        //坐标调整完毕，显示玩家
-        //player.gameObject.SetActive(true);
+        // 仅在非主菜单场景显示玩家，并在黑屏时设置坐标
+        if (player)
+        {
+            if (_sceneToLoad != menuScene)
+            {
+                player.position = _positionToGo;
+                player.gameObject.SetActive(true);
+            }
+            else
+            {
+                player.gameObject.SetActive(false);
+            }
+        }
         
         if (_isFade)
         {
@@ -121,6 +136,7 @@ public class SceneLoadManager : MonoBehaviour
         
         _isLoading = false;
 
+        //场景加载完成后广播事件,执行渐入后的逻辑
         afterScneLoadEvent?.RaiseEvent();
     }
 }
