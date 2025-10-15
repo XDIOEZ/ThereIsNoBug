@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build.Reporting;
 using UnityEngine;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
@@ -17,10 +18,14 @@ public class SceneLoadManager : MonoBehaviour
     private bool _isFade = true;
     private bool _isLoading;
     
+    const string PLAYER_DATA_FILE_NAME = "PlayerData.json";
+    const string SCENE_DATA_FILE_NAME = "SceneData.json";
+    
     
     [Header("事件监听")]
     public SceneLoadEventSO loadEventSO;
-    public VoidEventSO dayJumpEvent;
+    [FormerlySerializedAs("dayJumpEvent")] public VoidEventSO newGameEvent;
+    public VoidEventSO loadLastSceneEvent;
     
     [Header("事件广播")]
     public SceneLoadEventSO unloadedSceneEvent;
@@ -44,20 +49,39 @@ public class SceneLoadManager : MonoBehaviour
     private void OnEnable()
     {
         loadEventSO.LoadRequestEvent += LoadScene;
-        dayJumpEvent.OnEventRaised += DayJump;
+        newGameEvent.OnEventRaised += NewGame;
+        loadLastSceneEvent.OnEventRaised += LoadLastScene;
+        
+        // ISaveable saveable = this;
+        // saveable.RegisterSaveData();
     }
     private void OnDisable()
     {
         loadEventSO.LoadRequestEvent -= LoadScene;
-        dayJumpEvent.OnEventRaised -= DayJump;
+        newGameEvent.OnEventRaised -= NewGame;
+        loadLastSceneEvent.OnEventRaised -= LoadLastScene;
+        
+        // ISaveable saveable = this;
+        // saveable.UnregisterSaveData();
     }
 
     //新游戏（主菜单加载初始场景）
-    private void DayJump()
+    private void NewGame()
     {
         _sceneToLoad = menuLoadScene;
         loadEventSO.RaiseEvent(_sceneToLoad,firstPosition,true);
     }
+    //菜单中继续游戏接口
+    public void LoadLastScene()
+    {
+        _currentScene =  SaveSystem.LoadByJson<GameSceneSO>(SCENE_DATA_FILE_NAME);
+        Vector3 lastPosition = SaveSystem.LoadByJson<Vector3>(PLAYER_DATA_FILE_NAME);
+        if(_currentScene != null)
+            loadEventSO.RaiseEvent(_currentScene,lastPosition,true);
+        else
+            Debug.Log("无存档");
+    }
+    
     
     //从一个场景加载另一个场景
     private void LoadScene(GameSceneSO sceneToLoad, Vector3 positionToGo, bool isFade)
@@ -128,6 +152,9 @@ public class SceneLoadManager : MonoBehaviour
             }
         }
         
+        //记录当前场景，用于游戏退出后继续游戏
+        SaveLastScene();
+        
         if (_isFade)
         {
             //渐入
@@ -137,6 +164,49 @@ public class SceneLoadManager : MonoBehaviour
         _isLoading = false;
 
         //场景加载完成后广播事件,执行渐入后的逻辑
-        afterScneLoadEvent?.RaiseEvent();
+        //afterScneLoadEvent?.RaiseEvent();
     }
+    
+
+    public void SaveLastScene()
+    {
+        if (_currentScene == null) return;
+        if (_currentScene == menuScene) return; // 不把主菜单当作继续点
+        
+        SaveSystem.SaveByJson(SCENE_DATA_FILE_NAME,_currentScene);
+        SaveSystem.SaveByJson(PLAYER_DATA_FILE_NAME,player.position);
+    }
+
+
+    //删除存档接口
+    public static void DeleteDataSaveFile()
+    {
+        SaveSystem.DeleteSaveFile(SCENE_DATA_FILE_NAME);
+    }
+
+    ///<summary>
+    /// 存档接口
+    // public DataDefination GetDataID()
+    // {
+    //     return GetComponent<DataDefination>();
+    // }
+    //
+    // public void GetSaveData(Data data)
+    // {
+    //     data.SaveGameScene(_currentScene);
+    // }
+    //
+    // public void LoadData(Data data)
+    // {
+    //     var playerID = player.GetComponent<DataDefination>().ID;
+    //     if (data.characterPositionDict.ContainsKey(playerID))
+    //     {
+    //         _positionToGo = data.characterPositionDict[playerID];
+    //         _sceneToLoad = data.GetSavedScene();
+    //         
+    //         LoadScene(_sceneToLoad, _positionToGo, true);
+    //         
+    //     }
+    // }
+    /// </summary>
 }

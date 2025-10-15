@@ -7,3 +7,9 @@ public enum SceneType
     Menu,
     Location
 }
+
+public enum PersistentType
+{
+    ReadWrite,
+    DoNotPersist
+}
