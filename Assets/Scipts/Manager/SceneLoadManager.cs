@@ -33,6 +33,7 @@ public class SceneLoadManager : MonoBehaviour
     public FadeEventSO fadeEvent;
     
     [Header("场景设置")]
+    public GameSceneRegistrySO sceneRegistry;
     public GameSceneSO menuLoadScene;
     public GameSceneSO menuScene;
     private GameSceneSO _currentScene;
@@ -74,12 +75,24 @@ public class SceneLoadManager : MonoBehaviour
     //菜单中继续游戏接口
     public void LoadLastScene()
     {
-        _currentScene =  SaveSystem.LoadByJson<GameSceneSO>(SCENE_DATA_FILE_NAME);
-        Vector3 lastPosition = SaveSystem.LoadByJson<Vector3>(PLAYER_DATA_FILE_NAME);
-        if(_currentScene != null)
-            loadEventSO.RaiseEvent(_currentScene,lastPosition,true);
-        else
+        var sceneId = SaveSystem.LoadByJson<string>(SCENE_DATA_FILE_NAME);
+        if (string.IsNullOrEmpty(sceneId))
+        {
             Debug.Log("无存档");
+            return;
+        }
+
+        var lastPosition = SaveSystem.LoadByJson<Vector3>(PLAYER_DATA_FILE_NAME);
+
+        // 不覆盖 _currentScene，避免卸载错场景
+        var targetScene = sceneRegistry != null ? sceneRegistry.GetByAddressableGuid(sceneId) : null;
+        if (targetScene == null)
+        {
+            Debug.LogError($"存档中的场景ID无效或未在注册表中：{sceneId}");
+            return;
+        }
+
+        loadEventSO.RaiseEvent(targetScene, lastPosition, true);
     }
     
     
@@ -122,9 +135,6 @@ public class SceneLoadManager : MonoBehaviour
         yield return _currentScene.sceneReference.UnLoadScene();
         
         
-        //隐藏玩家，防止瞬移
-        //player.gameObject.SetActive(false);
-        
         //加载新场景
         LoadNewScne();
     }
@@ -139,18 +149,18 @@ public class SceneLoadManager : MonoBehaviour
         _currentScene = _sceneToLoad;
 
         // 仅在非主菜单场景显示玩家，并在黑屏时设置坐标
-        if (player)
-        {
-            if (_sceneToLoad != menuScene)
-            {
-                player.position = _positionToGo;
-                player.gameObject.SetActive(true);
-            }
-            else
-            {
-                player.gameObject.SetActive(false);
-            }
-        }
+        // if (player)
+        // {
+        //     if (_sceneToLoad != menuScene)
+        //     {
+        //         player.position = _positionToGo;
+        //         player.gameObject.SetActive(true);
+        //     }
+        //     else
+        //     {
+        //         player.gameObject.SetActive(false);
+        //     }
+        // }
         
         //记录当前场景，用于游戏退出后继续游戏
         SaveLastScene();
@@ -171,10 +181,18 @@ public class SceneLoadManager : MonoBehaviour
     public void SaveLastScene()
     {
         if (_currentScene == null) return;
-        if (_currentScene == menuScene) return; // 不把主菜单当作继续点
-        
-        SaveSystem.SaveByJson(SCENE_DATA_FILE_NAME,_currentScene);
-        SaveSystem.SaveByJson(PLAYER_DATA_FILE_NAME,player.position);
+        if (_currentScene == menuScene) return; // 主菜单不作为继续点
+
+        // 使用 Addressables 场景的 AssetGUID 作为稳定 ID
+        var sceneId = _currentScene.sceneReference.AssetGUID;
+        if (string.IsNullOrEmpty(sceneId))
+        {
+            Debug.LogWarning("当前场景缺少有效的 Addressables GUID，跳过存档。");
+            return;
+        }
+
+        SaveSystem.SaveByJson(SCENE_DATA_FILE_NAME, sceneId);
+        if (player) SaveSystem.SaveByJson(PLAYER_DATA_FILE_NAME, player.position);
     }
 
 
@@ -182,6 +200,7 @@ public class SceneLoadManager : MonoBehaviour
     public static void DeleteDataSaveFile()
     {
         SaveSystem.DeleteSaveFile(SCENE_DATA_FILE_NAME);
+        SaveSystem.DeleteSaveFile(PLAYER_DATA_FILE_NAME);
     }
 
     ///<summary>
