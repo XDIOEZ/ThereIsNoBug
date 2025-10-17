@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -10,12 +11,11 @@ using UnityEngine.Serialization;
 
 public class SceneLoadManager : MonoBehaviour
 {
-    public Transform player;
     
     public Vector3 menuPosition;
     public Vector3 firstPosition;
     
-    private bool _isFade = true;
+    private bool _isFade ;
     private bool _isLoading;
     
     const string PLAYER_DATA_FILE_NAME = "PlayerData.json";
@@ -28,12 +28,11 @@ public class SceneLoadManager : MonoBehaviour
     public VoidEventSO loadLastSceneEvent;
     
     [Header("事件广播")]
-    public SceneLoadEventSO unloadedSceneEvent;
+    //public SceneLoadEventSO unloadedSceneEvent;
     public VoidEventSO afterScneLoadEvent;
     public FadeEventSO fadeEvent;
     
     [Header("场景设置")]
-    public GameSceneRegistrySO sceneRegistry;
     public GameSceneSO menuLoadScene;
     public GameSceneSO menuScene;
     private GameSceneSO _currentScene;
@@ -44,7 +43,7 @@ public class SceneLoadManager : MonoBehaviour
     
     private void Start()
     {
-        if (player) player.gameObject.SetActive(false);
+        //if (player) player.gameObject.SetActive(false);
         loadEventSO.RaiseEvent(menuScene,menuPosition,true);//加载主菜单
     }
     private void OnEnable()
@@ -75,24 +74,6 @@ public class SceneLoadManager : MonoBehaviour
     //菜单中继续游戏接口
     public void LoadLastScene()
     {
-        var sceneId = SaveSystem.LoadByJson<string>(SCENE_DATA_FILE_NAME);
-        if (string.IsNullOrEmpty(sceneId))
-        {
-            Debug.Log("无存档");
-            return;
-        }
-
-        var lastPosition = SaveSystem.LoadByJson<Vector3>(PLAYER_DATA_FILE_NAME);
-
-        // 不覆盖 _currentScene，避免卸载错场景
-        var targetScene = sceneRegistry != null ? sceneRegistry.GetByAddressableGuid(sceneId) : null;
-        if (targetScene == null)
-        {
-            Debug.LogError($"存档中的场景ID无效或未在注册表中：{sceneId}");
-            return;
-        }
-
-        loadEventSO.RaiseEvent(targetScene, lastPosition, true);
     }
     
     
@@ -127,10 +108,10 @@ public class SceneLoadManager : MonoBehaviour
         yield return new WaitForSeconds(fadeDuration);
         
         // 黑屏中隐藏玩家，防止瞬移
-        if (player) player.gameObject.SetActive(false);
+        //if (player) player.gameObject.SetActive(false);
 
         //当前场景卸载后广播事件,执行黑屏后的逻辑
-        unloadedSceneEvent.RaiseEvent(_sceneToLoad,_positionToGo,true);
+        //unloadedSceneEvent.RaiseEvent(_sceneToLoad,_positionToGo,true);
         
         yield return _currentScene.sceneReference.UnLoadScene();
         
@@ -180,19 +161,6 @@ public class SceneLoadManager : MonoBehaviour
 
     public void SaveLastScene()
     {
-        if (_currentScene == null) return;
-        if (_currentScene == menuScene) return; // 主菜单不作为继续点
-
-        // 使用 Addressables 场景的 AssetGUID 作为稳定 ID
-        var sceneId = _currentScene.sceneReference.AssetGUID;
-        if (string.IsNullOrEmpty(sceneId))
-        {
-            Debug.LogWarning("当前场景缺少有效的 Addressables GUID，跳过存档。");
-            return;
-        }
-
-        SaveSystem.SaveByJson(SCENE_DATA_FILE_NAME, sceneId);
-        if (player) SaveSystem.SaveByJson(PLAYER_DATA_FILE_NAME, player.position);
     }
 
 
@@ -203,29 +171,5 @@ public class SceneLoadManager : MonoBehaviour
         SaveSystem.DeleteSaveFile(PLAYER_DATA_FILE_NAME);
     }
 
-    ///<summary>
-    /// 存档接口
-    // public DataDefination GetDataID()
-    // {
-    //     return GetComponent<DataDefination>();
-    // }
-    //
-    // public void GetSaveData(Data data)
-    // {
-    //     data.SaveGameScene(_currentScene);
-    // }
-    //
-    // public void LoadData(Data data)
-    // {
-    //     var playerID = player.GetComponent<DataDefination>().ID;
-    //     if (data.characterPositionDict.ContainsKey(playerID))
-    //     {
-    //         _positionToGo = data.characterPositionDict[playerID];
-    //         _sceneToLoad = data.GetSavedScene();
-    //         
-    //         LoadScene(_sceneToLoad, _positionToGo, true);
-    //         
-    //     }
-    // }
-    /// </summary>
+    
 }
