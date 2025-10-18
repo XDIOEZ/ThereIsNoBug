@@ -90,7 +90,7 @@ public class UIMgr : BaseMgrNoMono<UIMgr>
             return;
         }
 
-        ResMgr.Instance().Load<GameObject>("UI/" + panelName, (obj) =>
+        ResMgr.Instance().LoadAsync<GameObject>("UI/" + panelName, (obj) =>
         {
             //把他作为 Canvas的子对象
             //并且 要设置它的相对位置

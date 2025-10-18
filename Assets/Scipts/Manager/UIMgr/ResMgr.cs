@@ -32,33 +32,33 @@ public class ResMgr : BaseMgrNoMono<ResMgr>
     /// <param name="name"></param>
     /// <param name="callback">生成完后用资源做什么，参数是这个物体，就算是在没什么好干的也可以添加一个空函数</param>
     /// <typeparam name="T"></typeparam>
-    // public void LoadAsync<T>(string name, UnityAction<T> callback) where T:Object
-    // {
-    //     //开启异步加载的协程
-    //     MonoMgr.Instance().StartCoroutine(ReallyLoadAsync(name, callback));
-    // }
+    public void LoadAsync<T>(string name, UnityAction<T> callback) where T:Object
+    {
+        //开启异步加载的协程
+        MonoMgr.Instance().StartCoroutine(ReallyLoadAsync(name, callback));
+    }
 
     //真正的协同程序函数  用于 开启异步加载对应的资源
-    // private IEnumerator ReallyLoadAsync<T>(string name, UnityAction<T> callback) where T : Object
-    // {
-    //     ResourceRequest r = Resources.LoadAsync<T>(name);
-    //     yield return r;
-    //
-    //     // if (r.asset is GameObject)
-    //     //     callback(GameObject.Instantiate(r.asset) as T);
-    //     // else
-    //     //     callback(r.asset as T);
-    //     T result = null;
-    //     if (r.asset is GameObject)
-    //         result = GameObject.Instantiate(r.asset) as T;
-    //     else
-    //         result = r.asset as T;
-    //
-    //     if (result == null)
-    //         Debug.LogError($"资源加载失败: {name}");
-    //
-    //     callback?.Invoke(result);
-    // }
+    private IEnumerator ReallyLoadAsync<T>(string name, UnityAction<T> callback) where T : Object
+    {
+        ResourceRequest r = Resources.LoadAsync<T>(name);
+        yield return r;
+    
+        // if (r.asset is GameObject)
+        //     callback(GameObject.Instantiate(r.asset) as T);
+        // else
+        //     callback(r.asset as T);
+        T result = null;
+        if (r.asset is GameObject)
+            result = GameObject.Instantiate(r.asset) as T;
+        else
+            result = r.asset as T;
+    
+        if (result == null)
+            Debug.LogError($"资源加载失败: {name}");
+    
+        callback?.Invoke(result);
+    }
 
     #endregion
     
