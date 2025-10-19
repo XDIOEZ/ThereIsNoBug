@@ -6,19 +6,29 @@ using UnityEngine;
 public class GamePlayManager : MonoSingleton<GamePlayManager> 
 {
     public LayerMask interactableLayer;
-
+    public Inventory inventory;
+    public bool isOnInventory;
+    
+    
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!isOnInventory)
         {
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            
-            RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero,interactableLayer);
-            
-            if (hit.collider != null)
+            if (Input.GetMouseButtonDown(0))
             {
-                hit.collider.gameObject.GetComponent<InteractableComponent>().Interact();
+                Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            
+                RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero,interactableLayer);
+            
+                if (hit.collider != null)
+                {
+                    hit.collider.gameObject.GetComponent<InteractableComponent>().Interact();
+                }
             }
+        }
+        else
+        {
+            
         }
     }
 }
