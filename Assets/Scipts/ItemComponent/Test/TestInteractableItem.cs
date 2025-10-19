@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestInteractableItem : MonoBehaviour
+public class TestInteractableItem : Item 
 {
     InteractableComponent interactableComponent;
     void Start()
