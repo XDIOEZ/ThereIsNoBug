@@ -3,9 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class AreaChange : MonoBehaviour
 {
+    public int step = -1;//记录移动步数
+    public AreaTransition areaTransition;
+    
     public SpriteRenderer[] areas; // 前景淡入淡出
     public Vector3[] movePositions; // 相机移动到的位置
     
@@ -16,27 +20,51 @@ public class AreaChange : MonoBehaviour
     [Header("")]
     public Camera mainCamera;
     
-    public int currentAreaIndex = 0; // 当前区域索引
+    public int currentYAreaIndex = 0; // 当前区域索引
     private bool isTransitioning = false;
     
-    [Header("远景（与相机 z 同步移动，保持远景不变）")]
-    public GameObject farBackground; 
-    public float cameraMoveDistance; // 相机每次移动的距离
+    [Header("远景（按索引切换，不随相机移动）")]
+    public GameObject[] farBackgrounds; 
 
     [Header("远景上下晃动")]
     public float bobAmplitude = 0.2f;            // 振幅（单位：世界坐标）
     public float bobFrequency = 2f;              // 频率（Hz）
+    
+    
+    // 记录已访问区域索引
+    public int[,] visitedAreas;
     
     void Start()
     {
         if (mainCamera == null)
             mainCamera = Camera.main;
         
+        areaTransition = GetComponent<AreaTransition>();
         
         areas = new SpriteRenderer[4];
         for(int i=1;i<=4;i++)
         {
             areas[i-1] = GameObject.Find("areas" + i).GetComponent<SpriteRenderer>();
+        }
+
+        farBackgrounds = new GameObject[4];
+        for(int i=1;i<=4;i++)
+        {
+            farBackgrounds[i - 1] = GameObject.Find("farBackground" + i);
+        }
+        
+        // 初始化访问集合并标记当前区域为已访问
+        visitedAreas = new int[5, 4];
+        visitedAreas[areaTransition.currentXAreaIndex,currentYAreaIndex ] = 1;
+        
+        // 初始化远景激活状态：只有 currentAreaIndex 对应的远景激活
+        if (farBackgrounds != null && farBackgrounds.Length > 0)
+        {
+            for (int i = 0; i < farBackgrounds.Length; i++)
+            {
+                farBackgrounds[i].SetActive(false);
+            }
+            farBackgrounds[currentYAreaIndex].SetActive(true);
         }
         
     }
@@ -44,7 +72,7 @@ public class AreaChange : MonoBehaviour
     private void Update()
     {
         if (isTransitioning) return;
-        
+
         if(Input.GetKeyDown(KeyCode.C)&&!isTransitioning)
         {
             ChangeArea();
@@ -56,27 +84,98 @@ public class AreaChange : MonoBehaviour
     }
     
     //前进
-    private void ChangeArea()
+    public void ChangeArea()
     {
-        if (currentAreaIndex < areas.Length - 1)
+        
+        if (currentYAreaIndex < areas.Length - 1)
         {
-            SceneChange(areas[currentAreaIndex],areas[currentAreaIndex+1]);
-            StartCoroutine(TransitionToArea(movePositions[currentAreaIndex+1]));
-            currentAreaIndex++;
+            // 统计步数：首次访问 +1，已访问 -1
+            if (visitedAreas[areaTransition.currentXAreaIndex,currentYAreaIndex+1]!=0)
+            {
+                step--;
+                visitedAreas[areaTransition.currentXAreaIndex,currentYAreaIndex]=0;
+            }
+            else
+            {
+                step++;
+                visitedAreas[areaTransition.currentXAreaIndex,currentYAreaIndex+1]=1;
+            }
+            
+            //状态重置
+            if (step == 4 && currentYAreaIndex+1!=3 &&  areaTransition.currentXAreaIndex!=1)
+            {
+                ResetVisitedY();
+            }
+            //正常前进
+            else
+            {
+                SceneChange(areas[currentYAreaIndex],areas[currentYAreaIndex+1]);
+                int targetIndex = currentYAreaIndex + 1;
+                StartCoroutine(TransitionToArea(movePositions[targetIndex],targetIndex));
+                //currentAreaIndex++;
+            }
+            
         }
     }
     //后退
-    private void ChangeAreaBack()
+    public void ChangeAreaBack()
     {
-        if (currentAreaIndex > 0)
+        if (currentYAreaIndex > 0)
         {
-            SceneChange(areas[currentAreaIndex],areas[currentAreaIndex-1]);
-            StartCoroutine(TransitionToArea(movePositions[currentAreaIndex-1]));
-            currentAreaIndex--;
+            // 统计步数：首次访问 +1，已访问 -1
+            if (visitedAreas[areaTransition.currentXAreaIndex,currentYAreaIndex-1]!=0)
+            {
+                step--;
+                visitedAreas[areaTransition.currentXAreaIndex,currentYAreaIndex]=0;
+            }
+            else
+            {
+                step++;
+                visitedAreas[areaTransition.currentXAreaIndex,currentYAreaIndex-1]=1;
+            }
+            
+            if (step == 4 && currentYAreaIndex-1!=3 &&  areaTransition.currentXAreaIndex!=1)
+            {
+                ResetVisitedY();
+            }
+            else
+            {
+                SceneChange(areas[currentYAreaIndex],areas[currentYAreaIndex-1]);
+                int targetIndex = currentYAreaIndex - 1;
+                StartCoroutine(TransitionToArea(movePositions[targetIndex],targetIndex));
+                //currentAreaIndex--;
+            }
         }
-        else
+    }
+    
+    // 公共方法：重置步数、摄像机位置，近景、远景、已访问记录
+    public void ResetVisitedY()
+    {
+        
+        for (int i = 0; i < visitedAreas.GetLength(0); i++)
         {
-            return;
+            for (int j = 0; j < visitedAreas.GetLength(1); j++)
+            {
+                visitedAreas[i, j] = 0;
+            }
+        }
+        
+        Debug.Log("reset!");
+
+        
+        
+        SceneChange(areas[currentYAreaIndex],areas[0]);
+        StartCoroutine(TransitionToArea(movePositions[0],0));
+        
+        currentYAreaIndex = 0;
+        step = 0;
+        if (farBackgrounds != null && farBackgrounds.Length > 0)
+        {
+            for (int i = 0; i < farBackgrounds.Length; i++)
+            {
+                if (farBackgrounds[i] == null) continue;
+                farBackgrounds[i].SetActive(i == currentYAreaIndex);
+            }
         }
     }
     
@@ -91,89 +190,93 @@ public class AreaChange : MonoBehaviour
         
         currentScene.DOFade(0f, transitionDuration);
         nextScene.DOFade(1f, transitionDuration);
+        
+        //TODO:到达一定地点切换远景
     }
     
     
     
-    //相机和远景同时平滑移动
-    private IEnumerator TransitionToArea(Vector3 targetPosition)
+    //相机平滑移动,同时在过渡中切换远景（在进度 0.5 切换）
+    private IEnumerator TransitionToArea(Vector3 targetPosition,int targetAreaIndex)
     {
-        // isTransitioning = true;
-        //
-        // Vector3 cameraStartPosition = mainCamera.transform.position;
-        // Vector3 farBackgroundStartPosition = farBackground.transform.position;
-        //
-        // float journey = 0f;
-        //
-        // cameraMoveDistance = targetPosition.z - cameraStartPosition.z;
-        //
-        // while (journey <= 1f)
-        // {
-        //     journey += Time.deltaTime * transitionSpeed;
-        //     mainCamera.transform.position = Vector3.Lerp(cameraStartPosition, 
-        //         new Vector3(targetPosition.x, targetPosition.y, targetPosition.z), journey);
-        //     
-        //     farBackground.transform.position = Vector3.Lerp(farBackgroundStartPosition, 
-        //         new Vector3(farBackgroundStartPosition.x, farBackgroundStartPosition.y, farBackgroundStartPosition.z+cameraMoveDistance), journey);
-        //     
-        //     
-        //     yield return null;
-        // }
-        //
-        // isTransitioning = false;
         if (mainCamera == null) yield break;
-
+        if (movePositions == null || movePositions.Length == 0) yield break;
+        
         isTransitioning = true;
 
         Vector3 cameraStartPosition = mainCamera.transform.position;
-        Vector3 farStartPosition = farBackground != null ? farBackground.transform.position : Vector3.zero;
+        Vector3 realTargetPosition = new Vector3(mainCamera.transform.position.x,mainCamera.transform.position.y,targetPosition.z);
 
+        if (step == 4)
+        {
+            Debug.Log("特殊位置移动");
+            realTargetPosition = new Vector3(30,0,0);
+        }
+        
         float journey = 0f;
-        float bobTime = 0f;
-        cameraMoveDistance = targetPosition.z - cameraStartPosition.z;
+        float elapsed = 0f;
+        bool swappedFar = false;
+        
 
         while (journey < 1f)
         {
             float dt = Time.deltaTime;
+            elapsed += dt;
             journey += dt * Mathf.Max(0.0001f, transitionSpeed);
             journey = Mathf.Min(journey, 1f);
+            
+            
+            
+            // 基础线性插值位置
+            Vector3 basePos = Vector3.Lerp(cameraStartPosition, realTargetPosition, journey);
 
-            // 相机移动
-            mainCamera.transform.position = Vector3.Lerp(
-                cameraStartPosition,
-                new Vector3(targetPosition.x, targetPosition.y, targetPosition.z),
-                journey
-            );
+            // 计算晃动偏移（只在 Y 方向）
+            float bobY = Mathf.Sin(elapsed * bobFrequency * Mathf.PI * 2f) * bobAmplitude;
 
-            // 远景移动（z 跟随），Y 叠加上下晃动：sin(2πft) * 振幅 * 包络(使首尾为 0)
-            if (farBackground != null)
+            // 应用晃动到相机位置
+            mainCamera.transform.position = new Vector3(basePos.x, basePos.y + bobY, basePos.z);
+            
+            // // 相机移动
+            // mainCamera.transform.position = Vector3.Lerp(
+            //     cameraStartPosition,
+            //     new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, targetPosition.z),
+            //     journey
+            // );
+            
+            // 切换远景
+            if (!swappedFar && farBackgrounds != null && farBackgrounds.Length > 0)
             {
-                bobTime += dt;
-                float envelope = Mathf.Sin(journey * Mathf.PI); // 0→1→0 平滑包络
-                float bob = Mathf.Sin(bobTime * 2f * Mathf.PI * Mathf.Max(0f, bobFrequency)) *
-                            Mathf.Max(0f, bobAmplitude) * envelope;
+                if (journey >= 0.7f)
+                {
+                    
+                    if (currentYAreaIndex >= 0 && currentYAreaIndex < farBackgrounds.Length && farBackgrounds[currentYAreaIndex])
+                        farBackgrounds[currentYAreaIndex].SetActive(false);
 
-                float farZ = Mathf.Lerp(farStartPosition.z, farStartPosition.z + cameraMoveDistance, journey);
-                farBackground.transform.position = new Vector3(
-                    farStartPosition.x,
-                    farStartPosition.y + bob,
-                    farZ
-                );
+                    if (targetAreaIndex >= 0 && targetAreaIndex < farBackgrounds.Length && farBackgrounds[targetAreaIndex])
+                        farBackgrounds[targetAreaIndex].SetActive(true);
+                    
+                    
+                    currentYAreaIndex = targetAreaIndex;
+                    swappedFar = true;
+                }
             }
 
             yield return null;
         }
-        // 归位最终位置（消除数值误差，Y 回到初始，Z 到目标）
-        if (farBackground != null)
-        {
-            farBackground.transform.position = new Vector3(
-                farStartPosition.x,
-                farStartPosition.y,
-                farStartPosition.z + cameraMoveDistance
-            );
-        }
-        mainCamera.transform.position = new Vector3(targetPosition.x, targetPosition.y, targetPosition.z);
 
+        // 到达最终位置并清除晃动（确保高度精确）
+        mainCamera.transform.position = realTargetPosition;
+
+        // 确保远景最终状态正确
+        if (farBackgrounds != null && farBackgrounds.Length > 0)
+        {
+            for (int i = 0; i < farBackgrounds.Length; i++)
+            {
+                if (farBackgrounds[i]) continue;
+                farBackgrounds[i].SetActive(i == targetAreaIndex);
+            }
+        }
+        
         isTransitioning = false;
         
     }

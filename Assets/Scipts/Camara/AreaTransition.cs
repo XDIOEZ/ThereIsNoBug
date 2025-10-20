@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class AreaTransition : MonoBehaviour
 {
@@ -8,49 +9,91 @@ public class AreaTransition : MonoBehaviour
     public float transitionSpeed = 2f;
     public Camera mainCamera;
     
-    private int currentAreaIndex = 1;
-    private bool isTransitioning = false;
+    public int currentXAreaIndex = 3;
+    private bool _isTransitioning = false;
+    
+    public AreaChange areaChange;
+
     
     void Start()
     {
         if (mainCamera == null)
             mainCamera = Camera.main;
+        
+        areaChange = GetComponent<AreaChange>();
+        
+
     }
     
     void Update()
     {
         // 键盘输入切换区域
-        if (Input.GetKeyDown(KeyCode.RightArrow) && !isTransitioning)
+        if (Input.GetKeyDown(KeyCode.RightArrow) && !_isTransitioning)
         {
-            MoveToNextArea();
+            MoveToAreaRight();
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow) && !isTransitioning)
+        else if (Input.GetKeyDown(KeyCode.LeftArrow) && !_isTransitioning)
         {
-            MoveToPreviousArea();
-        }
-    }
-    
-    public void MoveToNextArea()
-    {
-        if (currentAreaIndex < areas.Length - 1)
-        {
-            currentAreaIndex++;
-            StartCoroutine(TransitionToArea(areas[currentAreaIndex].position));
+            MoveToAreaLeft();
         }
     }
     
-    public void MoveToPreviousArea()
+    public void countStep(int targetXAreaIndex, int targetYAreaIndex)
     {
-        if (currentAreaIndex > 0)
+        Debug.Log("LRcountStep");
+        // 统计步数：首次访问 +1，已访问 -1
+        if (areaChange.visitedAreas[targetXAreaIndex,targetYAreaIndex]!=0)
         {
-            currentAreaIndex--;
-            StartCoroutine(TransitionToArea(areas[currentAreaIndex].position));
+            areaChange.step--;
+            areaChange.visitedAreas[currentXAreaIndex,areaChange.currentYAreaIndex]=0;
+        }
+        else
+        {
+            areaChange.step++;
+            areaChange.visitedAreas[targetXAreaIndex,targetYAreaIndex]=1;
         }
     }
     
-    private IEnumerator TransitionToArea(Vector3 targetPosition)
+    public void MoveToAreaRight()
     {
-        isTransitioning = true;
+        if (currentXAreaIndex < areas.Length - 1)
+        {
+            countStep( currentXAreaIndex + 1,areaChange.currentYAreaIndex);
+            //状态重置
+            if(areaChange.step == 4 && areaChange.currentYAreaIndex!=3 && currentXAreaIndex != 1)
+            {
+                
+                areaChange.ResetVisitedY();
+            }
+            else
+            {
+                currentXAreaIndex++;
+                StartCoroutine(TransitionToArea(areas[currentXAreaIndex].position, currentXAreaIndex));
+            }
+        }
+    }
+    
+    public void MoveToAreaLeft()
+    {
+        if (currentXAreaIndex > 0)
+        {
+            countStep(currentXAreaIndex - 1 ,areaChange.currentYAreaIndex);
+            //状态重置
+            if(areaChange.step == 4 && areaChange.currentYAreaIndex!=3 && currentXAreaIndex != 1)
+            {
+                areaChange.ResetVisitedY();
+            }
+            else
+            {
+                currentXAreaIndex--;
+                StartCoroutine(TransitionToArea(areas[currentXAreaIndex].position, currentXAreaIndex));
+            }
+        }
+    }
+    
+    private IEnumerator TransitionToArea(Vector3 targetPosition, int targetAreaIndex)
+    {
+        _isTransitioning = true;
         
         Vector3 startPosition = mainCamera.transform.position;
         float journey = 0f;
@@ -63,18 +106,7 @@ public class AreaTransition : MonoBehaviour
             yield return null;
         }
         
-        isTransitioning = false;
+        _isTransitioning = false;
     }
     
-    // 直接跳转到指定区域
-    public void JumpToArea(int areaIndex)
-    {
-        if (areaIndex >= 0 && areaIndex < areas.Length)
-        {
-            currentAreaIndex = areaIndex;
-            Vector3 targetPosition = areas[areaIndex].position;
-            mainCamera.transform.position = new Vector3(targetPosition.x, targetPosition.y, 
-                mainCamera.transform.position.z);
-        }
-    }
 }
