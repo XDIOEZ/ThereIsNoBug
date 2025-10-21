@@ -53,21 +53,31 @@ public class AreaTransition : MonoBehaviour
             areaChange.visitedAreas[targetXAreaIndex,targetYAreaIndex]=1;
         }
     }
+    private bool ShouldResetAtStep4(int nextX, int nextY)
+    {
+        // 指定位置为 (x=1, y=3)，达到阈值且目标位置不是指定位置时重置
+        return areaChange.step >= 4 && !(nextX == 1 && nextY == 3);
+    }
     
     public void MoveToAreaRight()
     {
         if (currentXAreaIndex < areas.Length - 1)
         {
-            countStep( currentXAreaIndex + 1,areaChange.currentYAreaIndex);
+            int nextX = currentXAreaIndex + 1;
+            int nextY = areaChange.currentYAreaIndex;
+            
+            countStep( nextX, nextY);
             //状态重置
-            if(areaChange.step == 4 && areaChange.currentYAreaIndex!=3 && currentXAreaIndex != 1)
+            if (ShouldResetAtStep4(nextX, nextY))
             {
-                
                 areaChange.ResetVisitedY();
+                // 回到指定位置（X=3；Y=0）
+                currentXAreaIndex = 3;
+                StartCoroutine(TransitionToArea(areas[currentXAreaIndex].position, currentXAreaIndex));
             }
             else
             {
-                currentXAreaIndex++;
+                currentXAreaIndex = nextX;
                 StartCoroutine(TransitionToArea(areas[currentXAreaIndex].position, currentXAreaIndex));
             }
         }
@@ -77,15 +87,21 @@ public class AreaTransition : MonoBehaviour
     {
         if (currentXAreaIndex > 0)
         {
-            countStep(currentXAreaIndex - 1 ,areaChange.currentYAreaIndex);
+            int nextX = currentXAreaIndex - 1;
+            int nextY = areaChange.currentYAreaIndex;
+            
+            countStep(nextX, nextY);
+            
             //状态重置
-            if(areaChange.step == 4 && areaChange.currentYAreaIndex!=3 && currentXAreaIndex != 1)
+            if (ShouldResetAtStep4(nextX, nextY))
             {
                 areaChange.ResetVisitedY();
+                currentXAreaIndex = 3;
+                StartCoroutine(TransitionToArea(areas[currentXAreaIndex].position, currentXAreaIndex));
             }
             else
             {
-                currentXAreaIndex--;
+                currentXAreaIndex = nextX;
                 StartCoroutine(TransitionToArea(areas[currentXAreaIndex].position, currentXAreaIndex));
             }
         }
