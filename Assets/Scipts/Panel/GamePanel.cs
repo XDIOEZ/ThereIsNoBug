@@ -70,6 +70,18 @@ public class GamePanel : BasePanel
             case"玩小游戏":
                 UIMgr.Instance().ShowPanel<BasePanel>("LittleGamePanel", E_UI_Layer.Top);
                 break;
+            case"RightBtn":
+                print("向右移动");
+                break;
+            case"LeftBtn":
+                print("向左移动");
+                break;
+            case"ForwardBtn":
+                print("向前移动");
+                break;
+            case"BehindBtn":
+                print("向后移动");
+                break;
         }
     }
 }
