@@ -1,4 +1,4 @@
-using DG.Tweening;
+ï»¿using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,50 +6,50 @@ using UnityEngine.Events;
 
 public class FlowerChange : MonoBehaviour
 {
-    //ÕâÊÇ¹ÜÀíÎ»ÓÚ×Ó¶ÔÏóÉÏµÄ»¨¶ä¶ÔÏó ËûÃÇµÄÃû×ÖÎª ºì ¡¢»Æ ¡¢À¶ ¡¢×Ï ¡¢ÂÌ ¡¢ Çà ,³È ×Ï
+    //è¿™æ˜¯ç®¡ç†ä½äºå­å¯¹è±¡ä¸Šçš„èŠ±æœµå¯¹è±¡ ä»–ä»¬çš„åå­—ä¸º çº¢ ã€é»„ ã€è“ ã€ç´« ã€ç»¿ ã€ é’ ,æ©™ ç´«
     public List<GameObject> Flowers = new List<GameObject>();
 
-    [Header("»¨¶äÅÅÁĞÉèÖÃ")]
-    [Tooltip("»¨¶äÖ®¼äµÄ¼ä¸ô¾àÀë")]
+    [Header("èŠ±æœµæ’åˆ—è®¾ç½®")]
+    [Tooltip("èŠ±æœµä¹‹é—´çš„é—´éš”è·ç¦»")]
     public float flowerSpacing = 2.0f;
     
-    [Tooltip("µÚÒ»¸ö»¨¶äµÄÆğÊ¼X×ø±êÎ»ÖÃ")]
+    [Tooltip("ç¬¬ä¸€ä¸ªèŠ±æœµçš„èµ·å§‹Xåæ ‡ä½ç½®")]
     public float startOffsetX = 0.0f;
 
-    [Header("ÓÎÏ·Ê¤Àûºóµ÷ÓÃ")]
-    public UnityEvent unityEvent;
+    [Header("æ¸¸æˆèƒœåˆ©åè°ƒç”¨")]
+    public UnityEvent OnWin;
 
-    [Header("Ê¤ÀûÌõ¼şÉèÖÃ")]
-    [Tooltip("true±íÊ¾°´YÖáµİÔöÅÅĞòÎªÊ¤ÀûÌõ¼ş£¬false±íÊ¾°´ÑÕÉ«Ë³ĞòÅÅĞòÎªÊ¤ÀûÌõ¼ş")]
+    [Header("èƒœåˆ©æ¡ä»¶è®¾ç½®")]
+    [Tooltip("trueè¡¨ç¤ºæŒ‰Yè½´é€’å¢æ’åºä¸ºèƒœåˆ©æ¡ä»¶ï¼Œfalseè¡¨ç¤ºæŒ‰é¢œè‰²é¡ºåºæ’åºä¸ºèƒœåˆ©æ¡ä»¶")]
     public bool useYAxisOrderAsWinCondition = true;
 
-    // TODO StartÊ±°´Ë³Ğò»ñÈ¡×Ó¶ÔÏó Ìî³äµ½ Flowers ÁĞ±íÖĞ
+    // TODO Startæ—¶æŒ‰é¡ºåºè·å–å­å¯¹è±¡ å¡«å……åˆ° Flowers åˆ—è¡¨ä¸­
     void Start()
     {
-        // »ñÈ¡ËùÓĞ×Ó¶ÔÏó²¢°´Ë³ĞòÌí¼Óµ½FlowersÁĞ±íÖĞ
+        // è·å–æ‰€æœ‰å­å¯¹è±¡å¹¶æŒ‰é¡ºåºæ·»åŠ åˆ°Flowersåˆ—è¡¨ä¸­
         for (int i = 0; i < transform.childCount; i++)
         {
             Transform child = transform.GetChild(i);
             Flowers.Add(child.gameObject);
         }
         
-        // TODO Ëæ»ú´òÂÒ»¨¶äÎ»ÖÃ£¨Ö»ĞŞ¸ÄÎ»ÖÃ£¬²»ĞŞ¸ÄÁĞ±íË³Ğò£©
+        // TODO éšæœºæ‰“ä¹±èŠ±æœµä½ç½®ï¼ˆåªä¿®æ”¹ä½ç½®ï¼Œä¸ä¿®æ”¹åˆ—è¡¨é¡ºåºï¼‰
         ShuffleFlowerPositions();
     }
 
-    // Ëæ»ú´òÂÒ»¨¶äÎ»ÖÃ£¨Ö»ĞŞ¸ÄÎ»ÖÃ£¬²»ĞŞ¸ÄÁĞ±íË³Ğò£©
+    // éšæœºæ‰“ä¹±èŠ±æœµä½ç½®ï¼ˆåªä¿®æ”¹ä½ç½®ï¼Œä¸ä¿®æ”¹åˆ—è¡¨é¡ºåºï¼‰
     void ShuffleFlowerPositions()
     {
-        // ´´½¨Î»ÖÃÁĞ±í
+        // åˆ›å»ºä½ç½®åˆ—è¡¨
         List<Vector3> positions = new List<Vector3>();
         
-        // »ñÈ¡ËùÓĞ»¨¶äµÄµ±Ç°Î»ÖÃ
+        // è·å–æ‰€æœ‰èŠ±æœµçš„å½“å‰ä½ç½®
         for (int i = 0; i < Flowers.Count; i++)
         {
             positions.Add(Flowers[i].transform.position);
         }
         
-        // Ê¹ÓÃFisher-YatesÏ´ÅÆËã·¨´òÂÒÎ»ÖÃÁĞ±í
+        // ä½¿ç”¨Fisher-Yatesæ´—ç‰Œç®—æ³•æ‰“ä¹±ä½ç½®åˆ—è¡¨
         for (int i = positions.Count - 1; i > 0; i--)
         {
             int randomIndex = Random.Range(0, i + 1);
@@ -58,12 +58,12 @@ public class FlowerChange : MonoBehaviour
             positions[randomIndex] = temp;
         }
         
-        // ½«´òÂÒºóµÄÎ»ÖÃÓ¦ÓÃµ½»¨¶äÉÏ£¨Ö»ĞŞ¸Äx×ø±ê£¬±£³Öy,z²»±ä£©
+        // å°†æ‰“ä¹±åçš„ä½ç½®åº”ç”¨åˆ°èŠ±æœµä¸Šï¼ˆåªä¿®æ”¹xåæ ‡ï¼Œä¿æŒy,zä¸å˜ï¼‰
         for (int i = 0; i < Flowers.Count; i++)
         {
             Vector3 newPosition = Flowers[i].transform.position;
             newPosition.x = positions[i].x;
-            // ÏŞÖÆYÖá²»ÄÜ´óÓÚ1£¬Èç¹û´óÓÚ1ÔòÉèÎª0
+            // é™åˆ¶Yè½´ä¸èƒ½å¤§äº1ï¼Œå¦‚æœå¤§äº1åˆ™è®¾ä¸º0
             if (newPosition.y > 1f)
             {
                 newPosition.y = 0f;
@@ -73,20 +73,20 @@ public class FlowerChange : MonoBehaviour
     }
 
     /// <summary>
-    /// ¼ì²é»¨¶äË³ĞòÊÇ·ñÕıÈ·
-    /// °´ÕÕºì¡¢³È¡¢»Æ¡¢ÂÌ¡¢Çà¡¢À¶¡¢×ÏµÄË³Ğò¼ì²é
+    /// æ£€æŸ¥èŠ±æœµé¡ºåºæ˜¯å¦æ­£ç¡®
+    /// æŒ‰ç…§çº¢ã€æ©™ã€é»„ã€ç»¿ã€é’ã€è“ã€ç´«çš„é¡ºåºæ£€æŸ¥
     /// </summary>
-    /// <returns>Èç¹ûË³ĞòÕıÈ··µ»Øtrue£¬·ñÔò·µ»Øfalse</returns>
+    /// <returns>å¦‚æœé¡ºåºæ­£ç¡®è¿”å›trueï¼Œå¦åˆ™è¿”å›false</returns>
     public bool CheckFlowerOrder()
     {
-        // ¶¨ÒåÕıÈ·µÄ»¨¶äÃû³ÆË³Ğò
-        string[] correctOrder = { "ºì", "³È", "»Æ", "ÂÌ", "Çà", "À¶", "×Ï" };
+        // å®šä¹‰æ­£ç¡®çš„èŠ±æœµåç§°é¡ºåº
+        string[] correctOrder = { "çº¢", "æ©™", "é»„", "ç»¿", "é’", "è“", "ç´«" };
         
-        // °´xÖáÎ»ÖÃ¶Ô»¨¶ä½øĞĞÅÅĞò
+        // æŒ‰xè½´ä½ç½®å¯¹èŠ±æœµè¿›è¡Œæ’åº
         List<GameObject> sortedFlowers = new List<GameObject>(Flowers);
         sortedFlowers.Sort((a, b) => a.transform.position.x.CompareTo(b.transform.position.x));
         
-        // ¼ì²éÅÅĞòºóµÄ»¨¶äÊÇ·ñ·ûºÏÕıÈ·Ë³Ğò
+        // æ£€æŸ¥æ’åºåçš„èŠ±æœµæ˜¯å¦ç¬¦åˆæ­£ç¡®é¡ºåº
         for (int i = 0; i < sortedFlowers.Count && i < correctOrder.Length; i++)
         {
             if (sortedFlowers[i].name != correctOrder[i])
@@ -99,19 +99,19 @@ public class FlowerChange : MonoBehaviour
     }
 
     /// <summary>
-    /// ¼ì²é»¨¶äÊÇ·ñ°´YÖáµİÔöÅÅÁĞ£¨´Ó×óµ½ÓÒ£©
+    /// æ£€æŸ¥èŠ±æœµæ˜¯å¦æŒ‰Yè½´é€’å¢æ’åˆ—ï¼ˆä»å·¦åˆ°å³ï¼‰
     /// </summary>
-    /// <returns>Èç¹ûYÖá°´µİÔöË³ĞòÅÅÁĞ·µ»Øtrue£¬·ñÔò·µ»Øfalse</returns>
+    /// <returns>å¦‚æœYè½´æŒ‰é€’å¢é¡ºåºæ’åˆ—è¿”å›trueï¼Œå¦åˆ™è¿”å›false</returns>
     public bool CheckYAxisAscendingOrder()
     {
-        // °´xÖáÎ»ÖÃ¶Ô»¨¶ä½øĞĞÅÅĞò
+        // æŒ‰xè½´ä½ç½®å¯¹èŠ±æœµè¿›è¡Œæ’åº
         List<GameObject> sortedFlowers = new List<GameObject>(Flowers);
         sortedFlowers.Sort((a, b) => a.transform.position.x.CompareTo(b.transform.position.x));
 
-        // ¼ì²éYÖáÊÇ·ñ°´µİÔöË³ĞòÅÅÁĞ
+        // æ£€æŸ¥Yè½´æ˜¯å¦æŒ‰é€’å¢é¡ºåºæ’åˆ—
         for (int i = 1; i < sortedFlowers.Count; i++)
         {
-            // Èç¹ûÈÎºÎÒ»¸ö»¨¶äµÄYÖáĞ¡ÓÚ»òµÈÓÚÇ°Ò»¸ö»¨¶äµÄYÖá£¬Ôò²»Âú×ãµİÔöÌõ¼ş
+            // å¦‚æœä»»ä½•ä¸€ä¸ªèŠ±æœµçš„Yè½´å°äºæˆ–ç­‰äºå‰ä¸€ä¸ªèŠ±æœµçš„Yè½´ï¼Œåˆ™ä¸æ»¡è¶³é€’å¢æ¡ä»¶
             if (sortedFlowers[i].transform.position.y <= sortedFlowers[i - 1].transform.position.y)
             {
                 return false;
@@ -122,16 +122,16 @@ public class FlowerChange : MonoBehaviour
     }
 
     /// <summary>
-    /// »ñÈ¡µ±Ç°»¨¶äË³Ğò
+    /// è·å–å½“å‰èŠ±æœµé¡ºåº
     /// </summary>
-    /// <returns>°´xÖáÎ»ÖÃÅÅĞòµÄ»¨¶äÃû³ÆÁĞ±í</returns>
+    /// <returns>æŒ‰xè½´ä½ç½®æ’åºçš„èŠ±æœµåç§°åˆ—è¡¨</returns>
     public List<string> GetCurrentFlowerOrder()
     {
-        // °´xÖáÎ»ÖÃ¶Ô»¨¶ä½øĞĞÅÅĞò
+        // æŒ‰xè½´ä½ç½®å¯¹èŠ±æœµè¿›è¡Œæ’åº
         List<GameObject> sortedFlowers = new List<GameObject>(Flowers);
         sortedFlowers.Sort((a, b) => a.transform.position.x.CompareTo(b.transform.position.x));
         
-        // ÌáÈ¡»¨¶äÃû³Æ
+        // æå–èŠ±æœµåç§°
         List<string> flowerNames = new List<string>();
         foreach (GameObject flower in sortedFlowers)
         {
@@ -142,15 +142,15 @@ public class FlowerChange : MonoBehaviour
     }
 
     /// <summary>
-    /// ½»»»Á½¸ö»¨¶äµÄÎ»ÖÃ
+    /// äº¤æ¢ä¸¤ä¸ªèŠ±æœµçš„ä½ç½®
     /// </summary>
-    /// <param name="index1">µÚÒ»¸ö»¨¶äµÄË÷Òı</param>
-    /// <param name="index2">µÚ¶ş¸ö»¨¶äµÄË÷Òı</param>
+    /// <param name="index1">ç¬¬ä¸€ä¸ªèŠ±æœµçš„ç´¢å¼•</param>
+    /// <param name="index2">ç¬¬äºŒä¸ªèŠ±æœµçš„ç´¢å¼•</param>
     public void SwapFlowers(int index1, int index2)
     {
         if (index1 >= 0 && index1 < Flowers.Count && index2 >= 0 && index2 < Flowers.Count)
         {
-            // ½»»»Á½¸ö»¨¶äµÄÎ»ÖÃ£¨Ö»½»»»x×ø±ê£¬±£³Öy,z²»±ä£©
+            // äº¤æ¢ä¸¤ä¸ªèŠ±æœµçš„ä½ç½®ï¼ˆåªäº¤æ¢xåæ ‡ï¼Œä¿æŒy,zä¸å˜ï¼‰
             Vector3 pos1 = Flowers[index1].transform.position;
             Vector3 pos2 = Flowers[index2].transform.position;
             
@@ -158,7 +158,7 @@ public class FlowerChange : MonoBehaviour
             tempX.x = pos2.x;
             pos2.x = pos1.x;
             
-            // ÏŞÖÆYÖá²»ÄÜ´óÓÚ1£¬Èç¹û´óÓÚ1ÔòÉèÎª0
+            // é™åˆ¶Yè½´ä¸èƒ½å¤§äº1ï¼Œå¦‚æœå¤§äº1åˆ™è®¾ä¸º0
             if (tempX.y > 1f)
             {
                 tempX.y = 0f;
@@ -171,16 +171,16 @@ public class FlowerChange : MonoBehaviour
             Flowers[index1].transform.position = tempX;
             Flowers[index2].transform.position = pos2;
             
-            // Ã¿´Î½»»»ºó¼ì²éÊÇ·ñ´ï³ÉÓÎÏ·Ê¤ÀûÄ¿±ê
+            // æ¯æ¬¡äº¤æ¢åæ£€æŸ¥æ˜¯å¦è¾¾æˆæ¸¸æˆèƒœåˆ©ç›®æ ‡
             CheckWinCondition();
         }
     }
     
     /// <summary>
-    /// ¸ù¾İÊÀ½ç×ø±êÎ»ÖÃ½»»»»¨¶ä
+    /// æ ¹æ®ä¸–ç•Œåæ ‡ä½ç½®äº¤æ¢èŠ±æœµ
     /// </summary>
-    /// <param name="flower1">µÚÒ»¸ö»¨¶ä¶ÔÏó</param>
-    /// <param name="flower2">µÚ¶ş¸ö»¨¶ä¶ÔÏó</param>
+    /// <param name="flower1">ç¬¬ä¸€ä¸ªèŠ±æœµå¯¹è±¡</param>
+    /// <param name="flower2">ç¬¬äºŒä¸ªèŠ±æœµå¯¹è±¡</param>
     public void SwapFlowersByObject(GameObject flower1, GameObject flower2)
     {
         int index1 = Flowers.IndexOf(flower1);
@@ -193,21 +193,21 @@ public class FlowerChange : MonoBehaviour
     }
     
     /// <summary>
-    /// ¸ù¾İÊÀ½ç×ø±êÎ»ÖÃ½»»»»¨¶ä£¨±£³Ö¸÷×ÔYÖáÎ»ÖÃ£©
+    /// æ ¹æ®ä¸–ç•Œåæ ‡ä½ç½®äº¤æ¢èŠ±æœµï¼ˆä¿æŒå„è‡ªYè½´ä½ç½®ï¼‰
     /// </summary>
-    /// <param name="flower1">µÚÒ»¸ö»¨¶ä¶ÔÏó</param>
-    /// <param name="flower2">µÚ¶ş¸ö»¨¶ä¶ÔÏó</param>
-    /// <param name="originalPosition">µÚÒ»¸ö»¨¶äµÄÔ­Ê¼Î»ÖÃ</param>
+    /// <param name="flower1">ç¬¬ä¸€ä¸ªèŠ±æœµå¯¹è±¡</param>
+    /// <param name="flower2">ç¬¬äºŒä¸ªèŠ±æœµå¯¹è±¡</param>
+    /// <param name="originalPosition">ç¬¬ä¸€ä¸ªèŠ±æœµçš„åŸå§‹ä½ç½®</param>
     public void SwapFlowersByObjectWithYFixed(GameObject flower1, GameObject flower2, Vector3 originalPosition)
     {
         if (flower1 == null || flower2 == null)
             return;
 
-        // ±£³Ö¸÷×ÔµÄY×ø±ê£¬Ö»½»»»X×ø±ê
+        // ä¿æŒå„è‡ªçš„Yåæ ‡ï¼Œåªäº¤æ¢Xåæ ‡
         Vector3 flower1TargetPosition = new Vector3(flower2.transform.position.x, flower1.transform.position.y, flower1.transform.position.z);
         Vector3 flower2TargetPosition = new Vector3(originalPosition.x, flower2.transform.position.y, flower2.transform.position.z);
         
-        // ÏŞÖÆYÖá²»ÄÜ´óÓÚ1£¬Èç¹û´óÓÚ1ÔòÉèÎª0
+        // é™åˆ¶Yè½´ä¸èƒ½å¤§äº1ï¼Œå¦‚æœå¤§äº1åˆ™è®¾ä¸º0
         if (flower1TargetPosition.y > 1f)
         {
             flower1TargetPosition.y = 0f;
@@ -217,39 +217,39 @@ public class FlowerChange : MonoBehaviour
             flower2TargetPosition.y = 0f;
         }
         
-        // Ê¹ÓÃDoTweenÖ´ĞĞ¶¯»­
+        // ä½¿ç”¨DoTweenæ‰§è¡ŒåŠ¨ç”»
         flower1.transform.DOMove(flower1TargetPosition, 0.3f).OnComplete(() => CheckWinCondition());
         flower2.transform.DOMove(flower2TargetPosition, 0.3f).OnComplete(() => CheckWinCondition());
     }
     
     /// <summary>
-    /// ¼ì²éÓÎÏ·Ê¤ÀûÌõ¼ş²¢ÔÚ´ï³ÉÊ±´¥·¢Ê¤ÀûÂß¼­
+    /// æ£€æŸ¥æ¸¸æˆèƒœåˆ©æ¡ä»¶å¹¶åœ¨è¾¾æˆæ—¶è§¦å‘èƒœåˆ©é€»è¾‘
     /// </summary>
     private void CheckWinCondition()
     {
         bool isWin = false;
         
-        // ¸ù¾İuseYAxisOrderAsWinConditionµÄÖµÑ¡Ôñ²»Í¬µÄÊ¤ÀûÌõ¼ş
+        // æ ¹æ®useYAxisOrderAsWinConditionçš„å€¼é€‰æ‹©ä¸åŒçš„èƒœåˆ©æ¡ä»¶
         if (useYAxisOrderAsWinCondition)
         {
-            // °´YÖáµİÔöÅÅĞòÎªÊ¤ÀûÌõ¼ş
+            // æŒ‰Yè½´é€’å¢æ’åºä¸ºèƒœåˆ©æ¡ä»¶
             isWin = CheckYAxisAscendingOrder();
             if (isWin)
             {
-                Debug.Log("¹§Ï²£¡»¨¶ä°´YÖáµİÔöË³ĞòÅÅÁĞ£¬ÓÎÏ·Ê¤Àû£¡");
+                Debug.Log("æ­å–œï¼èŠ±æœµæŒ‰Yè½´é€’å¢é¡ºåºæ’åˆ—ï¼Œæ¸¸æˆèƒœåˆ©ï¼");
             }
         }
         else
         {
-            // °´ÑÕÉ«Ë³ĞòÅÅĞòÎªÊ¤ÀûÌõ¼ş
+            // æŒ‰é¢œè‰²é¡ºåºæ’åºä¸ºèƒœåˆ©æ¡ä»¶
             isWin = CheckFlowerOrder();
             if (isWin)
             {
-                Debug.Log("¹§Ï²£¡»¨¶ä°´ÑÕÉ«Ë³ĞòÅÅÁĞ£¬ÓÎÏ·Ê¤Àû£¡");
+                Debug.Log("æ­å–œï¼èŠ±æœµæŒ‰é¢œè‰²é¡ºåºæ’åˆ—ï¼Œæ¸¸æˆèƒœåˆ©ï¼");
             }
         }
         
-        // Èç¹û´ï³ÉÊ¤ÀûÌõ¼ş£¬Ôò´¥·¢Ê¤ÀûÂß¼­
+        // å¦‚æœè¾¾æˆèƒœåˆ©æ¡ä»¶ï¼Œåˆ™è§¦å‘èƒœåˆ©é€»è¾‘
         if (isWin)
         {
             OnGameWin();
@@ -257,26 +257,26 @@ public class FlowerChange : MonoBehaviour
     }
     
     /// <summary>
-    /// ÓÎÏ·Ê¤ÀûÊ±µ÷ÓÃµÄ·½·¨
+    /// æ¸¸æˆèƒœåˆ©æ—¶è°ƒç”¨çš„æ–¹æ³•
     /// </summary>
     private void OnGameWin()
     {
-        // Ê¾Àı£º½«¹ÜÀíÆ÷ÉÏµÄSprite RendererÉèÖÃÎªÂÌÉ«
+        // ç¤ºä¾‹ï¼šå°†ç®¡ç†å™¨ä¸Šçš„Sprite Rendererè®¾ç½®ä¸ºç»¿è‰²
         SpriteRenderer renderer = GetComponent<SpriteRenderer>();
         if (renderer != null)
         {
             renderer.color = Color.green;
         }
-        unityEvent.Invoke();
-        // ¿ÉÒÔÔÚÕâÀïÌí¼ÓÆäËûÊ¤ÀûÂß¼­
-        // ÀıÈç½ûÓÃ»¨¶äÍÏ×§¡¢ÏÔÊ¾Ê¤Àû½çÃæµÈ
+        OnWin.Invoke();
+        // å¯ä»¥åœ¨è¿™é‡Œæ·»åŠ å…¶ä»–èƒœåˆ©é€»è¾‘
+        // ä¾‹å¦‚ç¦ç”¨èŠ±æœµæ‹–æ‹½ã€æ˜¾ç¤ºèƒœåˆ©ç•Œé¢ç­‰
     }
     
     /// <summary>
-    /// ¸ù¾İË÷Òı»ñÈ¡»¨¶ä¶ÔÏó
+    /// æ ¹æ®ç´¢å¼•è·å–èŠ±æœµå¯¹è±¡
     /// </summary>
-    /// <param name="index">»¨¶äË÷Òı</param>
-    /// <returns>»¨¶ä¶ÔÏó</returns>
+    /// <param name="index">èŠ±æœµç´¢å¼•</param>
+    /// <returns>èŠ±æœµå¯¹è±¡</returns>
     public GameObject GetFlower(int index)
     {
         if (index >= 0 && index < Flowers.Count)
@@ -287,9 +287,9 @@ public class FlowerChange : MonoBehaviour
     }
     
     /// <summary>
-    /// »ñÈ¡»¨¶äÊıÁ¿
+    /// è·å–èŠ±æœµæ•°é‡
     /// </summary>
-    /// <returns>»¨¶äÊıÁ¿</returns>
+    /// <returns>èŠ±æœµæ•°é‡</returns>
     public int GetFlowerCount()
     {
         return Flowers.Count;
