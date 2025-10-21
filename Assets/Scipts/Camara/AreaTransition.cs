@@ -14,6 +14,11 @@ public class AreaTransition : MonoBehaviour
     
     public AreaChange areaChange;
 
+    [Header("事件广播")]
+    public VoidEventSO moveLeftEvent;
+    public VoidEventSO moveRightEvent;
+    
+    
     
     void Start()
     {
@@ -77,6 +82,7 @@ public class AreaTransition : MonoBehaviour
             }
             else
             {
+                moveRightEvent.RaiseEvent();
                 currentXAreaIndex = nextX;
                 StartCoroutine(TransitionToArea(areas[currentXAreaIndex].position, currentXAreaIndex));
             }
@@ -101,6 +107,7 @@ public class AreaTransition : MonoBehaviour
             }
             else
             {
+                moveLeftEvent.RaiseEvent();
                 currentXAreaIndex = nextX;
                 StartCoroutine(TransitionToArea(areas[currentXAreaIndex].position, currentXAreaIndex));
             }
