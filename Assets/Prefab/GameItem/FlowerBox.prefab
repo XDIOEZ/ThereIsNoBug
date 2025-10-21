@@ -450,7 +450,7 @@ GameObject:
   - component: {fileID: 5129850895143445972}
   - component: {fileID: 7103812982031443420}
   m_Layer: 0
-  m_Name: "\u5C0F\u82B1\u6E38\u620F\u76D2\u5B50(\u4F7F\u7528\u4E0D\u540C\u82B1\u74E3\u6570\u91CF\u7684\u7D20\u6750\u66FF\u6362\u7EA2\u5230\u7D2B\u7684\u6E38\u620F\u5BF9\u8C61\u7CBE\u7075)"
+  m_Name: FlowerBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -542,10 +542,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9d1cb2c314901f4aa229ffe657934eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Tip: "\u5C0F\u82B1\u6E38\u620F\u76D2\u5B50(\u4F7F\u7528\u4E0D\u540C\u82B1\u74E3\u6570\u91CF\u7684\u7D20\u6750\u66FF\u6362\u7EA2\u5230\u7D2B\u7684\u6E38\u620F\u5BF9\u8C61\u7CBE\u7075)"
   Flowers: []
   flowerSpacing: 0.3
   startOffsetX: -0.8
-  unityEvent:
+  OnWin:
     m_PersistentCalls:
       m_Calls: []
   useYAxisOrderAsWinCondition: 1

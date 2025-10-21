@@ -6,6 +6,7 @@ using UnityEngine.Events;
 
 public class FlowerChange : MonoBehaviour
 {
+    [TextArea(2, 5)] public string Tip;
     //这是管理位于子对象上的花朵对象 他们的名字为 红 、黄 、蓝 、紫 、绿 、 青 ,橙 紫
     public List<GameObject> Flowers = new List<GameObject>();
 
