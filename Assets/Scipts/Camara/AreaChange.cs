@@ -30,6 +30,10 @@ public class AreaChange : MonoBehaviour
     public float bobAmplitude = 0.2f;            // 振幅（单位：世界坐标）
     public float bobFrequency = 2f;              // 频率（Hz）
     
+    [Header("事件广播")]
+    public VoidEventSO moveUpEvent;
+    public VoidEventSO moveDownEvent;
+    public VoidEventSO ResetEvent;
     
     // 记录已访问区域索引
     public int[,] visitedAreas;
@@ -109,6 +113,7 @@ public class AreaChange : MonoBehaviour
             //正常前进
             else
             {
+                moveUpEvent.RaiseEvent();
                 SceneChange(areas[currentYAreaIndex],areas[currentYAreaIndex+1]);
                 int targetIndex = currentYAreaIndex + 1;
                 StartCoroutine(TransitionToArea(movePositions[targetIndex],targetIndex));
@@ -140,6 +145,7 @@ public class AreaChange : MonoBehaviour
             }
             else
             {
+                moveDownEvent.RaiseEvent();
                 SceneChange(areas[currentYAreaIndex],areas[currentYAreaIndex-1]);
                 int targetIndex = currentYAreaIndex - 1;
                 StartCoroutine(TransitionToArea(movePositions[targetIndex],targetIndex));
@@ -151,6 +157,7 @@ public class AreaChange : MonoBehaviour
     // 公共方法：重置步数、摄像机位置，近景、远景、已访问记录
     public void ResetVisitedY()
     {
+        ResetEvent.RaiseEvent();
         
         for (int i = 0; i < visitedAreas.GetLength(0); i++)
         {
