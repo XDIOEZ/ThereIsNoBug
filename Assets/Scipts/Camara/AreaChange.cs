@@ -165,9 +165,11 @@ public class AreaChange : MonoBehaviour
         
         
         SceneChange(areas[currentYAreaIndex],areas[0]);
-        StartCoroutine(TransitionToArea(movePositions[0],0));
         
-        currentYAreaIndex = 0;
+        StartCoroutine(TransitionToArea(movePositions[1],1));
+        //currentYAreaIndex = 1;
+        areaTransition.currentXAreaIndex = 3;
+        
         step = 0;
         if (farBackgrounds != null && farBackgrounds.Length > 0)
         {
@@ -210,7 +212,7 @@ public class AreaChange : MonoBehaviour
         if (step == 4)
         {
             Debug.Log("特殊位置移动");
-            realTargetPosition = new Vector3(30,0,0);
+            realTargetPosition = new Vector3(30,0,4.5f);
         }
         
         float journey = 0f;
@@ -257,6 +259,7 @@ public class AreaChange : MonoBehaviour
                     
                     
                     currentYAreaIndex = targetAreaIndex;
+                    
                     swappedFar = true;
                 }
             }

@@ -52,6 +52,11 @@ public class BasePanel : MonoBehaviour
 
     }
 
+    protected virtual void SliderOnValueChanged(string sliderName, float value)
+    {
+        
+    }
+
     /// <summary>
     /// 得到对应名字的对应控件脚本
     /// </summary>
@@ -100,6 +105,13 @@ public class BasePanel : MonoBehaviour
                 (controls[i] as Toggle).onValueChanged.AddListener((value) =>
                 {
                     OnValueChanged(objName, value);
+                });
+            }
+            else if (controls[i] is Slider)
+            {
+                (controls[i] as Slider).onValueChanged.AddListener((value) =>
+                {
+                    SliderOnValueChanged(objName, value);
                 });
             }
         }
