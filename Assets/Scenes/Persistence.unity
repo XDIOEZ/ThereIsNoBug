@@ -233,7 +233,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 631
 --- !u!114 &92119088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,6 +324,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1494324037}
   - component: {fileID: 1494324038}
+  - component: {fileID: 1494324039}
   m_Layer: 0
   m_Name: SceneManager
   m_TagString: Untagged
@@ -363,12 +364,24 @@ MonoBehaviour:
   loadEventSO: {fileID: 11400000, guid: 85b71ef2d90a5cf4ea35599caeb98591, type: 2}
   newGameEvent: {fileID: 11400000, guid: 55b85c9bec9d0a84fbb847a2d1ea0697, type: 2}
   loadLastSceneEvent: {fileID: 11400000, guid: 9267e2e3e865a944fa606d55fb21b3e0, type: 2}
-  unloadedSceneEvent: {fileID: 11400000, guid: 00fbc61189db4274b8b0bd9c792d1068, type: 2}
   afterScneLoadEvent: {fileID: 11400000, guid: 2226170425dd69443875ca92a34f9105, type: 2}
   fadeEvent: {fileID: 11400000, guid: e2dbd81b67091d5498a8bed7f6d7be1f, type: 2}
   menuLoadScene: {fileID: 11400000, guid: 3673f6dc52301f046b0b0000822ed7a0, type: 2}
   menuScene: {fileID: 11400000, guid: 33edba7370c2f5b4da1838cd1e8c3403, type: 2}
   fadeDuration: 2
+--- !u!114 &1494324039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1494324036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d9efc335a890bb4789b7cc5f950454c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnAreaUp: {fileID: 11400000, guid: c940ca9e1aa683f43ac8c00e20cca832, type: 2}
 --- !u!1 &1633225649
 GameObject:
   m_ObjectHideFlags: 0

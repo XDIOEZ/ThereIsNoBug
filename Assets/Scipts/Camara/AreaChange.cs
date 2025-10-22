@@ -77,13 +77,9 @@ public class AreaChange : MonoBehaviour
     {
         if (isTransitioning) return;
 
-        if(Input.GetKeyDown(KeyCode.C)&&!isTransitioning)
+        if(step==4 && currentYAreaIndex==3 && areaTransition.currentXAreaIndex==1)
         {
-            ChangeArea();
-        }
-        else if(Input.GetKeyDown(KeyCode.X)&&!isTransitioning)
-        {
-            ChangeAreaBack();
+            step = 77;
         }
     }
     
@@ -171,7 +167,7 @@ public class AreaChange : MonoBehaviour
 
         
         
-        SceneChange(areas[currentYAreaIndex],areas[0]);
+        SceneChange(areas[currentYAreaIndex],areas[1]);
         
         StartCoroutine(TransitionToArea(movePositions[1],1));
         //currentYAreaIndex = 1;
@@ -218,7 +214,7 @@ public class AreaChange : MonoBehaviour
 
         if (step == 4)
         {
-            Debug.Log("特殊位置移动");
+            Debug.Log("相机返回初始位置");
             realTargetPosition = new Vector3(30,0,4.5f);
         }
         

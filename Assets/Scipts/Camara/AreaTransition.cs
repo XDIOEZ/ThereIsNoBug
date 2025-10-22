@@ -61,7 +61,7 @@ public class AreaTransition : MonoBehaviour
     private bool ShouldResetAtStep4(int nextX, int nextY)
     {
         // 指定位置为 (x=1, y=3)，达到阈值且目标位置不是指定位置时重置
-        return areaChange.step >= 4 && !(nextX == 1 && nextY == 3);
+        return areaChange.step == 4 && !(nextX == 1 && nextY == 3);
     }
     
     public void MoveToAreaRight()
