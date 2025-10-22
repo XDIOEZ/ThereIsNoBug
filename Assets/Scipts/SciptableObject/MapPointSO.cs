@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "CollectionSO/MapPointsSO")]
 public class MapPointsSO : ScriptableObject
 {
-    [Header("dirµÄ0Îª×ó£¬1ÎªÉÏ£¬2ÎªÓÒ£¬3ÎªÏÂ¡£Êı×Ö´ÓĞ¡µ½´óÌî£¬ÇÒÀ´Ê±µÄ·½Ïò²»ÓÃÌî")]
+    [Header("0å·¦,1ä¸Š,2å³,3ä¸‹")]
     public List<MapPoint> MapPoints = new List<MapPoint>();
 
 }

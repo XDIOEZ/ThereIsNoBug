@@ -12,6 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7604d96c73943148800e74a9ba4fa18, type: 3}
   m_Name: ArrivedMap
   m_EditorClassIdentifier: 
-  MapPoints:
-  - pos: {x: 0, y: 0}
-    dirs: 01000000
+  MapPoints: []

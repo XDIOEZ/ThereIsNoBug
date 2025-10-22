@@ -10,27 +10,23 @@ public class Map : MonoBehaviour
     public VoidEventSO moveDownEvent;
     public VoidEventSO moveLeftEvent;
     public VoidEventSO moveRightEvent;
+    public VoidEventSO resetEvent;
     public MapPointsSO arrived;
     public float lineSize;
     public float size;
+    public GameObject nowPoint;
     public GameObject point;
-    private Vector2 nowPos;
     private LineRenderer lineRenderer;
     
-    public Vector2 NowPos
-    {
-        get { return nowPos; }
-        set { nowPos = value; }
-    }
-
     private void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        ReverseMap();
+        arrived.MapPoints.Clear();
         moveUpEvent.OnEventRaised += GoUp;
         moveDownEvent.OnEventRaised += GoDown;
         moveLeftEvent.OnEventRaised += GoLeft;
         moveRightEvent.OnEventRaised += GoRight;
+        resetEvent.OnEventRaised += ReverseMap;
     }
 
     public void OpenMap()
@@ -54,16 +50,22 @@ public class Map : MonoBehaviour
     
     public void ReverseMap()
     {
+        lineRenderer.positionCount = 0;
         arrived.MapPoints.Clear();
+        arrived.MapPoints.Add(new MapPoint(new Vector2(3,0), 1));
     }
     
     public void GoUp()
     {
-        MapPoint mapPoint = new MapPoint(nowPos,1);
-        MapPoint _mapPoint = arrived.MapPoints.FirstOrDefault(mapPoint => mapPoint.pos == nowPos);
+        MapPoint mapPoint = new MapPoint(SceneLoadManager.GetInstance().currentPosition,1);
+        MapPoint _mapPoint = arrived.MapPoints.FirstOrDefault(mapPoint => mapPoint.pos == SceneLoadManager.GetInstance().currentPosition);
+        if (arrived.MapPoints.FirstOrDefault(mapPoint => mapPoint.pos == new Vector2(SceneLoadManager.GetInstance().currentPosition.x , SceneLoadManager.GetInstance().currentPosition.y + 1 )) != null)
+        {
+            return;
+        }
         if (_mapPoint != null)
         {
-            if (_mapPoint.dirs.FirstOrDefault(_dir => _dir == 1) == null)
+            if (!_mapPoint.dirs.Contains(1))
             {
                 _mapPoint.dirs.Add(1);
             }
@@ -75,11 +77,15 @@ public class Map : MonoBehaviour
     }
     public void GoDown()
     {
-        MapPoint mapPoint = new MapPoint(nowPos,3);
-        MapPoint _mapPoint = arrived.MapPoints.FirstOrDefault(mapPoint => mapPoint.pos == nowPos);
+        MapPoint mapPoint = new MapPoint(SceneLoadManager.GetInstance().currentPosition,3);
+        MapPoint _mapPoint = arrived.MapPoints.FirstOrDefault(mapPoint => mapPoint.pos == SceneLoadManager.GetInstance().currentPosition);
+        if (arrived.MapPoints.FirstOrDefault(mapPoint => mapPoint.pos == new Vector2(SceneLoadManager.GetInstance().currentPosition.x , SceneLoadManager.GetInstance().currentPosition.y - 1 )) != null)
+        {
+            return;
+        }
         if (_mapPoint != null)
         {
-            if (_mapPoint.dirs.FirstOrDefault(_dir => _dir == 3) == null)
+            if (!_mapPoint.dirs.Contains(3))
             {
                 _mapPoint.dirs.Add(3);
             }
@@ -91,11 +97,15 @@ public class Map : MonoBehaviour
     }
     public void GoLeft()
     {
-        MapPoint mapPoint = new MapPoint(nowPos,0);
-        MapPoint _mapPoint = arrived.MapPoints.FirstOrDefault(mapPoint => mapPoint.pos == nowPos);
+        MapPoint mapPoint = new MapPoint(SceneLoadManager.GetInstance().currentPosition,0);
+        MapPoint _mapPoint = arrived.MapPoints.FirstOrDefault(mapPoint => mapPoint.pos == SceneLoadManager.GetInstance().currentPosition);
+        if (arrived.MapPoints.FirstOrDefault(mapPoint => mapPoint.pos == new Vector2(SceneLoadManager.GetInstance().currentPosition.x - 1 , SceneLoadManager.GetInstance().currentPosition.y)) != null)
+        {
+            return;
+        }
         if (_mapPoint != null)
         {
-            if (_mapPoint.dirs.FirstOrDefault(_dir => _dir == 0) == null)
+            if (!_mapPoint.dirs.Contains(0))
             {
                 _mapPoint.dirs.Add(0);
             }
@@ -107,11 +117,15 @@ public class Map : MonoBehaviour
     }
     public void GoRight()
     {
-        MapPoint mapPoint = new MapPoint(nowPos,2);
-        MapPoint _mapPoint = arrived.MapPoints.FirstOrDefault(mapPoint => mapPoint.pos == nowPos);
+        MapPoint mapPoint = new MapPoint(SceneLoadManager.GetInstance().currentPosition,2);
+        MapPoint _mapPoint = arrived.MapPoints.FirstOrDefault(mapPoint => mapPoint.pos == SceneLoadManager.GetInstance().currentPosition);
+        if (arrived.MapPoints.FirstOrDefault(mapPoint => mapPoint.pos == new Vector2(SceneLoadManager.GetInstance().currentPosition.x + 1, SceneLoadManager.GetInstance().currentPosition.y )) != null)
+        {
+            return;
+        }
         if (_mapPoint != null)
         {
-            if (_mapPoint.dirs.FirstOrDefault(_dir => _dir == 2) == null)
+            if (!_mapPoint.dirs.Contains(2))
             {
                 _mapPoint.dirs.Add(2);
             }
@@ -126,21 +140,37 @@ public class Map : MonoBehaviour
     {
         if(lineRenderer == null)
             lineRenderer = GetComponent<LineRenderer>();
-        arrived.MapPoints = arrived.MapPoints
-            .OrderBy(v => v.pos.x)
-            .ThenBy(v => v.pos.y)
-            .ToList();
-        List<Vector2> pointsOnWay = new List<Vector2>();
-        pointsOnWay.AddRange(DrawWays(new MapPoint(Vector2.zero, 2)));
-        lineRenderer.startWidth = lineSize;
-        lineRenderer.endWidth = lineSize;
-        lineRenderer.positionCount = pointsOnWay.Count;
-        for (int i = 0; i < pointsOnWay.Count; i++)
+        if (arrived.MapPoints.Count != 0)
         {
-            lineRenderer.SetPosition(i, pointsOnWay[i] * size);
-            GameObject pointGbj = Instantiate(point,this.transform);
-            Debug.Log("one point");
-            pointGbj.transform.localPosition = pointsOnWay[i] * size;
+            arrived.MapPoints = arrived.MapPoints
+                .OrderBy(v => v.pos.x)
+                .ThenBy(v => v.pos.y)
+                .ToList();
+            List<Vector2> pointsOnWay = new List<Vector2>();
+            pointsOnWay.AddRange(DrawWays(new MapPoint(new Vector2(3,0), 1)));
+            lineRenderer.startWidth = lineSize;
+            lineRenderer.endWidth = lineSize;
+            lineRenderer.positionCount = pointsOnWay.Count;
+            for (int i = 0; i < pointsOnWay.Count; i++)
+            {
+                lineRenderer.SetPosition(i, pointsOnWay[i] * size);
+                if (pointsOnWay[i] == SceneLoadManager.GetInstance().currentPosition)
+                {
+                    GameObject nowPointGbj = Instantiate(nowPoint,this.transform);
+                    nowPointGbj.transform.localPosition = pointsOnWay[i] * size;
+                }
+                else
+                {
+                    GameObject pointGbj = Instantiate(point,this.transform);
+                    pointGbj.transform.localPosition = pointsOnWay[i] * size;
+                }
+            }
+        }
+        else
+        {
+            GameObject nowPointGbj = Instantiate(nowPoint,this.transform);
+            nowPointGbj.transform.localPosition = new Vector2(3 , 0) * size;
+            Debug.Log("no point");
         }
     }
 
@@ -156,7 +186,9 @@ public class Map : MonoBehaviour
                 break;
             }
         }
+        
         pointsOnWay.Add(point.pos);
+
         if (_point.dirs.IndexOf(0) != -1)
         {
             List<Vector2> wayPoints = DrawLeftWays(point);
@@ -206,6 +238,7 @@ public class Map : MonoBehaviour
         List<Vector2> pointsOnWay = new List<Vector2>();
         MapPoint _point = new MapPoint(point);
         _point.pos.x = point.pos.x-1;
+        _point.dirs[0] = -1;
         pointsOnWay = DrawWays(_point);
         return pointsOnWay;
     }
@@ -215,6 +248,7 @@ public class Map : MonoBehaviour
         List<Vector2> pointsOnWay = new List<Vector2>();
         MapPoint _point = new MapPoint(point);
         _point.pos.x = point.pos.x+1;
+        _point.dirs[0] = -1;
         pointsOnWay = DrawWays(_point);
         return pointsOnWay;
     }
@@ -224,6 +258,7 @@ public class Map : MonoBehaviour
         List<Vector2> pointsOnWay = new List<Vector2>();
         MapPoint _point = new MapPoint(point);
         _point.pos.y = point.pos.y+1;
+        _point.dirs[0] = -1;
         pointsOnWay = DrawWays(_point);
         return pointsOnWay;
     }
@@ -233,6 +268,7 @@ public class Map : MonoBehaviour
         List<Vector2> pointsOnWay = new List<Vector2>();
         MapPoint _point = new MapPoint(point);
         _point.pos.y = point.pos.y-1;
+        _point.dirs[0] = -1;
         pointsOnWay = DrawWays(_point);
         return pointsOnWay;
     }
@@ -288,11 +324,12 @@ public class MapPoint
     {
         pos = _mapPoint.pos;
         dirs = new List<int>();
-        foreach (var VARIABLE in dirs)
+        foreach (var VARIABLE in _mapPoint.dirs)
         {
             dirs.Add(VARIABLE);
         }
     }
+    
     public Vector2 pos;
     public List<int> dirs;
 }

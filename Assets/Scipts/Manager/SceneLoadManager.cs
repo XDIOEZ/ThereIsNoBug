@@ -9,7 +9,7 @@ using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
-public class SceneLoadManager : MonoBehaviour
+public class SceneLoadManager : SingletonMono<SceneLoadManager>
 {
     
     public Vector3 menuPosition;

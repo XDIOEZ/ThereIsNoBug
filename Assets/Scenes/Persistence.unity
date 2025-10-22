@@ -140,7 +140,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 358401868519468111, guid: 97a46349905fd2248bb668d41b2a12eb, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1075169389606924675, guid: 97a46349905fd2248bb668d41b2a12eb, type: 3}
+      propertyPath: m_Positions.Array.size
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1075169389606924675, guid: 97a46349905fd2248bb668d41b2a12eb, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
+      value: 0.1626091
+      objectReference: {fileID: 0}
+    - target: {fileID: 1075169389606924675, guid: 97a46349905fd2248bb668d41b2a12eb, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 0.035556793
       objectReference: {fileID: 0}
     - target: {fileID: 1243232318526370082, guid: 97a46349905fd2248bb668d41b2a12eb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -186,6 +198,14 @@ PrefabInstance:
       propertyPath: size
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 2440869490720057278, guid: 97a46349905fd2248bb668d41b2a12eb, type: 3}
+      propertyPath: nowPoint
+      value: 
+      objectReference: {fileID: 4467275058017847004, guid: 75451510d7559e54891b0173c299ec98, type: 3}
+    - target: {fileID: 2440869490720057278, guid: 97a46349905fd2248bb668d41b2a12eb, type: 3}
+      propertyPath: resetEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 4167d2f23955fb84fb0eac3310d67bb0, type: 2}
     - target: {fileID: 2440869490720057278, guid: 97a46349905fd2248bb668d41b2a12eb, type: 3}
       propertyPath: moveUpEvent
       value: 
@@ -549,6 +569,7 @@ MonoBehaviour:
   fadeEvent: {fileID: 11400000, guid: e2dbd81b67091d5498a8bed7f6d7be1f, type: 2}
   menuLoadScene: {fileID: 11400000, guid: 3673f6dc52301f046b0b0000822ed7a0, type: 2}
   menuScene: {fileID: 11400000, guid: 33edba7370c2f5b4da1838cd1e8c3403, type: 2}
+  currentPosition: {x: 0, y: 0}
   fadeDuration: 2
 --- !u!114 &1494324039
 MonoBehaviour:
@@ -562,7 +583,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d9efc335a890bb4789b7cc5f950454c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnAreaUp: {fileID: 11400000, guid: c940ca9e1aa683f43ac8c00e20cca832, type: 2}
 --- !u!1 &1633225649
 GameObject:
   m_ObjectHideFlags: 0
