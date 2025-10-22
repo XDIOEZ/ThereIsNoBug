@@ -16,7 +16,8 @@ public class Inventory : SingletonMono<Inventory>
     public void AddItem(Item item)
     {
         itemInInventory.Add(item);
-        //todo: 添加至ui
+        //显示在物品栏中
+        UIMgr.Instance().GetPanel<GamePanel>("GamePanel").GetItem(item);
     }
 
     public void RemoveItem(Item item)
@@ -24,7 +25,8 @@ public class Inventory : SingletonMono<Inventory>
         if (itemInInventory.Contains(item))
         {
             itemInInventory.Remove(item);
-            //todo: ui中删除
+            //物品栏中移除
+            UIMgr.Instance().GetPanel<GamePanel>("GamePanel").RemoveItem(item);
         }
     }
 
@@ -36,7 +38,10 @@ public class Inventory : SingletonMono<Inventory>
             Item _item = itemInInventory.FirstOrDefault(item => item.GetComponent<InventoryComponent>().index == index);
             itemInInventory[index] = item;
             itemInInventory[_index] = _item;
-            //todo:物品栏中交换
+            //物品栏中交换
+            GamePanel gamePanel = UIMgr.Instance().GetPanel<GamePanel>("GamePanel");
+            gamePanel.ChangeSprite(index, item);
+            gamePanel.ChangeSprite(_index,_item);
         }
     }
 }

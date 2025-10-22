@@ -5,16 +5,7 @@ using UnityEngine.UI;
 
 public class GamePanel : BasePanel
 {
-    #region 注释
-
-    // public UIDrag propBtn1drag;
-    // public UIDrag propBtn2drag;
-    // public UIDrag propBtn3drag;
-    // public UIDrag propBtn4drag;
-    // public UIDrag propBtn5drag;
-    // public UIDrag propBtn6drag;
-
-    #endregion
+    public List<Image> itemImages; 
 
     private Image textImg;
 
@@ -22,16 +13,19 @@ public class GamePanel : BasePanel
     {
         base.Awake();
         #region 注释
-
         // propBtn1drag = GetControl<Image>("PropBtn1").gameObject.GetComponent<UIDrag>();
         // propBtn2drag = GetControl<Image>("PropBtn2").gameObject.GetComponent<UIDrag>();
         // propBtn3drag = GetControl<Image>("PropBtn3").gameObject.GetComponent<UIDrag>();
         // propBtn4drag = GetControl<Image>("PropBtn4").gameObject.GetComponent<UIDrag>();
         // propBtn5drag = GetControl<Image>("PropBtn5").gameObject.GetComponent<UIDrag>();
         // propBtn6drag = GetControl<Image>("PropBtn6").gameObject.GetComponent<UIDrag>();
-
         #endregion
-
+        int i=0;
+        while (i < 6)
+        {
+            itemImages.Add(GetControl<Image>("PropBtn" + (i + 1)).gameObject.GetComponent<Image>());
+            i++;
+        }
         textImg = GetControl<Image>("TextImage");
         textImg.gameObject.SetActive(false);
     }
@@ -44,22 +38,22 @@ public class GamePanel : BasePanel
                 UIMgr.Instance().ShowPanel<BasePanel>("SettingPanel", E_UI_Layer.Top);
                 break;
             case"PropBtn1":
-                print("道具1拖到了某处并使用");
+                print("选择了0位置道具");
                 break;
             case"PropBtn2":
-                print("道具2拖到了某处并使用");
+                print("选择了1位置道具");
                 break;
             case"PropBtn3":
-                print("道具3拖到了某处并使用");
+                print("选择了2位置道具");
                 break;
             case"PropBtn4":
-                print("道具4拖到了某处并使用");
+                print("选择了3位置道具");
                 break;
             case"PropBtn5":
-                print("道具5拖到了某处并使用");
+                print("选择了4位置道具");
                 break;
             case"PropBtn6":
-                print("道具6拖到了某处并使用");
+                print("选择了5位置道具");
                 break;
             case"启动对话框":
                 textImg.gameObject.SetActive(true);
@@ -83,5 +77,26 @@ public class GamePanel : BasePanel
                 print("向后移动");
                 break;
         }
+    }
+    public void GetItem(Item item)
+    {
+        int index = item.GetComponent<InventoryComponent>().index;
+        ChangeSprite(index, item);
+    }
+
+    public void ChangeSprite(int index,Item item)
+    {
+        
+        if (item.GetImagePath()!=null)
+        {
+            //TODO: 后续根据图集与否修改使用方法
+            itemImages[index].sprite =  ResMgr.Instance().Load<Sprite>(item.GetImagePath());
+            
+        }
+    }
+    public void RemoveItem(Item item)
+    {
+        int _index = item.GetComponent<InventoryComponent>().index;
+        itemImages[_index].sprite = null;
     }
 }
