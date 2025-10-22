@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 711383393866795231}
   - component: {fileID: 7727130948147839128}
   m_Layer: 0
-  m_Name: "\u97F3\u9891\u7BA1\u7406\u5668"
+  m_Name: AudioManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,16 +50,25 @@ MonoBehaviour:
   sfxSource: {fileID: 7727130948147839128}
   bgmClips:
   - {fileID: 8300000, guid: dcc8d242c8d4a9f429d6244a830af1f3, type: 3}
+  - {fileID: 8300000, guid: 06823ca19fbe1044bb3a6bcaa365b3b6, type: 3}
   sfxClips:
   - {fileID: 8300000, guid: ab6afe35a4878d244930f2daca2baaa0, type: 3}
   - {fileID: 8300000, guid: 87bcefc92a83ed140a253af0be67d6c4, type: 3}
   - {fileID: 8300000, guid: bacafff239c2e7242aeed1d439ec78a4, type: 3}
   - {fileID: 8300000, guid: abdd9b8b5d3efe243bc49f3e8b843274, type: 3}
   - {fileID: 8300000, guid: 34d902347770ca04f816ac8d65ebcc75, type: 3}
+  - {fileID: 8300000, guid: c5713ed8dcbd1b8478a1355f88f6792f, type: 3}
+  - {fileID: 8300000, guid: ac8201088a3108543b885bd28dc57686, type: 3}
   OnAudioSettingsChanged:
     m_PersistentCalls:
       m_Calls: []
-  bgmVolume: 1
+  OnPlaySFX:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPlayBGM:
+    m_PersistentCalls:
+      m_Calls: []
+  bgmVolume: 0
   sfxVolume: 1
   isMuted: 0
   audioSourcePrefab: {fileID: 8938656753846244773, guid: bad80208222a70844b77713f122599db, type: 3}
@@ -73,7 +82,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: a3b5030fb5fb25d449193d0224c3a34a, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
