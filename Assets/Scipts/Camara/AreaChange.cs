@@ -20,7 +20,7 @@ public class AreaChange : MonoBehaviour
     [Header("")]
     public Camera mainCamera;
     
-    public int currentYAreaIndex = 0; // 当前区域索引
+    public  int currentYAreaIndex = 0; // 当前区域索引
     private bool isTransitioning = false;
     
     [Header("远景（按索引切换，不随相机移动）")]
@@ -81,6 +81,8 @@ public class AreaChange : MonoBehaviour
         {
             step = 77;
         }
+        
+        currentPosition.Instance.Y_currentindex = currentYAreaIndex;
     }
     
     //前进

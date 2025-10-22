@@ -38,6 +38,8 @@ public class SceneLoadManager : MonoBehaviour
     private GameSceneSO _currentScene;
     private GameSceneSO _sceneToLoad;
     
+    public Vector2 currentPosition;
+    
     private Vector3 _positionToGo;
     public float fadeDuration;
     
@@ -157,7 +159,13 @@ public class SceneLoadManager : MonoBehaviour
         //场景加载完成后广播事件,执行渐入后的逻辑
         //afterScneLoadEvent?.RaiseEvent();
     }
-    
+
+
+    private void Update()
+    {
+        currentPosition = new Vector2(global::currentPosition.Instance.X_currentindex, global::currentPosition.Instance.Y_currentindex);
+    }
+
 
     public void SaveLastScene()
     {

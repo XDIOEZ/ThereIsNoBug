@@ -32,15 +32,7 @@ public class AreaTransition : MonoBehaviour
     
     void Update()
     {
-        // 键盘输入切换区域
-        if (Input.GetKeyDown(KeyCode.RightArrow) && !_isTransitioning)
-        {
-            MoveToAreaRight();
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow) && !_isTransitioning)
-        {
-            MoveToAreaLeft();
-        }
+        currentPosition.Instance.X_currentindex = currentXAreaIndex;
     }
     
     public void countStep(int targetXAreaIndex, int targetYAreaIndex)
