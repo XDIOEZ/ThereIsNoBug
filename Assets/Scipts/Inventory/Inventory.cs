@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public class Inventory : SingletonMono<Inventory>
 {
     public List<Item> itemInInventory;
     public Item nowItem;
@@ -15,6 +16,7 @@ public class Inventory : MonoBehaviour
     public void AddItem(Item item)
     {
         itemInInventory.Add(item);
+        //todo: 添加至ui
     }
 
     public void RemoveItem(Item item)
@@ -22,6 +24,7 @@ public class Inventory : MonoBehaviour
         if (itemInInventory.Contains(item))
         {
             itemInInventory.Remove(item);
+            //todo: ui中删除
         }
     }
 
@@ -29,10 +32,11 @@ public class Inventory : MonoBehaviour
     {
         if (itemInInventory[index] != null && itemInInventory[index] != item)
         {
-            int _index = itemInInventory.IndexOf(item);
-            Item _item = itemInInventory[index];
+            int _index = item.GetComponent<InventoryComponent>().index;
+            Item _item = itemInInventory.FirstOrDefault(item => item.GetComponent<InventoryComponent>().index == index);
             itemInInventory[index] = item;
             itemInInventory[_index] = _item;
+            //todo:物品栏中交换
         }
     }
 }

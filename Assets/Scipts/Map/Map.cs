@@ -6,8 +6,12 @@ using UnityEngine;
 
 public class Map : MonoBehaviour
 {
-    public MapPointsSO points;
+    public VoidEventSO moveUpEvent;
+    public VoidEventSO moveDownEvent;
+    public VoidEventSO moveLeftEvent;
+    public VoidEventSO moveRightEvent;
     public MapPointsSO arrived;
+    public float lineSize;
     public float size;
     public GameObject point;
     private Vector2 nowPos;
@@ -22,23 +26,120 @@ public class Map : MonoBehaviour
     private void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        arrived.MapPoints = arrived.MapPoints
-            .OrderBy(v => v.pos.x)     // 首先按 x 升序排序
-            .ThenBy(v => v.pos.y)      // 然后按 y 升序排序
-            .ToList();
-        DrawMap();
+        ReverseMap();
+        moveUpEvent.OnEventRaised += GoUp;
+        moveDownEvent.OnEventRaised += GoDown;
+        moveLeftEvent.OnEventRaised += GoLeft;
+        moveRightEvent.OnEventRaised += GoRight;
     }
 
+    public void OpenMap()
+    {
+        gameObject.SetActive(true);
+        DrawMap();
+        gameObject.transform.position = Camera.main.ViewportToWorldPoint(
+            new Vector3(0.75f, 0.25f, Camera.main.nearClipPlane + 1f));
+    }
+
+    public void CloseMap()
+    {
+        var children = transform.Cast<Transform>().ToList();
+        
+        foreach (var child in children)
+        {
+            Destroy(child.gameObject);
+        }
+        gameObject.SetActive(false);
+    }
+    
+    public void ReverseMap()
+    {
+        arrived.MapPoints.Clear();
+    }
+    
+    public void GoUp()
+    {
+        MapPoint mapPoint = new MapPoint(nowPos,1);
+        MapPoint _mapPoint = arrived.MapPoints.FirstOrDefault(mapPoint => mapPoint.pos == nowPos);
+        if (_mapPoint != null)
+        {
+            if (_mapPoint.dirs.FirstOrDefault(_dir => _dir == 1) == null)
+            {
+                _mapPoint.dirs.Add(1);
+            }
+        }
+        else
+        {
+            arrived.MapPoints.Add(mapPoint);
+        }
+    }
+    public void GoDown()
+    {
+        MapPoint mapPoint = new MapPoint(nowPos,3);
+        MapPoint _mapPoint = arrived.MapPoints.FirstOrDefault(mapPoint => mapPoint.pos == nowPos);
+        if (_mapPoint != null)
+        {
+            if (_mapPoint.dirs.FirstOrDefault(_dir => _dir == 3) == null)
+            {
+                _mapPoint.dirs.Add(3);
+            }
+        }
+        else
+        {
+            arrived.MapPoints.Add(mapPoint);
+        }
+    }
+    public void GoLeft()
+    {
+        MapPoint mapPoint = new MapPoint(nowPos,0);
+        MapPoint _mapPoint = arrived.MapPoints.FirstOrDefault(mapPoint => mapPoint.pos == nowPos);
+        if (_mapPoint != null)
+        {
+            if (_mapPoint.dirs.FirstOrDefault(_dir => _dir == 0) == null)
+            {
+                _mapPoint.dirs.Add(0);
+            }
+        }
+        else
+        {
+            arrived.MapPoints.Add(mapPoint);
+        }
+    }
+    public void GoRight()
+    {
+        MapPoint mapPoint = new MapPoint(nowPos,2);
+        MapPoint _mapPoint = arrived.MapPoints.FirstOrDefault(mapPoint => mapPoint.pos == nowPos);
+        if (_mapPoint != null)
+        {
+            if (_mapPoint.dirs.FirstOrDefault(_dir => _dir == 2) == null)
+            {
+                _mapPoint.dirs.Add(2);
+            }
+        }
+        else
+        {
+            arrived.MapPoints.Add(mapPoint);
+        }
+    }
+    
     private void DrawMap()
     {
+        if(lineRenderer == null)
+            lineRenderer = GetComponent<LineRenderer>();
+        arrived.MapPoints = arrived.MapPoints
+            .OrderBy(v => v.pos.x)
+            .ThenBy(v => v.pos.y)
+            .ToList();
         List<Vector2> pointsOnWay = new List<Vector2>();
-        pointsOnWay.Add(Vector2.zero);
         pointsOnWay.AddRange(DrawWays(new MapPoint(Vector2.zero, 2)));
+        lineRenderer.startWidth = lineSize;
+        lineRenderer.endWidth = lineSize;
         lineRenderer.positionCount = pointsOnWay.Count;
         for (int i = 0; i < pointsOnWay.Count; i++)
         {
             lineRenderer.SetPosition(i, pointsOnWay[i] * size);
             GameObject pointGbj = Instantiate(point,this.transform);
+            Debug.Log("one point");
             pointGbj.transform.localPosition = pointsOnWay[i] * size;
         }
     }

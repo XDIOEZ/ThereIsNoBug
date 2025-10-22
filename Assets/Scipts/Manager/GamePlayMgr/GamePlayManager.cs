@@ -8,6 +8,7 @@ public class GamePlayManager : MonoSingleton<GamePlayManager>
     public LayerMask interactableLayer;
     public Inventory inventory;
     public bool isOnInventory;
+    public Map map;
     
     
     private void Update()
@@ -23,6 +24,18 @@ public class GamePlayManager : MonoSingleton<GamePlayManager>
                 if (hit.collider != null)
                 {
                     hit.collider.gameObject.GetComponent<InteractableComponent>().Interact();
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                if (map.gameObject.activeInHierarchy)
+                {
+                    map.CloseMap();
+                }
+                else
+                {
+                    map.OpenMap();
                 }
             }
         }
