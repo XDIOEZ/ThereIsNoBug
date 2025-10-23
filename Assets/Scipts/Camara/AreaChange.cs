@@ -10,7 +10,7 @@ public class AreaChange : MonoBehaviour
     public int step = -1;//记录移动步数
     public AreaTransition areaTransition;
     
-    public SpriteRenderer[] areas; // 前景淡入淡出
+    public GameObject[] areas; // 前景淡入淡出
     public Vector3[] movePositions; // 相机移动到的位置
     
     [Header("相机与淡入淡出时长")]
@@ -42,13 +42,14 @@ public class AreaChange : MonoBehaviour
     {
         if (mainCamera == null)
             mainCamera = Camera.main;
+        mainCamera.transform.position = new Vector3(30, 0, 0);
         
         areaTransition = GetComponent<AreaTransition>();
         
-        areas = new SpriteRenderer[4];
+        areas = new GameObject[4];
         for(int i=1;i<=4;i++)
         {
-            areas[i-1] = GameObject.Find("areas" + i).GetComponent<SpriteRenderer>();
+            areas[i-1] = GameObject.Find("areas" + i);
         }
 
         farBackgrounds = new GameObject[4];
@@ -187,18 +188,33 @@ public class AreaChange : MonoBehaviour
     }
     
     //场景切换淡入淡出
-    private void SceneChange(SpriteRenderer currentScene,SpriteRenderer nextScene)
+    private void SceneChange(GameObject currentScene,GameObject nextScene)
     {
         if (currentScene == null || nextScene == null)
         {
             Debug.LogWarning("[AreaChange] areas 中存在空引用，请在 Inspector 重新绑定。");
             return;
         }
+        // 确保 nextScene 激活，以便对其子 SpriteRenderer 做淡入
+        nextScene.SetActive(true);
+
+        var currentSprites = currentScene.GetComponentsInChildren<SpriteRenderer>(true);
+        var nextSprites = nextScene.GetComponentsInChildren<SpriteRenderer>(true);
         
-        currentScene.DOFade(0f, transitionDuration);
-        nextScene.DOFade(1f, transitionDuration);
+        // 淡出当前前景的所有子 SpriteRenderer
+        foreach (var sr in currentSprites)
+        {
+            if (sr == null) continue;
+            sr.DOFade(0f, transitionDuration);
+        }
+
+        // 淡入目标前景的所有子 SpriteRenderer
+        foreach (var sr in nextSprites)
+        {
+            if (sr == null) continue;
+            sr.DOFade(1f, transitionDuration);
+        }
         
-        //TODO:到达一定地点切换远景
     }
     
     
