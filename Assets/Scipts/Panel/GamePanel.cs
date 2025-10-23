@@ -5,14 +5,17 @@ using UnityEngine.UI;
 
 public class GamePanel : BasePanel
 {
-    public List<Image> itemImages; 
-
-    // private Image textImg;
+    private List<Image> itemImages = new List<Image>(); 
     private Canvas canvas;
-
+    private Image DialogImg;
+    private Text SpeakText;
+    public GameObject 测试用;
     protected override void Awake()
     {
         base.Awake();
+        SpeakText = GetControl<Text>("speak");
+        DialogImg = GetControl<Image>("DialogBox");
+        DialogImg.gameObject.SetActive(false);
         #region 注释
         // propBtn1drag = GetControl<Image>("PropBtn1").gameObject.GetComponent<UIDrag>();
         // propBtn2drag = GetControl<Image>("PropBtn2").gameObject.GetComponent<UIDrag>();
@@ -29,8 +32,7 @@ public class GamePanel : BasePanel
             itemImages.Add(GetControl<Image>("PropBtn" + (i + 1)).gameObject.GetComponent<Image>());
             i++;
         }
-        // textImg = GetControl<Image>("TextImage");
-        // textImg.gameObject.SetActive(false);
+        
     }
     protected override void OnClick(string btnName)
     {
@@ -79,6 +81,12 @@ public class GamePanel : BasePanel
             case"BehindBtn":
                 print("向后移动");
                 break;
+            case "对话框生成测试":
+                InitDialogBox("姑姑嘎嘎",测试用.transform.position);
+                break;
+            case "对话框关闭测试":
+                CloseDialogBox();
+                break;
         }
     }
     public void GetItem(Item item)
@@ -102,17 +110,58 @@ public class GamePanel : BasePanel
         int _index = item.GetComponent<InventoryComponent>().index;
         itemImages[_index].sprite = null;
     }
-
-    public void InitDialogBox(string speak,Vector3 pos)
+/// <summary>
+/// 生成对话框
+/// </summary>
+/// <param name="speak"></param>
+/// <param name="pos"></param>
+    public void InitDialogBox(string speak, Vector3 pos)
     {
-        Camera worldCam = Camera.main;
-        // 世界坐标 -> 屏幕坐标
-        Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(worldCam, pos);
-        
-        // 屏幕坐标 -> Canvas 本地坐标（ScreenSpace-Overlay 时传 null camera）
+        if (canvas == null)
+        {
+            Debug.LogError("Canvas 为 null，无法生成对话框");
+            return;
+        }
+        if (DialogImg == null)
+        {
+            Debug.LogError("DialogImg 为 null，无法生成对话框");
+            return;
+        }
+        if (SpeakText == null)
+        {
+            Debug.LogWarning("SpeakText 为 null，文本不会显示");
+        }
+
         RectTransform canvasRect = canvas.transform as RectTransform;
+        if (canvasRect == null)
+        {
+            Debug.LogError("canvas 的 RectTransform 未找到");
+            return;
+        }
+
+        // 世界坐标 -> 屏幕坐标
+        Camera worldCam = Camera.main;
+        Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(worldCam, pos);
+
+        // 屏幕坐标 -> Canvas 本地坐标（ScreenSpace-Overlay 时传 null camera）
         RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, screenPoint, null, out Vector2 localPoint);
-        //生成对话框在localPoint位置 
-        
+
+        // 确保 DialogImg 是 Canvas 的直接子物体
+        RectTransform dialogRect = DialogImg.rectTransform;
+        if (dialogRect.parent != canvasRect)
+        {
+            dialogRect.SetParent(canvasRect, false);
+        }
+
+        DialogImg.gameObject.SetActive(true);
+        dialogRect.anchoredPosition = localPoint;
+        if (SpeakText != null) SpeakText.text = speak;
+    }
+/// <summary>
+/// 关闭对话框
+/// </summary>
+    public void CloseDialogBox()
+    {
+        DialogImg.gameObject.SetActive(false);
     }
 }
