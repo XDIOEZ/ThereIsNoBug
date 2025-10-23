@@ -7,7 +7,8 @@ public class GamePanel : BasePanel
 {
     public List<Image> itemImages; 
 
-    private Image textImg;
+    // private Image textImg;
+    private Canvas canvas;
 
     protected override void Awake()
     {
@@ -20,14 +21,16 @@ public class GamePanel : BasePanel
         // propBtn5drag = GetControl<Image>("PropBtn5").gameObject.GetComponent<UIDrag>();
         // propBtn6drag = GetControl<Image>("PropBtn6").gameObject.GetComponent<UIDrag>();
         #endregion
+        //获取Canvas组件 方便后续使用
+        canvas = UIMgr.Instance().canvas.gameObject.GetComponent<Canvas>();
         int i=0;
         while (i < 6)
         {
             itemImages.Add(GetControl<Image>("PropBtn" + (i + 1)).gameObject.GetComponent<Image>());
             i++;
         }
-        textImg = GetControl<Image>("TextImage");
-        textImg.gameObject.SetActive(false);
+        // textImg = GetControl<Image>("TextImage");
+        // textImg.gameObject.SetActive(false);
     }
     protected override void OnClick(string btnName)
     {
@@ -55,11 +58,11 @@ public class GamePanel : BasePanel
             case"PropBtn6":
                 print("选择了5位置道具");
                 break;
-            case"启动对话框":
-                textImg.gameObject.SetActive(true);
-                break;
-            case"关闭对话框":
-                textImg.gameObject.SetActive(false);
+            // case"启动对话框":
+            //     textImg.gameObject.SetActive(true);
+            //     break;
+            // case"关闭对话框":
+            //     textImg.gameObject.SetActive(false);
                 break;
             case"玩小游戏":
                 UIMgr.Instance().ShowPanel<BasePanel>("LittleGamePanel", E_UI_Layer.Top);
@@ -98,5 +101,18 @@ public class GamePanel : BasePanel
     {
         int _index = item.GetComponent<InventoryComponent>().index;
         itemImages[_index].sprite = null;
+    }
+
+    public void InitDialogBox(string speak,Vector3 pos)
+    {
+        Camera worldCam = Camera.main;
+        // 世界坐标 -> 屏幕坐标
+        Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(worldCam, pos);
+        
+        // 屏幕坐标 -> Canvas 本地坐标（ScreenSpace-Overlay 时传 null camera）
+        RectTransform canvasRect = canvas.transform as RectTransform;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, screenPoint, null, out Vector2 localPoint);
+        //生成对话框在localPoint位置 
+        
     }
 }
