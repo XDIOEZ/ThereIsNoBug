@@ -60,26 +60,19 @@ public class GamePanel : BasePanel
             case"PropBtn6":
                 print("选择了5位置道具");
                 break;
+
+                #region 注释
+
             // case"启动对话框":
             //     textImg.gameObject.SetActive(true);
             //     break;
             // case"关闭对话框":
             //     textImg.gameObject.SetActive(false);
-                break;
+
+            #endregion
+
             case"玩小游戏":
                 UIMgr.Instance().ShowPanel<BasePanel>("LittleGamePanel", E_UI_Layer.Top);
-                break;
-            case"RightBtn":
-                print("向右移动");
-                break;
-            case"LeftBtn":
-                print("向左移动");
-                break;
-            case"ForwardBtn":
-                print("向前移动");
-                break;
-            case"BehindBtn":
-                print("向后移动");
                 break;
             case "对话框生成测试":
                 InitDialogBox("姑姑嘎嘎",测试用.transform.position);
@@ -93,7 +86,7 @@ public class GamePanel : BasePanel
     {
         int index = item.GetComponent<InventoryComponent>().index;
         ChangeSprite(index, item);
-    }
+    } 
 
     public void ChangeSprite(int index,Item item)
     {
@@ -164,4 +157,5 @@ public class GamePanel : BasePanel
     {
         DialogImg.gameObject.SetActive(false);
     }
+    
 }
