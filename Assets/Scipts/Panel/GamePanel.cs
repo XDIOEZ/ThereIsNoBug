@@ -43,22 +43,22 @@ public class GamePanel : BasePanel
                 UIMgr.Instance().ShowPanel<BasePanel>("SettingPanel", E_UI_Layer.Top);
                 break;
             case"PropBtn1":
-                print("选择了0位置道具");
+                Inventory.GetInstance().SelectItem(0);
                 break;
             case"PropBtn2":
-                print("选择了1位置道具");
+                Inventory.GetInstance().SelectItem(1);
                 break;
             case"PropBtn3":
-                print("选择了2位置道具");
+                Inventory.GetInstance().SelectItem(2);
                 break;
             case"PropBtn4":
-                print("选择了3位置道具");
+                Inventory.GetInstance().SelectItem(3);
                 break;
             case"PropBtn5":
-                print("选择了4位置道具");
+                Inventory.GetInstance().SelectItem(4);
                 break;
             case"PropBtn6":
-                print("选择了5位置道具");
+                Inventory.GetInstance().SelectItem(5);
                 break;
             // case"启动对话框":
             //     textImg.gameObject.SetActive(true);

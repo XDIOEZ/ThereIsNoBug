@@ -8,10 +8,10 @@ public class TestInteractableItem : Item
     void Start()
     {
         interactableComponent = GetComponent<InteractableComponent>();
-        interactableComponent.OnInteract += Test;
+        interactableComponent.OnInteract += Used;
     }
 
-    void Test()
+    protected override void Used()
     {
         Debug.Log("Test");
     }

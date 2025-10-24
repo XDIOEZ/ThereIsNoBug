@@ -5,7 +5,7 @@ public class InventoryComponent : MonoBehaviour
     public event Action OnUsed;
     public int index;
     
-    public void Interact()
+    public void Used()
     {
         OnUsed?.Invoke();
     }

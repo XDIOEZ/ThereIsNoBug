@@ -156,6 +156,7 @@ MonoBehaviour:
     m_Bits: 64
   inventory: {fileID: 1243374506}
   isOnInventory: 0
+  map: {fileID: 0}
 --- !u!4 &382835544
 Transform:
   m_ObjectHideFlags: 0
@@ -202,6 +203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemInInventory: []
   nowItem: {fileID: 0}
+  textAsset: {fileID: 0}
 --- !u!4 &1243374507
 Transform:
   m_ObjectHideFlags: 0

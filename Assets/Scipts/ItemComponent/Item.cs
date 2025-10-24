@@ -6,6 +6,11 @@ public class Item : MonoBehaviour
 {
     public int id;
 
+    protected virtual void Used()
+    {
+        
+    }
+    
     public string GetPrePath()
     {
         return ItemUtils.GetItemInfo(id).PrePath;
