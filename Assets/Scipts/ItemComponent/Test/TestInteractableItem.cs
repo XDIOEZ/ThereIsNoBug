@@ -14,6 +14,7 @@ public class TestInteractableItem : Item
 
     protected override void Used()
     {
+        UIMgr.Instance().GetPanel<GamePanel>("GamePanel").InitDialogBox("hello",transform.position);
         Debug.Log("Test");
     }
 

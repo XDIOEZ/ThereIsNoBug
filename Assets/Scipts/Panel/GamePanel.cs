@@ -149,12 +149,14 @@ public class GamePanel : BasePanel
         DialogImg.gameObject.SetActive(true);
         dialogRect.anchoredPosition = localPoint;
         if (SpeakText != null) SpeakText.text = speak;
+        StartCoroutine(CloseDialogBox());
     }
 /// <summary>
 /// 关闭对话框
 /// </summary>
-    public void CloseDialogBox()
+    IEnumerator CloseDialogBox()
     {
+        yield return new WaitForSeconds(2f);
         DialogImg.gameObject.SetActive(false);
     }
     
