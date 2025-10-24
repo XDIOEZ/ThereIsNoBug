@@ -9,10 +9,17 @@ public class TestInteractableItem : Item
     {
         interactableComponent = GetComponent<InteractableComponent>();
         interactableComponent.OnInteract += Used;
+        interactableComponent.OnInteractWithItem += UsedWithItem;
     }
 
     protected override void Used()
     {
         Debug.Log("Test");
+    }
+
+    protected override void UsedWithItem(Item item)
+    {
+        Debug.Log(item.GetName() + "别闹了，我不玩想旮旯给木");
+        Inventory.Instance.ResetInventory();
     }
 }

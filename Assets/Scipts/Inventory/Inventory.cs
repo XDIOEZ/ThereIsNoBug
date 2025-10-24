@@ -4,7 +4,7 @@ using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class Inventory : SingletonMono<Inventory>
+public class Inventory : MonoSingleton<Inventory>
 {
     public List<Item> itemInInventory;
     public Item nowItem;
@@ -22,13 +22,6 @@ public class Inventory : SingletonMono<Inventory>
         //test
         if (!GamePlayManager.Instance.isOnInventory)
         {
-            if (itemIndex == 1 && isFirst)
-            {
-                AddItem(1);
-                isFirst = false;
-                ResetInventory();
-                return;
-            }
             nowItem = itemInInventory.FirstOrDefault(item => item.GetComponent<InventoryComponent>().index == itemIndex);
             GamePlayManager.Instance.isOnInventory = true;
             if (nowItem == null)
@@ -65,18 +58,33 @@ public class Inventory : SingletonMono<Inventory>
         string path = ItemUtils.GetItemInfo(id).PrePath;
         GameObject item = Instantiate(Resources.Load<GameObject>(path));
         item.GetComponent<Item>().id = id;
+        int index = 0;
+        if (itemInInventory.Count > 0)
+        {
+            for (int i = 0; itemInInventory[i].GetComponent<InventoryComponent>().index != index; i++)
+            {
+                index = i + 1;
+            }
+            item.GetComponent<InventoryComponent>().index = index + 1;
+        }
         itemInInventory.Add(item.GetComponent<Item>());
         item.transform.SetParent(transform);
-        int index = 0;
-        for (int i = 0; itemInInventory[i].GetComponent<InventoryComponent>().index != index; i++)
-        {
-            index = i;
-        }
-        item.GetComponent<InventoryComponent>().index = index;
+        itemInInventory.OrderBy(x=>x.GetComponent<InventoryComponent>().index);
         //显示在物品栏中
         UIMgr.Instance().GetPanel<GamePanel>("GamePanel").GetItem(item.GetComponent<Item>());
     }
 
+    public void RemoveItem(int id)
+    {
+        Item item = itemInInventory.FirstOrDefault(X => X.id == id);
+        if (item != null)
+        {
+            itemInInventory.Remove(item);
+            //物品栏中移除
+            UIMgr.Instance().GetPanel<GamePanel>("GamePanel").RemoveItem(item);
+        }
+    }
+    
     public void RemoveItem(Item item)
     {
         if (itemInInventory.Contains(item))
@@ -96,6 +104,7 @@ public class Inventory : SingletonMono<Inventory>
             Item _item = itemInInventory.FirstOrDefault(item => item.GetComponent<InventoryComponent>().index == index);
             _item.GetComponent<InventoryComponent>().index = _index;
             item.GetComponent<InventoryComponent>().index = index;
+            itemInInventory.OrderBy(x=>x.GetComponent<InventoryComponent>().index);
             //物品栏中交换
             GamePanel gamePanel = UIMgr.Instance().GetPanel<GamePanel>("GamePanel");
             gamePanel.ChangeSprite(index, item);

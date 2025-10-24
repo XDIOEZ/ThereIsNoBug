@@ -1,2 +1,3 @@
 ﻿ID,Name,Description,ImagePath,PrefabPath
-1,test item,only for test,TestArt/sora,Prefabs/InventoryItem/InventoryItem
+1,sora,only for test,TestArt/sora,Prefabs/InventoryItem/InventoryItem
+2,ririko,only for test,TestArt/ririko,Prefabs/InventoryItem/InventoryItem

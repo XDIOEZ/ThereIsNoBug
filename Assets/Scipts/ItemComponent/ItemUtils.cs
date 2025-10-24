@@ -30,10 +30,7 @@ public static class ItemUtils
             string description = cells[2];
             string imagePath = cells[3];
             string prePath = cells[4];
-            if (i == rows.Length-2)
-            {
-                prePath = prePath.Substring(0, prePath.Length - 1);
-            }
+            prePath = prePath.Substring(0, prePath.Length - 1);
             ItemInfo itemInfo = new ItemInfo(id, name, description, imagePath, prePath);
             itemInfos[i-1] = itemInfo;
         }
