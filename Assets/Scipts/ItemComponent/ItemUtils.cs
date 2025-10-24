@@ -1,12 +1,40 @@
 using System.Collections.Generic;
+using UnityEditor;
+using UnityEngine;
 
 public static class ItemUtils 
 {
     private static Dictionary<int,ItemInfo> items;
-
-    public static void Init()
+    
+    public static void Init(TextAsset asset)
     {
-        
+        items = new Dictionary<int, ItemInfo>();
+        ItemInfo[] itemInfos = ReadSCV(asset);
+        foreach (ItemInfo itemInfo in itemInfos)
+        {
+            items.Add(itemInfo.Id, itemInfo);
+        }
+
+        Debug.Log("初始化物品字典完毕，共有" + items.Count + "个物品");
+    }
+    
+    private static ItemInfo[] ReadSCV(TextAsset asset)
+    {
+        string[] rows = asset.text.Split("\n");
+        ItemInfo[] itemInfos = new ItemInfo[rows.Length-2];
+        for (int i = 1; i < rows.Length-1; i++)
+        {
+            string[] cells = rows[i].Split(",");
+            int id = int.Parse(cells[0]);
+            string name = cells[1];
+            string description = cells[2];
+            string imagePath = cells[3];
+            string prePath = cells[4];
+            prePath = prePath.Substring(0, prePath.Length - 1);
+            ItemInfo itemInfo = new ItemInfo(id, name, description, imagePath, prePath);
+            itemInfos[i-1] = itemInfo;
+        }
+        return itemInfos;
     }
     
     public static ItemInfo GetItemInfo(int _id)
@@ -17,11 +45,18 @@ public static class ItemUtils
 
 public class ItemInfo
 {
+    public ItemInfo(int _id, string _name, string _desc, string _imgpath, string _prePath)
+    {
+        id = _id;
+        name = _name;
+        description =  _desc;
+        imagePath = _imgpath;
+        prePath = _prePath;
+    }
     private int id;
     public int Id
     {
         get { return id; }
-        set { id = value; }
     }
     
     private string name;
@@ -29,7 +64,6 @@ public class ItemInfo
     public string Name
     {
         get { return name; }
-        set { name = value; }
     }
     
     private string description;
@@ -37,7 +71,6 @@ public class ItemInfo
     public string Description
     {
         get { return description; }
-        set { description = value; }
     }
     
     private string imagePath;
@@ -45,7 +78,6 @@ public class ItemInfo
     public string ImagePath
     {
         get { return imagePath; }
-        set { imagePath = value; }
     }
     
     private string prePath;
@@ -53,6 +85,5 @@ public class ItemInfo
     public string PrePath
     {
         get { return prePath; }
-        set { prePath = value; }
     }
 }

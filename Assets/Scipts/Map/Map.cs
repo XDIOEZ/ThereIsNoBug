@@ -139,6 +139,7 @@ public class Map : MonoBehaviour
     private void DrawMap()
     {
         if(lineRenderer == null)
+            
             lineRenderer = GetComponent<LineRenderer>();
         if (arrived.MapPoints.Count != 0)
         {

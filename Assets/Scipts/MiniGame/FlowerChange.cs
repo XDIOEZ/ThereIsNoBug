@@ -10,6 +10,10 @@ public class FlowerChange : MonoBehaviour
     //这是管理位于子对象上的花朵对象 他们的名字为 红 、黄 、蓝 、紫 、绿 、 青 ,橙 紫
     public List<GameObject> Flowers = new List<GameObject>();
 
+    // 定义正确的花朵名称顺序
+    [Header("默认为-红、橙、黄、绿、青、蓝、紫")]
+    public string[] correctOrder = { "红", "橙", "黄", "绿", "青", "蓝", "紫" };
+
     [Header("花朵排列设置")]
     [Tooltip("花朵之间的间隔距离")]
     public float flowerSpacing = 2.0f;
@@ -80,9 +84,6 @@ public class FlowerChange : MonoBehaviour
     /// <returns>如果顺序正确返回true，否则返回false</returns>
     public bool CheckFlowerOrder()
     {
-        // 定义正确的花朵名称顺序
-        string[] correctOrder = { "红", "橙", "黄", "绿", "青", "蓝", "紫" };
-        
         // 按x轴位置对花朵进行排序
         List<GameObject> sortedFlowers = new List<GameObject>(Flowers);
         sortedFlowers.Sort((a, b) => a.transform.position.x.CompareTo(b.transform.position.x));

@@ -8,11 +8,18 @@ public class TestInteractableItem : Item
     void Start()
     {
         interactableComponent = GetComponent<InteractableComponent>();
-        interactableComponent.OnInteract += Test;
+        interactableComponent.OnInteract += Used;
+        interactableComponent.OnInteractWithItem += UsedWithItem;
     }
 
-    void Test()
+    protected override void Used()
     {
         Debug.Log("Test");
+    }
+
+    protected override void UsedWithItem(Item item)
+    {
+        Debug.Log(item.GetName() + "别闹了，我不玩想旮旯给木");
+        Inventory.Instance.ResetInventory();
     }
 }
