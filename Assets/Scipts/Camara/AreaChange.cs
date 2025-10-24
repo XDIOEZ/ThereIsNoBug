@@ -72,6 +72,30 @@ public class AreaChange : MonoBehaviour
             farBackgrounds[currentYAreaIndex].SetActive(true);
         }
         
+        //初始化近景激活状态：只有 currentAreaIndex 对应的近景激活
+        for (int i = 0; i < 4; i++)
+        {
+            var currentSprites = areas[i].GetComponentsInChildren<SpriteRenderer>(true);
+            if (i > 0)
+            {
+                foreach (var sr in currentSprites)
+                {
+                    if (sr == null) continue;
+                    sr.color = new Color(1, 1, 1, 0);
+                }
+            }
+            else
+            {
+                foreach (var sr in currentSprites)
+                {
+                    if (sr == null) continue;
+                    sr.color = new Color(1, 1, 1, 1);
+                }
+            }
+        }
+        
+        
+        
     }
 
     private void Update()
