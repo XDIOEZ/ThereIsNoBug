@@ -141,12 +141,12 @@ public class AudioManager : MonoBehaviour
     /// <param name="loop">是否循环播放</param>
     /// <param name="fadeTime">淡入时长（秒）</param>
     [Button("播放背景音乐")]
-    public void PlayBGM(string name, bool loop = true, float fadeTime = 0.5f)
+    public AudioSource PlayBGM(string name, bool loop = true, float fadeTime = 0.5f)
     {
         if (!bgmDict.TryGetValue(name, out var clip))
         {
             Debug.LogWarning($"[AudioManager] 未找到BGM: {name}");
-            return;
+            return null;
         }
 
         // 创建新的AudioSource用于播放BGM
@@ -163,12 +163,14 @@ public class AudioManager : MonoBehaviour
         
         // 添加到BGM源列表
         bgmSources.Add(newBGMSource);
+       
 
         // 淡入播放
         StartCoroutine(FadeInBGM(newBGMSource, fadeTime));
         
         // 触发播放BGM事件
         OnPlayBGM?.Invoke(name);
+        return newBGMSource;
     }
 
     /// <summary>

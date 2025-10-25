@@ -300,6 +300,7 @@ GameObject:
   - component: {fileID: 7887041570521973108}
   - component: {fileID: 2207868607802706238}
   - component: {fileID: 4638432941206701937}
+  - component: {fileID: 1374020842848280692}
   m_Layer: 5
   m_Name: CloseBtn
   m_TagString: Untagged
@@ -408,7 +409,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2207868607802706238}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1374020842848280692}
+        m_TargetAssemblyTypeName: BaseAudio, Assembly-CSharp
+        m_MethodName: PlaySFX
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: "\u7CFB\u7EDFUI\u6309\u952E\u97F3"
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1374020842848280692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3250919413864645500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 896ff4bd7b2b6da4ebd1f9537a19ec81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3954795077923018683
 GameObject:
   m_ObjectHideFlags: 0
@@ -1014,7 +1039,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9067967366089606366}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1374020842848280692}
+        m_TargetAssemblyTypeName: BaseAudio, Assembly-CSharp
+        m_MethodName: PlaySFX
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: "\u7CFB\u7EDFUI\u6309\u952E\u97F3"
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6885461831105728982
 GameObject:
   m_ObjectHideFlags: 0
@@ -1214,4 +1251,16 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1975328223296588918}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1374020842848280692}
+        m_TargetAssemblyTypeName: BaseAudio, Assembly-CSharp
+        m_MethodName: PlaySFX
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: "\u7CFB\u7EDFUI\u6309\u952E\u97F3"
+          m_BoolArgument: 0
+        m_CallState: 2

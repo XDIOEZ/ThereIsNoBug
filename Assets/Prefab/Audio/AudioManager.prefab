@@ -59,6 +59,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 34d902347770ca04f816ac8d65ebcc75, type: 3}
   - {fileID: 8300000, guid: c5713ed8dcbd1b8478a1355f88f6792f, type: 3}
   - {fileID: 8300000, guid: ac8201088a3108543b885bd28dc57686, type: 3}
+  - {fileID: 8300000, guid: 3e9af042c572e7b4b881262335598de2, type: 3}
+  - {fileID: 8300000, guid: 99d19f027cc0b624c9f44adb8e971342, type: 3}
+  - {fileID: 8300000, guid: 5cbd34bcd3f945748b30e2a3e74a11df, type: 3}
+  - {fileID: 8300000, guid: fc648101d65772b4aa07cbed9d005627, type: 3}
   OnAudioSettingsChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -82,7 +86,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: a3b5030fb5fb25d449193d0224c3a34a, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

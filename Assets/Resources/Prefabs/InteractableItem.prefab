@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 4308701159289274590}
   - component: {fileID: 7618591748576136255}
   - component: {fileID: 7607043321372856004}
+  - component: {fileID: 8703916388849944332}
+  - component: {fileID: 2404998068663629731}
   m_Layer: 6
   m_Name: InteractableItem
   m_TagString: Untagged
@@ -157,3 +159,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 1
+--- !u!114 &8703916388849944332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8885135431594995833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c358489f82edf44e9451fa939497428, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactableComponent: {fileID: 0}
+  onAudioPlayed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2404998068663629731}
+        m_TargetAssemblyTypeName: BaseAudio, Assembly-CSharp
+        m_MethodName: PlaySFX
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: "\u9053\u5177\u62FE\u53D6\u97F3\u6548"
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2404998068663629731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8885135431594995833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 896ff4bd7b2b6da4ebd1f9537a19ec81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

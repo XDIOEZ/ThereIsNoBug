@@ -11,14 +11,6 @@ public class Tiger : MonoBehaviour
     public UnityEvent onTigerAwake;
     public UnityEvent onTigerSleep;
 
-    [Header("音频设置")]
-    [Tooltip("背景音乐名称")]
-    public string bgmName = "AugHHH";
-    [Tooltip("第一个音效名称")]
-    public string firstSFXName = "VineBoom";
-    [Tooltip("第二个音效名称")]
-    public string secondSFXName = "GetOut";
-
     private bool isTigerAwake = false; // 老虎是否处于惊醒状态
 
     public void Start()
@@ -76,15 +68,6 @@ public class Tiger : MonoBehaviour
     {
         isTigerAwake = true;
         onTigerAwake?.Invoke();
-        AudioManager.Instance.StopBGM(bgmName);
-        AudioManager.Instance.PlaySFXWithCallback(firstSFXName, () =>
-        {
-            AudioManager.Instance.PlaySFXWithCallback(secondSFXName, () =>
-            {
-                // 启动协程，在eatSheepTime秒后让老虎睡去
-                StartCoroutine(PutTigerToSleep());
-            });
-        });
     }
 
     /// <summary>
@@ -96,7 +79,6 @@ public class Tiger : MonoBehaviour
         
         isTigerAwake = false;
         onTigerSleep?.Invoke();
-        AudioManager.Instance.PlayBGM(bgmName);
     }
 
     private void OnDisable()
