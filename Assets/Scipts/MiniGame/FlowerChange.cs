@@ -12,7 +12,7 @@ public class FlowerChange : MonoBehaviour
 
     // 定义正确的花朵名称顺序
     [Header("默认为-红、橙、黄、绿、青、蓝、紫")]
-    public string[] correctOrder = { "红", "橙", "黄", "绿", "青", "蓝", "紫" };
+    public string[] correctOrder = { "红", "橙", "黄", "绿", "青", "蓝"};
 
     [Header("花朵排列设置")]
     [Tooltip("花朵之间的间隔距离")]
@@ -23,6 +23,13 @@ public class FlowerChange : MonoBehaviour
     
     [Tooltip("所有花朵的Y轴位置")]
     public float flowerYPosition = 0.0f;
+
+    [Header("初始排序设置")]
+    [Tooltip("true表示使用手动设置的初始排序，false表示自动随机排序")]
+    public bool useManualInitialOrder = false;
+    
+    [Tooltip("手动设置的初始花朵顺序（按从左到右的顺序填写花朵名称）")]
+    public string[] manualInitialOrder = { "红", "橙", "黄", "绿", "青", "蓝"};
 
     [Header("游戏胜利后调用")]
     public UnityEvent OnWin;
@@ -46,7 +53,14 @@ public class FlowerChange : MonoBehaviour
         }
         
         // TODO 随机打乱花朵位置（只修改位置，不修改列表顺序）
-        ShuffleFlowerPositions();
+        if (useManualInitialOrder)
+        {
+            SetManualFlowerPositions();
+        }
+        else
+        {
+            ShuffleFlowerPositions();
+        }
     }
 
     // 随机打乱花朵位置（只修改位置，不修改列表顺序）
@@ -78,6 +92,30 @@ public class FlowerChange : MonoBehaviour
         for (int i = 0; i < Flowers.Count; i++)
         {
             Flowers[i].transform.position = positions[i];
+        }
+    }
+
+    // 根据手动设置排列花朵位置
+    void SetManualFlowerPositions()
+    {
+        // 创建一个临时字典来映射花朵名称到花朵对象
+        Dictionary<string, FlowerDrag> flowerMap = new Dictionary<string, FlowerDrag>();
+        foreach (FlowerDrag flower in Flowers)
+        {
+            flowerMap[flower.gameObject.name] = flower;
+        }
+
+        // 根据manualInitialOrder设置花朵位置
+        for (int i = 0; i < manualInitialOrder.Length && i < Flowers.Count; i++)
+        {
+            if (flowerMap.ContainsKey(manualInitialOrder[i]))
+            {
+                Vector3 position = new Vector3();
+                position.x = startOffsetX + i * flowerSpacing;
+                position.y = flowerYPosition;
+                position.z = flowerMap[manualInitialOrder[i]].transform.position.z;
+                flowerMap[manualInitialOrder[i]].transform.position = position;
+            }
         }
     }
 

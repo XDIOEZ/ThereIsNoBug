@@ -679,6 +679,42 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7103812982031443420, guid: 0fa399ea49bdddb4b908a894eff1fca2, type: 3}
+      propertyPath: useManualInitialOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7103812982031443420, guid: 0fa399ea49bdddb4b908a894eff1fca2, type: 3}
+      propertyPath: correctOrder.Array.data[0]
+      value: "\u7EFF"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7103812982031443420, guid: 0fa399ea49bdddb4b908a894eff1fca2, type: 3}
+      propertyPath: correctOrder.Array.data[1]
+      value: "\u7EA2"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7103812982031443420, guid: 0fa399ea49bdddb4b908a894eff1fca2, type: 3}
+      propertyPath: correctOrder.Array.data[2]
+      value: "\u9752"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7103812982031443420, guid: 0fa399ea49bdddb4b908a894eff1fca2, type: 3}
+      propertyPath: correctOrder.Array.data[3]
+      value: "\u9EC4"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7103812982031443420, guid: 0fa399ea49bdddb4b908a894eff1fca2, type: 3}
+      propertyPath: correctOrder.Array.data[4]
+      value: "\u6A59"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7103812982031443420, guid: 0fa399ea49bdddb4b908a894eff1fca2, type: 3}
+      propertyPath: manualInitialOrder.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7103812982031443420, guid: 0fa399ea49bdddb4b908a894eff1fca2, type: 3}
+      propertyPath: manualInitialOrder.Array.data[4]
+      value: "\u84DD"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7103812982031443420, guid: 0fa399ea49bdddb4b908a894eff1fca2, type: 3}
+      propertyPath: manualInitialOrder.Array.data[5]
+      value: "\u9752"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7103812982031443420, guid: 0fa399ea49bdddb4b908a894eff1fca2, type: 3}
       propertyPath: OnWin.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
