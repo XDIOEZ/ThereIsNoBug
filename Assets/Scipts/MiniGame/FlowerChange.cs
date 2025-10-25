@@ -20,6 +20,9 @@ public class FlowerChange : MonoBehaviour
     
     [Tooltip("第一个花朵的起始X坐标位置")]
     public float startOffsetX = 0.0f;
+    
+    [Tooltip("所有花朵的Y轴位置")]
+    public float flowerYPosition = 0.0f;
 
     [Header("游戏胜利后调用")]
     public UnityEvent OnWin;
@@ -51,7 +54,10 @@ public class FlowerChange : MonoBehaviour
         // 获取所有花朵的当前位置
         for (int i = 0; i < Flowers.Count; i++)
         {
-            positions.Add(Flowers[i].transform.position);
+            Vector3 currentPosition = Flowers[i].transform.position;
+            // 使用统一的Y轴位置
+            currentPosition.y = flowerYPosition;
+            positions.Add(currentPosition);
         }
         
         // 使用Fisher-Yates洗牌算法打乱位置列表
@@ -68,11 +74,8 @@ public class FlowerChange : MonoBehaviour
         {
             Vector3 newPosition = Flowers[i].transform.position;
             newPosition.x = positions[i].x;
-            // 限制Y轴不能大于1，如果大于1则设为0
-            if (newPosition.y > 1f)
-            {
-                newPosition.y = 0f;
-            }
+            // 使用统一的Y轴位置
+            newPosition.y = flowerYPosition;
             Flowers[i].transform.position = newPosition;
         }
     }
@@ -160,15 +163,9 @@ public class FlowerChange : MonoBehaviour
             tempX.x = pos2.x;
             pos2.x = pos1.x;
             
-            // 限制Y轴不能大于1，如果大于1则设为0
-            if (tempX.y > 1f)
-            {
-                tempX.y = 0f;
-            }
-            if (pos2.y > 1f)
-            {
-                pos2.y = 0f;
-            }
+            // 保持Y轴位置不变
+            tempX.y = flowerYPosition;
+            pos2.y = flowerYPosition;
             
             Flowers[index1].transform.position = tempX;
             Flowers[index2].transform.position = pos2;
@@ -206,18 +203,8 @@ public class FlowerChange : MonoBehaviour
             return;
 
         // 保持各自的Y坐标，只交换X坐标
-        Vector3 flower1TargetPosition = new Vector3(flower2.transform.position.x, flower1.transform.position.y, flower1.transform.position.z);
-        Vector3 flower2TargetPosition = new Vector3(originalPosition.x, flower2.transform.position.y, flower2.transform.position.z);
-        
-        // 限制Y轴不能大于1，如果大于1则设为0
-        if (flower1TargetPosition.y > 1f)
-        {
-            flower1TargetPosition.y = 0f;
-        }
-        if (flower2TargetPosition.y > 1f)
-        {
-            flower2TargetPosition.y = 0f;
-        }
+        Vector3 flower1TargetPosition = new Vector3(flower2.transform.position.x, flowerYPosition, flower1.transform.position.z);
+        Vector3 flower2TargetPosition = new Vector3(originalPosition.x, flowerYPosition, flower2.transform.position.z);
         
         // 使用DoTween执行动画
         flower1.transform.DOMove(flower1TargetPosition, 0.3f).OnComplete(() => CheckWinCondition());
