@@ -1,4 +1,4 @@
-using DG.Tweening;
+ï»¿using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,165 +6,131 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class FlowerDrag : MonoBehaviour
 {
-    [Header("ÍÏ×§ÉèÖÃ")]
-    [Tooltip("ÊÇ·ñÆôÓÃÍÏ×§¹¦ÄÜ")]
+    [Header("æ‹–æ‹½è®¾ç½®")]
+    [Tooltip("æ˜¯å¦å¯ç”¨æ‹–æ‹½åŠŸèƒ½")]
     public bool enableDrag = true;
-    
-    [Tooltip("ÍÏ×§Ê±µÄZÖáÎ»ÖÃ£¬È·±£ÔÚÉãÏñ»úÇ°·½")]
-    public float dragZPosition = -5f;
-    
-    [Tooltip("¼ì²â×î½ü»¨¶äµÄ×î´ó¾àÀë")]
+
+    [Tooltip("æ£€æµ‹æœ€è¿‘èŠ±æœµçš„æœ€å¤§è·ç¦»")]
     public float maxSwapDistance = 3f;
-    
+
     private Camera mainCamera;
     private Vector3 originalPosition;
-    private Vector3 clickPosition; // ¼ÇÂ¼µã»÷Ê±µÄÎ»ÖÃ
+    private Vector3 clickPosition;
+    private float keepZ; // è®°å½•åˆå§‹Zè½´
     private bool isDragging = false;
     private FlowerChange flowerManager;
     private Collider2D flowerCollider;
 
     void Start()
     {
-        // »ñÈ¡Ö÷ÉãÏñ»ú
         mainCamera = Camera.main;
-        
-        // »ñÈ¡Åö×²Æ÷×é¼ş
+
         flowerCollider = GetComponent<Collider2D>();
         if (flowerCollider == null)
-        {
-            Debug.LogError("»¨¶ä¶ÔÏóĞèÒªCollider2D×é¼ş²ÅÄÜ½øĞĞÍÏ×§²Ù×÷£¡", gameObject);
-        }
-        
-        // ²éÕÒFlowerChange¹ÜÀíÆ÷
+            Debug.LogError("éœ€æ·»åŠ  Collider2D ç»„ä»¶!", gameObject);
+
         flowerManager = FindObjectOfType<FlowerChange>();
         if (flowerManager == null)
-        {
-            Debug.LogError("³¡¾°ÖĞÎ´ÕÒµ½FlowerChange×é¼ş£¡", gameObject);
-        }
+            Debug.LogError("åœºæ™¯ä¸­æœªæ‰¾åˆ° FlowerChange!", gameObject);
     }
 
     void OnMouseDown()
     {
-        // ¼ì²éÊÇ·ñÆôÓÃÍÏ×§¹¦ÄÜ
-        if (!enableDrag || !flowerCollider.enabled)
-            return;
-            
-        // ¿ªÊ¼ÍÏ×§
+        if (!enableDrag || !flowerCollider.enabled) return;
         StartDrag();
     }
 
     void OnMouseDrag()
     {
-        // ¼ì²éÊÇ·ñÕıÔÚÍÏ×§
-        if (!isDragging || !enableDrag)
-            return;
-            
-        // ¸üĞÂ»¨¶äÎ»ÖÃ
+        if (!enableDrag || !isDragging) return;
         DragFlower();
     }
 
     void OnMouseUp()
     {
-        // ¼ì²éÊÇ·ñÕıÔÚÍÏ×§
-        if (!isDragging || !enableDrag)
-            return;
-            
-        // ½áÊøÍÏ×§²¢´¦ÀíÎ»ÖÃ½»»»
+        if (!isDragging || !enableDrag) return;
         EndDrag();
     }
 
-    /// <summary>
-    /// ¿ªÊ¼ÍÏ×§²Ù×÷
-    /// </summary>
+    private Tweener dragTween; // æ‹–æ‹½è·Ÿéš Tween
+
     private void StartDrag()
     {
         isDragging = true;
         originalPosition = transform.position;
-        clickPosition = transform.position; // ¼ÇÂ¼µã»÷Ê±µÄÎ»ÖÃ
-        
-        // ½«»¨¶äÖÃÓÚ×îÇ°²ã£¬È·±£¿É¼û
-        Vector3 dragPosition = transform.position;
-        dragPosition.z = dragZPosition;
-        transform.position = dragPosition;
+        clickPosition = transform.position;
+        keepZ = transform.position.z;
+
+        // åˆå§‹åŒ–æŒç»­ tweenï¼šä¸è‡ªåŠ¨å®Œæˆ
+        dragTween = transform.DOMove(transform.position, 0.15f)
+            .SetEase(Ease.OutQuad)
+            .SetAutoKill(false)
+            .Pause();
     }
 
-    /// <summary>
-    /// ÍÏ×§¹ı³ÌÖĞ¸üĞÂ»¨¶äÎ»ÖÃ
-    /// </summary>
     private void DragFlower()
     {
-        // ½«Êó±êÆÁÄ»×ø±ê×ª»»ÎªÊÀ½ç×ø±ê
         Vector3 mousePosition = Input.mousePosition;
-        mousePosition.z = -mainCamera.transform.position.z + dragZPosition;
-        Vector3 worldPosition = mainCamera.ScreenToWorldPoint(mousePosition);
-        
-        // ¸üĞÂ»¨¶äÎ»ÖÃ£¬±£³ÖZÖá²»±ä
-        Vector3 newPosition = new Vector3(worldPosition.x, worldPosition.y, dragZPosition);
-        transform.position = newPosition;
+        mousePosition.z = Mathf.Abs(mainCamera.transform.position.z - keepZ);
+        Vector3 targetPos = mainCamera.ScreenToWorldPoint(mousePosition);
+        targetPos.z = keepZ;
+
+        if (!dragTween.IsPlaying()) dragTween.Play();
+
+        // åŠ¨æ€æ›´æ–°ç›®æ ‡å€¼è¾¾åˆ°å¹³æ»‘æ•ˆæœ
+        dragTween.ChangeEndValue(targetPos, true);
     }
 
-    /// <summary>
-    /// ½áÊøÍÏ×§²Ù×÷²¢´¦Àí»¨¶ä½»»»
-    /// </summary>
     private void EndDrag()
     {
         isDragging = false;
-        
-        // ²éÕÒ×î½üµÄ»¨¶ä
-        GameObject nearestFlower = FindNearestFlower();
-        
-        // Èç¹ûÕÒµ½×î½üµÄ»¨¶äÇÒ²»ÊÇ×Ô¼º£¬Ôò½»»»Î»ÖÃ
-        if (nearestFlower != null && nearestFlower != gameObject)
+
+        if (dragTween != null)
         {
-            // Í¨¹ı¹ÜÀíÆ÷½»»»»¨¶äÎ»ÖÃ
+            dragTween.Kill();
+            dragTween = null;
+        }
+
+        FlowerDrag nearestFlower = FindNearestFlower();
+
+        if (nearestFlower != null && nearestFlower != this)
+        {
             if (flowerManager != null)
             {
-                flowerManager.SwapFlowersByObjectWithYFixed(gameObject, nearestFlower, clickPosition);
+                flowerManager.SwapFlowersByObjectWithYFixed(gameObject, nearestFlower.gameObject, clickPosition);
             }
             else
             {
-                // Èç¹ûÃ»ÓĞ¹ÜÀíÆ÷£¬Ö±½Ó½»»»Î»ÖÃ£¨±£³ÖYÖá£©
-                SwapPositionWithYFixed(nearestFlower);
+                SwapPositionWithYFixed(nearestFlower.gameObject);
             }
         }
         else
         {
-            // Èç¹ûÃ»ÓĞÕÒµ½ºÏÊÊµÄ»¨¶ä£¬»Øµ½Ô­Ê¼Î»ÖÃ£¨´ø¶¯»­£©
-            transform.DOMove(originalPosition, 0.3f);
+            transform.DOMove(originalPosition, 0.3f).SetEase(Ease.OutQuad);
         }
-        
-        // ¼ì²éµ±Ç°ÅÅĞòÊÇ·ñÕıÈ·
+
         if (flowerManager != null && flowerManager.CheckFlowerOrder())
         {
-            Debug.Log("¹§Ï²£¡»¨¶äË³ĞòÕıÈ·£ººì³È»ÆÂÌÇàÀ¶×Ï");
-            // ¿ÉÒÔÔÚÕâÀïÌí¼ÓÓÎÏ·Íê³ÉµÄÂß¼­
+            Debug.Log("âœ… é¡ºåºæ­£ç¡®!");
         }
     }
 
     /// <summary>
-    /// ²éÕÒ×î½üµÄ»¨¶ä
+    /// æŸ¥æ‰¾æœ€è¿‘èŠ±æœµ
     /// </summary>
-    /// <returns>×î½üµÄ»¨¶ä¶ÔÏó£¬Èç¹ûÃ»ÓĞÕÒµ½Ôò·µ»Ønull</returns>
-    private GameObject FindNearestFlower()
+    private FlowerDrag FindNearestFlower()
     {
-        GameObject nearestFlower = null;
+        FlowerDrag nearestFlower = null;
         float minDistance = maxSwapDistance;
-        
-        // ±éÀúËùÓĞ»¨¶ä²éÕÒ×î½üµÄ
+
         if (flowerManager != null)
         {
             for (int i = 0; i < flowerManager.GetFlowerCount(); i++)
             {
-                GameObject flower = flowerManager.GetFlower(i);
-                
-                // ÅÅ³ı×Ô¼º
-                if (flower == gameObject)
-                    continue;
-                    
-                // ¼ÆËã¾àÀë
+                FlowerDrag flower = flowerManager.GetFlower(i);
+                if (flower == this) continue;
+
                 float distance = Vector3.Distance(transform.position, flower.transform.position);
-                
-                // ¸üĞÂ×î½üµÄ»¨¶ä
                 if (distance < minDistance)
                 {
                     minDistance = distance;
@@ -172,63 +138,23 @@ public class FlowerDrag : MonoBehaviour
                 }
             }
         }
-        
+
         return nearestFlower;
     }
 
     /// <summary>
-    /// ÓëÁíÒ»¶ä»¨½»»»Î»ÖÃ£¨±£³Ö¸÷×ÔµÄYÖá£©
+    /// ä¿æŒYäº¤æ¢ä½ç½® (DoTweenåŠ¨ç”»)
     /// </summary>
-    /// <param name="otherFlower">Òª½»»»µÄÁíÒ»¶ä»¨</param>
     private void SwapPositionWithYFixed(GameObject otherFlower)
     {
-        if (otherFlower == null)
-            return;
-            
-        // ±£³Ö¸÷×ÔµÄY×ø±ê£¬Ö»½»»»X×ø±ê
-        Vector3 myTargetPosition = new Vector3(otherFlower.transform.position.x, transform.position.y, transform.position.z);
-        Vector3 otherTargetPosition = new Vector3(clickPosition.x, otherFlower.transform.position.y, otherFlower.transform.position.z);
-        
-        // Ê¹ÓÃDoTweenÖ´ĞĞ¶¯»­
-        transform.DOMove(myTargetPosition, 0.3f);
-        otherFlower.transform.DOMove(otherTargetPosition, 0.3f);
+        if (!otherFlower) return;
+
+        Vector3 myTargetPos = new Vector3(otherFlower.transform.position.x, transform.position.y, keepZ);
+        Vector3 otherTargetPos = new Vector3(clickPosition.x, otherFlower.transform.position.y, otherFlower.transform.position.z);
+
+        transform.DOMove(myTargetPos, 0.3f);
+        otherFlower.transform.DOMove(otherTargetPos, 0.3f);
     }
 
-    /// <summary>
-    /// Ö±½ÓÓëÁíÒ»¶ä»¨½»»»Î»ÖÃ£¨±£³ÖYÖá²»±ä£©
-    /// </summary>
-    /// <param name="otherFlower">Òª½»»»µÄÁíÒ»¶ä»¨</param>
-    private void SwapPositionWith(GameObject otherFlower)
-    {
-        if (otherFlower == null)
-            return;
-            
-        // ±£³Ö¸÷×ÔµÄY×ø±ê£¬Ö»½»»»X×ø±ê
-        Vector3 myTargetPosition = new Vector3(otherFlower.transform.position.x, transform.position.y, transform.position.z);
-        Vector3 otherTargetPosition = new Vector3(transform.position.x, otherFlower.transform.position.y, otherFlower.transform.position.z);
-        
-        // Ê¹ÓÃDoTweenÖ´ĞĞ¶¯»­
-        transform.DOMove(myTargetPosition, 0.3f);
-        otherFlower.transform.DOMove(otherTargetPosition, 0.3f);
-    }
-
-    /// <summary>
-    /// ÖØÖÃ»¨¶äµ½Ô­Ê¼Î»ÖÃ
-    /// </summary>
-    public void ResetToOriginalPosition()
-    {
-        if (!isDragging)
-        {
-            transform.position = originalPosition;
-        }
-    }
-
-    /// <summary>
-    /// »ñÈ¡ÊÇ·ñÕıÔÚÍÏ×§×´Ì¬
-    /// </summary>
-    /// <returns>ÊÇ·ñÕıÔÚÍÏ×§</returns>
-    public bool IsDragging()
-    {
-        return isDragging;
-    }
+    public bool IsDragging() => isDragging;
 }

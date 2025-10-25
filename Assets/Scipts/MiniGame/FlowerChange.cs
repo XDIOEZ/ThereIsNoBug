@@ -8,7 +8,7 @@ public class FlowerChange : MonoBehaviour
 {
     [TextArea(2, 5)] public string Tip;
     //这是管理位于子对象上的花朵对象 他们的名字为 红 、黄 、蓝 、紫 、绿 、 青 ,橙 紫
-    public List<GameObject> Flowers = new List<GameObject>();
+    public List<FlowerDrag> Flowers = new List<FlowerDrag>();
 
     // 定义正确的花朵名称顺序
     [Header("默认为-红、橙、黄、绿、青、蓝、紫")]
@@ -38,7 +38,11 @@ public class FlowerChange : MonoBehaviour
         for (int i = 0; i < transform.childCount; i++)
         {
             Transform child = transform.GetChild(i);
-            Flowers.Add(child.gameObject);
+            FlowerDrag flowerDrag = child.GetComponent<FlowerDrag>();
+            if (flowerDrag != null)
+            {
+                Flowers.Add(flowerDrag);
+            }
         }
         
         // TODO 随机打乱花朵位置（只修改位置，不修改列表顺序）
@@ -51,13 +55,14 @@ public class FlowerChange : MonoBehaviour
         // 创建位置列表
         List<Vector3> positions = new List<Vector3>();
         
-        // 获取所有花朵的当前位置
+        // 根据flowerSpacing和startOffsetX创建位置
         for (int i = 0; i < Flowers.Count; i++)
         {
-            Vector3 currentPosition = Flowers[i].transform.position;
-            // 使用统一的Y轴位置
-            currentPosition.y = flowerYPosition;
-            positions.Add(currentPosition);
+            Vector3 position = new Vector3();
+            position.x = startOffsetX + i * flowerSpacing;
+            position.y = flowerYPosition;
+            position.z = Flowers[i].transform.position.z; // 保持原有的Z轴
+            positions.Add(position);
         }
         
         // 使用Fisher-Yates洗牌算法打乱位置列表
@@ -69,14 +74,10 @@ public class FlowerChange : MonoBehaviour
             positions[randomIndex] = temp;
         }
         
-        // 将打乱后的位置应用到花朵上（只修改x坐标，保持y,z不变）
+        // 将打乱后的位置应用到花朵上
         for (int i = 0; i < Flowers.Count; i++)
         {
-            Vector3 newPosition = Flowers[i].transform.position;
-            newPosition.x = positions[i].x;
-            // 使用统一的Y轴位置
-            newPosition.y = flowerYPosition;
-            Flowers[i].transform.position = newPosition;
+            Flowers[i].transform.position = positions[i];
         }
     }
 
@@ -88,13 +89,13 @@ public class FlowerChange : MonoBehaviour
     public bool CheckFlowerOrder()
     {
         // 按x轴位置对花朵进行排序
-        List<GameObject> sortedFlowers = new List<GameObject>(Flowers);
+        List<FlowerDrag> sortedFlowers = new List<FlowerDrag>(Flowers);
         sortedFlowers.Sort((a, b) => a.transform.position.x.CompareTo(b.transform.position.x));
         
         // 检查排序后的花朵是否符合正确顺序
         for (int i = 0; i < sortedFlowers.Count && i < correctOrder.Length; i++)
         {
-            if (sortedFlowers[i].name != correctOrder[i])
+            if (sortedFlowers[i].gameObject.name != correctOrder[i])
             {
                 return false;
             }
@@ -110,7 +111,7 @@ public class FlowerChange : MonoBehaviour
     public bool CheckYAxisAscendingOrder()
     {
         // 按x轴位置对花朵进行排序
-        List<GameObject> sortedFlowers = new List<GameObject>(Flowers);
+        List<FlowerDrag> sortedFlowers = new List<FlowerDrag>(Flowers);
         sortedFlowers.Sort((a, b) => a.transform.position.x.CompareTo(b.transform.position.x));
 
         // 检查Y轴是否按递增顺序排列
@@ -133,14 +134,14 @@ public class FlowerChange : MonoBehaviour
     public List<string> GetCurrentFlowerOrder()
     {
         // 按x轴位置对花朵进行排序
-        List<GameObject> sortedFlowers = new List<GameObject>(Flowers);
+        List<FlowerDrag> sortedFlowers = new List<FlowerDrag>(Flowers);
         sortedFlowers.Sort((a, b) => a.transform.position.x.CompareTo(b.transform.position.x));
         
         // 提取花朵名称
         List<string> flowerNames = new List<string>();
-        foreach (GameObject flower in sortedFlowers)
+        foreach (FlowerDrag flower in sortedFlowers)
         {
-            flowerNames.Add(flower.name);
+            flowerNames.Add(flower.gameObject.name);
         }
         
         return flowerNames;
@@ -182,8 +183,11 @@ public class FlowerChange : MonoBehaviour
     /// <param name="flower2">第二个花朵对象</param>
     public void SwapFlowersByObject(GameObject flower1, GameObject flower2)
     {
-        int index1 = Flowers.IndexOf(flower1);
-        int index2 = Flowers.IndexOf(flower2);
+        FlowerDrag drag1 = flower1.GetComponent<FlowerDrag>();
+        FlowerDrag drag2 = flower2.GetComponent<FlowerDrag>();
+        
+        int index1 = Flowers.IndexOf(drag1);
+        int index2 = Flowers.IndexOf(drag2);
         
         if (index1 != -1 && index2 != -1)
         {
@@ -199,16 +203,19 @@ public class FlowerChange : MonoBehaviour
     /// <param name="originalPosition">第一个花朵的原始位置</param>
     public void SwapFlowersByObjectWithYFixed(GameObject flower1, GameObject flower2, Vector3 originalPosition)
     {
-        if (flower1 == null || flower2 == null)
+        FlowerDrag drag1 = flower1.GetComponent<FlowerDrag>();
+        FlowerDrag drag2 = flower2.GetComponent<FlowerDrag>();
+        
+        if (drag1 == null || drag2 == null)
             return;
 
         // 保持各自的Y坐标，只交换X坐标
-        Vector3 flower1TargetPosition = new Vector3(flower2.transform.position.x, flowerYPosition, flower1.transform.position.z);
-        Vector3 flower2TargetPosition = new Vector3(originalPosition.x, flowerYPosition, flower2.transform.position.z);
+        Vector3 flower1TargetPosition = new Vector3(drag2.transform.position.x, flowerYPosition, drag1.transform.position.z);
+        Vector3 flower2TargetPosition = new Vector3(originalPosition.x, flowerYPosition, drag2.transform.position.z);
         
         // 使用DoTween执行动画
-        flower1.transform.DOMove(flower1TargetPosition, 0.3f).OnComplete(() => CheckWinCondition());
-        flower2.transform.DOMove(flower2TargetPosition, 0.3f).OnComplete(() => CheckWinCondition());
+        drag1.transform.DOMove(flower1TargetPosition, 0.3f).OnComplete(() => CheckWinCondition());
+        drag2.transform.DOMove(flower2TargetPosition, 0.3f).OnComplete(() => CheckWinCondition());
     }
     
     /// <summary>
@@ -266,7 +273,7 @@ public class FlowerChange : MonoBehaviour
     /// </summary>
     /// <param name="index">花朵索引</param>
     /// <returns>花朵对象</returns>
-    public GameObject GetFlower(int index)
+    public FlowerDrag GetFlower(int index)
     {
         if (index >= 0 && index < Flowers.Count)
         {
