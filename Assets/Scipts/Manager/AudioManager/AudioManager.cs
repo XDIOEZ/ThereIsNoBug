@@ -141,7 +141,7 @@ public class AudioManager : MonoBehaviour
     /// <param name="loop">是否循环播放</param>
     /// <param name="fadeTime">淡入时长（秒）</param>
     [Button("播放背景音乐")]
-    public AudioSource PlayBGM(string name, bool loop = true, float fadeTime = 0.5f)
+    public AudioSource PlayBGM(string name, bool loop = true, float fadeTime = 2f)
     {
         if (!bgmDict.TryGetValue(name, out var clip))
         {

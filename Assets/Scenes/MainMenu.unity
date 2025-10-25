@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 85741194}
   - component: {fileID: 85741199}
   - component: {fileID: 85741198}
+  - component: {fileID: 85741200}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -159,7 +160,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1655
 --- !u!114 &85741195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,6 +254,18 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &85741200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85741193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 896ff4bd7b2b6da4ebd1f9537a19ec81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &146579934
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,6 +495,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 85741200}
+        m_TargetAssemblyTypeName: BaseAudio, Assembly-CSharp
+        m_MethodName: PlaySFX
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: "\u9053\u5177\u62FE\u53D6\u97F3\u6548"
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &481258268
@@ -956,6 +981,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 85741200}
+        m_TargetAssemblyTypeName: BaseAudio, Assembly-CSharp
+        m_MethodName: PlaySFX
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: "\u9053\u5177\u62FE\u53D6\u97F3\u6548"
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1998087694

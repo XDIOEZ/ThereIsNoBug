@@ -51,6 +51,7 @@ MonoBehaviour:
   bgmClips:
   - {fileID: 8300000, guid: dcc8d242c8d4a9f429d6244a830af1f3, type: 3}
   - {fileID: 8300000, guid: 06823ca19fbe1044bb3a6bcaa365b3b6, type: 3}
+  - {fileID: 8300000, guid: a3b5030fb5fb25d449193d0224c3a34a, type: 3}
   sfxClips:
   - {fileID: 8300000, guid: ab6afe35a4878d244930f2daca2baaa0, type: 3}
   - {fileID: 8300000, guid: 87bcefc92a83ed140a253af0be67d6c4, type: 3}
@@ -72,7 +73,7 @@ MonoBehaviour:
   OnPlayBGM:
     m_PersistentCalls:
       m_Calls: []
-  bgmVolume: 0
+  bgmVolume: 1
   sfxVolume: 1
   isMuted: 0
   audioSourcePrefab: {fileID: 8938656753846244773, guid: bad80208222a70844b77713f122599db, type: 3}

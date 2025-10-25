@@ -179,6 +179,7 @@ GameObject:
   - component: {fileID: 785313134937279402}
   - component: {fileID: 6964230910753975373}
   - component: {fileID: 2628068807930689110}
+  - component: {fileID: 5998733928903099072}
   m_Layer: 0
   m_Name: Tiger
   m_TagString: Untagged
@@ -248,13 +249,22 @@ MonoBehaviour:
         m_CallState: 2
   onTigerAwake:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5998733928903099072}
+        m_TargetAssemblyTypeName: BaseAudio, Assembly-CSharp
+        m_MethodName: PlaySFX
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: "\u72EE\u5B50\u543C"
+          m_BoolArgument: 0
+        m_CallState: 2
   onTigerSleep:
     m_PersistentCalls:
       m_Calls: []
-  bgmName: AugHHH
-  firstSFXName: VineBoom
-  secondSFXName: GetOut
 --- !u!61 &2628068807930689110
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -300,3 +310,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 13.3503895, y: 5.00193}
   m_EdgeRadius: 0
+--- !u!114 &5998733928903099072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7166880554787128850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 896ff4bd7b2b6da4ebd1f9537a19ec81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
