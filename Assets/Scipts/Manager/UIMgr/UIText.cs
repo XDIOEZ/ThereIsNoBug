@@ -7,7 +7,7 @@ public class UIText : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-            UIMgr.Instance().ShowPanel<BasePanel>("StartPanel", E_UI_Layer.Mid);
+            UIMgr.Instance().ShowPanel<BasePanel>("GamePanel", E_UI_Layer.Mid);
     }
 
 }
