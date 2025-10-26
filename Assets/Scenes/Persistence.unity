@@ -523,7 +523,7 @@ MonoBehaviour:
   interactableLayer:
     serializedVersion: 2
     m_Bits: 64
-  isOnInventory: 0
+  isOnInventory: 1
   map: {fileID: 1847238240}
 --- !u!1 &745756110
 GameObject:
