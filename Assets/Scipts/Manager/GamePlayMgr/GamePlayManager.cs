@@ -8,19 +8,14 @@ public class GamePlayManager : MonoSingleton<GamePlayManager>
     public LayerMask interactableLayer;
     public bool isOnInventory;
     public Map map;
+    public VoidEventSO newGameEvent;
     
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            //test
-            Inventory.Instance.AddItem(1);
-            Inventory.Instance.AddItem(2);
-        }
         if (Input.GetKeyDown(KeyCode.G))
         {
             //test
-            Inventory.Instance.RemoveItem(1);
+            Inventory.Instance.AddItem(2);
         }
         if (!isOnInventory)
         {
@@ -37,18 +32,6 @@ public class GamePlayManager : MonoSingleton<GamePlayManager>
                     hit.collider.gameObject.GetComponent<InteractableComponent>().Interact();
                 }
             }
-
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                if (map.gameObject.activeInHierarchy)
-                {
-                    map.CloseMap();
-                }
-                else
-                {
-                    map.OpenMap();
-                }
-            }
         }
         else
         {
@@ -62,7 +45,28 @@ public class GamePlayManager : MonoSingleton<GamePlayManager>
                 {
                     hit.collider.gameObject.GetComponent<InteractableComponent>().Interact(Inventory.Instance.nowItem);
                 }
+                StartCoroutine(CountTime());
+
             }
         }
+    }
+
+    public void ShowMap()
+    {
+        if (map.gameObject.activeInHierarchy)
+        {
+            map.CloseMap();
+            Debug.Log("Map closed");
+        }
+        else
+        {
+            map.OpenMap();
+            Debug.Log("Map opened");
+        } 
+    }
+    IEnumerator CountTime()
+    {
+        yield return new WaitForSeconds(0.1f);
+        Inventory.Instance.ResetInventory();
     }
 }

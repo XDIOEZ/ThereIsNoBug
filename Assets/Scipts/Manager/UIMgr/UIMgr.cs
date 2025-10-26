@@ -31,7 +31,8 @@ public class UIMgr : BaseMgrNoMono<UIMgr>
 
     //记录我们UI的Canvas父对象 方便以后外部可能会使用它
     public RectTransform canvas;
-
+    // 新增：当面板被打开时，广播面板名
+    public event UnityAction<string> PanelOpened;
     public UIMgr()
     {
         //创建Canvas 让其过场景的时候 不被移除
@@ -87,6 +88,8 @@ public class UIMgr : BaseMgrNoMono<UIMgr>
             if (callBack != null)
                 callBack(panelDic[panelName] as T);
             //避免面板重复加载 如果存在该面板 即直接显示 调用回调函数后  直接return 不再处理后面的异步加载逻辑
+            //TODO：面板打开事件
+            PanelOpened?.Invoke(panelName);
             return;
         }
 
@@ -112,7 +115,8 @@ public class UIMgr : BaseMgrNoMono<UIMgr>
                 callBack(panel);
 
             panel.ShowMe();
-
+            //TODO：面板打开事件
+            PanelOpened?.Invoke(panelName);
             //把面板存起来
             panelDic.Add(panelName, panel);
         });
@@ -160,5 +164,6 @@ public class UIMgr : BaseMgrNoMono<UIMgr>
 
         trigger.triggers.Add(entry);
     }
-
+    
+    
 }

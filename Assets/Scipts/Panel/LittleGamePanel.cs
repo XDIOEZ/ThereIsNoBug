@@ -12,6 +12,7 @@ public enum E_MoveWay
 public class LittleGamePanel : BasePanel
 {
     public List<Image> Images = new List<Image>();
+    private int index = -1;
     protected override void Awake()
     {
         base.Awake();
@@ -33,27 +34,27 @@ public class LittleGamePanel : BasePanel
                 break;
             case"Image0":
                 CardOut(0);
-                Inventory.Instance.AddItem(0);
+                index = 0;
                 break;
             case"Image1":
                 CardOut(1);
-                Inventory.Instance.AddItem(0);
+                index = 1;
                 break;
             case"Image2":
                 CardOut(2);
-                Inventory.Instance.AddItem(0);
+                index = 2;
                 break;
             case"Image3":
                 CardOut(3);
-                Inventory.Instance.AddItem(0);
+                Inventory.Instance.AddItem(0).GetComponent<CardItem>().SetCard(index,3);
                 break;
             case"Image4":
                 CardOut(4);
-                Inventory.Instance.AddItem(0);
+                Inventory.Instance.AddItem(0).GetComponent<CardItem>().SetCard(index,3);
                 break;
             case"Image5":
                 CardOut(5);
-                Inventory.Instance.AddItem(0);
+                Inventory.Instance.AddItem(0).GetComponent<CardItem>().SetCard(index,3);
                 break;
             case"Image6":
                 CardOut(6);
@@ -124,8 +125,9 @@ public class LittleGamePanel : BasePanel
                 }
             }
             CardMove(E_MoveWay.Out,cardObj);
+            BronCard(2);
         }
-        else if(3==x&& x<6)
+        else if(3<=x&& x<6)
         {
             for (int i = 3; i < 6; i++)
             {
@@ -135,8 +137,9 @@ public class LittleGamePanel : BasePanel
                 }
             }
             CardMove(E_MoveWay.Out,cardObj);
+            BronCard(3);
         }
-        else if(6==x&& x<9)
+        else if(6<=x&& x<9)
         {
             for (int i = 6; i < 9; i++)
             {
@@ -146,6 +149,7 @@ public class LittleGamePanel : BasePanel
                 }
             }
             CardMove(E_MoveWay.Out,cardObj);
+            //TODO：结束小游戏
         }
     }
 }

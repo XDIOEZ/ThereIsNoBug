@@ -140,7 +140,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 358401868519468111, guid: 97a46349905fd2248bb668d41b2a12eb, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1075169389606924675, guid: 97a46349905fd2248bb668d41b2a12eb, type: 3}
       propertyPath: m_Positions.Array.size
@@ -196,6 +196,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2440869490720057278, guid: 97a46349905fd2248bb668d41b2a12eb, type: 3}
       propertyPath: size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2440869490720057278, guid: 97a46349905fd2248bb668d41b2a12eb, type: 3}
+      propertyPath: lineSize
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2440869490720057278, guid: 97a46349905fd2248bb668d41b2a12eb, type: 3}
@@ -525,6 +529,7 @@ MonoBehaviour:
     m_Bits: 64
   isOnInventory: 0
   map: {fileID: 1847238240}
+  newGameEvent: {fileID: 0}
 --- !u!1 &745756110
 GameObject:
   m_ObjectHideFlags: 0
