@@ -20,7 +20,8 @@ public class Tiger : MonoBehaviour
 
     [Header("组件引用")]
     public SkeletonAnimation skeletonAnimation; // 骨骼动画组件
-
+    public GameObject skeletonPrefab;
+    
     private bool isTigerAwake = false; // 老虎是否处于惊醒状态
 
     #endregion
@@ -30,10 +31,20 @@ public class Tiger : MonoBehaviour
     void Start()
     {
         AudioManager.Instance.OnAudioSettingsChanged.AddListener(CheckIsPass);
+        skeletonPrefab.SetActive(false);
     }
 
     void Update()
     {
+        if(currentPosition.Instance.Y_currentindex!=2)
+        {
+            skeletonPrefab.SetActive(false);
+        }
+        else
+        {
+            skeletonPrefab.SetActive(true);
+        }
+        
         // 2D射线检测点击老虎
         if (Input.GetMouseButtonDown(0))
         {

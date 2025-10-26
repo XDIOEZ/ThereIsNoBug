@@ -36,7 +36,7 @@ public class AreaTransition : MonoBehaviour
     
     public void countStep(int targetXAreaIndex, int targetYAreaIndex)
     {
-        Debug.Log("LRcountStep");
+        //Debug.Log("LRcountStep");
         // 统计步数：首次访问 +1，已访问 -1
         if (areaChange.visitedAreas[targetXAreaIndex,targetYAreaIndex]!=0)
         {

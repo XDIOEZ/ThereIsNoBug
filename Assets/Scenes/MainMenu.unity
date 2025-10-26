@@ -415,7 +415,7 @@ GameObject:
   - component: {fileID: 481258268}
   - component: {fileID: 481258267}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Exit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -485,9 +485,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 9267e2e3e865a944fa606d55fb21b3e0, type: 2}
-        m_TargetAssemblyTypeName: VoidEventSO, Assembly-CSharp
-        m_MethodName: RaiseEvent
+      - m_Target: {fileID: 85741198}
+        m_TargetAssemblyTypeName: MenuUIController, Assembly-CSharp
+        m_MethodName: OnClickExit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -741,7 +741,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Continue
+  m_text: 'Exit
 
 '
   m_isRightToLeft: 0
@@ -901,7 +901,7 @@ GameObject:
   - component: {fileID: 1998087694}
   - component: {fileID: 1998087693}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

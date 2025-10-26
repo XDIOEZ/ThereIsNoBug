@@ -22,6 +22,12 @@ public class MenuUIController : MonoBehaviour
         newGameEvent?.OnEventRaised?.Invoke();
     }
 
+    public void OnClickExit()
+    {
+        Debug.Log("Exit");
+        Application.Quit();
+    }
+    
     private void HideMenuImmediate()
     {
         if (menuRoot != null)
