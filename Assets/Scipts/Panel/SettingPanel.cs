@@ -20,12 +20,23 @@ public class SettingPanel:BasePanel
         base.OnClick(btnName);
         switch (btnName)
         {
-            case "CloseBtn":
+            case "ReloadBtn":
                 UIMgr.Instance().HidePanel("SettingPanel");
                 break;
-            case "ReloadBtn":
-                break;
             case"ExitBtn":
+                Application.Quit();
+                break;
+        }
+    }
+
+    protected override void OnValueChanged(string toggleName, bool value)
+    {
+        base.OnValueChanged(toggleName, value);
+        switch (toggleName)
+        {
+            case "MusicToggle":
+                break;
+            case "SoundToggle":
                 break;
         }
     }
