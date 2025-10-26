@@ -6,11 +6,13 @@ using UnityEngine.UI;
 public class SettingPanel:BasePanel
 {
     public Slider MusicSlider;
+    public Slider SoundSlider;
 
     protected override void Awake()
     {
         base.Awake();
         MusicSlider = GetControl<Slider>("MusicSlider");
+        SoundSlider = GetControl<Slider>("SoundSlider");
     }
 
     protected override void OnClick(string btnName)
@@ -35,6 +37,9 @@ public class SettingPanel:BasePanel
         {
             case "MusicSlider":
                 print("音量大小为"+value);
+                break;
+            case "SoundSlider":
+                print("音效大小为"+value);
                 break;
         }
     }

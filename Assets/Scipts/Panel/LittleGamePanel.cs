@@ -25,6 +25,7 @@ public class LittleGamePanel : BasePanel
     protected override void OnClick(string btnName)
     {
         base.OnClick(btnName);
+        //TODO：缺少添加ID
         switch (btnName)
         {
             case"CloseBtn":
@@ -32,30 +33,39 @@ public class LittleGamePanel : BasePanel
                 break;
             case"Image0":
                 CardOut(0);
+                Inventory.Instance.AddItem(0);
                 break;
             case"Image1":
                 CardOut(1);
+                Inventory.Instance.AddItem(0);
                 break;
             case"Image2":
                 CardOut(2);
+                Inventory.Instance.AddItem(0);
                 break;
             case"Image3":
                 CardOut(3);
+                Inventory.Instance.AddItem(0);
                 break;
             case"Image4":
                 CardOut(4);
+                Inventory.Instance.AddItem(0);
                 break;
             case"Image5":
                 CardOut(5);
+                Inventory.Instance.AddItem(0);
                 break;
             case"Image6":
                 CardOut(6);
+                Inventory.Instance.AddItem(0);
                 break;
             case"Image7":
                 CardOut(7);
+                Inventory.Instance.AddItem(0);
                 break;
             case"Image8":
                 CardOut(8);
+                Inventory.Instance.AddItem(0);
                 break;
         }
     }
