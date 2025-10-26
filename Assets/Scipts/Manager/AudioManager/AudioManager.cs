@@ -329,6 +329,126 @@ public class AudioManager : MonoBehaviour
         OnPlaySFX?.Invoke(name);
     }
 
+/// <summary>
+/// 从指定时间开始播放背景音乐
+/// </summary>
+/// <param name="name">音乐名</param>
+/// <param name="startTime">开始时间（秒）</param>
+/// <param name="loop">是否循环播放</param>
+/// <param name="fadeTime">淡入时长（秒）</param>
+public AudioSource PlayBGMFromTime(string name, float startTime, bool loop = true, float fadeTime = 2f)
+{
+    AudioClip clip = FindClipByName(name, true);
+    
+    if (clip == null)
+    {
+        Debug.LogWarning($"[AudioManager] 未找到BGM: {name}");
+        return null;
+    }
+
+    // 创建新的AudioSource用于播放BGM
+    GameObject bgmObject = new GameObject($"BGM_{name}");
+    bgmObject.transform.SetParent(transform);
+    AudioSource newBGMSource = bgmObject.AddComponent<AudioSource>();
+    newBGMSource.outputAudioMixerGroup = bgmSource != null ? bgmSource.outputAudioMixerGroup : null;
+    
+    // 配置新的AudioSource
+    newBGMSource.clip = clip;
+    newBGMSource.loop = loop;
+    newBGMSource.volume = 0f;
+    newBGMSource.time = startTime; // 设置开始时间
+    newBGMSource.Play();
+    
+    // 添加到BGM源列表
+    bgmSources.Add(newBGMSource);
+
+    // 淡入播放
+    StartCoroutine(FadeInBGM(newBGMSource, fadeTime));
+    
+    // 触发播放BGM事件
+    OnPlayBGM?.Invoke(name);
+    return newBGMSource;
+}
+
+/// <summary>
+/// 从指定时间开始播放音效
+/// </summary>
+/// <param name="name">音效名称</param>
+/// <param name="startTime">开始时间（秒）</param>
+public void PlaySFXFromTime(string name, float startTime)
+{
+    AudioClip clip = FindClipByName(name, false);
+    
+    if (clip == null)
+    {
+        Debug.LogWarning($"[AudioManager] 未找到SFX: {name}");
+        return;
+    }
+
+    // 创建临时AudioSource来播放音效
+    GameObject sfxObject = new GameObject($"SFX_{name}");
+    sfxObject.transform.SetParent(transform);
+    AudioSource tempSource = sfxObject.AddComponent<AudioSource>();
+    
+    // 配置AudioSource
+    tempSource.clip = clip;
+    tempSource.volume = sfxVolume;
+    tempSource.outputAudioMixerGroup = sfxSource != null ? sfxSource.outputAudioMixerGroup : null;
+    tempSource.time = startTime; // 设置开始时间
+    tempSource.Play();
+    
+    // 触发播放SFX事件
+    OnPlaySFX?.Invoke(name);
+    
+    // 音效播放完毕后销毁对象
+    Destroy(sfxObject, clip.length - startTime);
+}
+
+
+    /// <summary>
+/// 根据名称查找音频剪辑
+/// </summary>
+/// <param name="name">音频名称</param>
+/// <param name="isBGM">是否为背景音乐</param>
+/// <returns>找到的音频剪辑，未找到则返回null</returns>
+private AudioClip FindClipByName(string name, bool isBGM = true)
+{
+    List<AudioClip> clips = isBGM ? bgmClips : sfxClips;
+    
+    foreach (var clip in clips)
+    {
+        if (clip != null && clip.name == name)
+        {
+            return clip;
+        }
+    }
+    
+    return null;
+}
+
+/// <summary>
+/// 获取一个可用的AudioSource
+/// </summary>
+/// <returns>可用的AudioSource</returns>
+private AudioSource GetAvailableAudioSource()
+{
+    // 这里可以实现对象池逻辑
+    GameObject audioObject = new GameObject("TempAudio");
+    return audioObject.AddComponent<AudioSource>();
+}
+
+/// <summary>
+/// 回收AudioSource
+/// </summary>
+/// <param name="audioSource">要回收的AudioSource</param>
+/// <param name="delay">延迟时间</param>
+private IEnumerator RecycleAudioSource(AudioSource audioSource, float delay)
+{
+    yield return new WaitForSeconds(delay);
+    if (audioSource.gameObject != null)
+        Destroy(audioSource.gameObject);
+}
+
     /// <summary>
     /// 播放音效并带回调函数（在音效播放完毕后激活回调函数）
     /// </summary>
