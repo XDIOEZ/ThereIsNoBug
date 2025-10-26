@@ -2,3 +2,4 @@ ID,Name,Description,ImagePath,PrefabPath
 1,key,only for test,TestArt/sora,Prefabs/InventoryItem/KeyItem
 2,map,only for test,TestArt/ririko,Prefabs/InventoryItem/MapItem
 3,card, ,TestArt/saki,Prefabs/InventoryItem/CardItem
+4,Anotherkey,,TestArt/sora,Prefabs/Interactable/AotherKey

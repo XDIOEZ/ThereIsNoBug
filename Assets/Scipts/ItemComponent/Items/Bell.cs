@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Card : Item
+public class Bell : Item
 {
-    InteractableComponent interactableComponent;
+    private InteractableComponent interactableComponent;
 
     private void Start()
     {
@@ -16,5 +16,6 @@ public class Card : Item
     protected override void Used()
     {
         base.Used();
+        Instantiate(Resources.Load<GameObject>("Prefabs/InventoryItem/KeyItem"));
     }
 }
