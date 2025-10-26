@@ -30,7 +30,7 @@ public class GamePlayManager : MonoSingleton<GamePlayManager>
             
                 RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
             
-                Debug.Log(hit.collider.name);
+                //Debug.Log(hit.collider.name);
                 if (hit.collider != null&& hit.collider.gameObject.GetComponent<InteractableComponent>())
                 {
                     Debug.Log("interactable");

@@ -136,6 +136,7 @@ public class AreaChange : MonoBehaviour
             //正常前进
             else
             {
+                mainCamera.orthographic = false;
                 moveUpEvent.RaiseEvent();
                 SceneChange(areas[currentYAreaIndex],areas[currentYAreaIndex+1]);
                 int targetIndex = currentYAreaIndex + 1;
@@ -168,6 +169,7 @@ public class AreaChange : MonoBehaviour
             }
             else
             {
+                mainCamera.orthographic = false;
                 moveDownEvent.RaiseEvent();
                 SceneChange(areas[currentYAreaIndex],areas[currentYAreaIndex-1]);
                 int targetIndex = currentYAreaIndex - 1;
@@ -324,7 +326,7 @@ public class AreaChange : MonoBehaviour
                 farBackgrounds[i].SetActive(i == targetAreaIndex);
             }
         }
-        
+        mainCamera.orthographic = true;
         isTransitioning = false;
         
     }

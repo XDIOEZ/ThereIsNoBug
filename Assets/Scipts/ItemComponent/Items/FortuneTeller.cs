@@ -16,5 +16,6 @@ public class FortuneTeller : Item
     protected override void Used()
     {
         //todo:跳转到卡牌游戏界面
+        UIMgr.Instance().ShowPanel<BasePanel>("LittleGamePanel", E_UI_Layer.Top);
     }
 }
