@@ -27,7 +27,6 @@ public class AreaTransition : MonoBehaviour
         
         areaChange = GetComponent<AreaChange>();
         
-
     }
     
     void Update()

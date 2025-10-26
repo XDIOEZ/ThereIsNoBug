@@ -10,6 +10,8 @@ public class arrowShow : MonoBehaviour
     private int[,] up;
     private int[,] down;
 
+    private static arrowShow instance;
+    
     public GameObject leftArrow;
     public GameObject rightArrow;
     public GameObject upArrow;
@@ -20,8 +22,34 @@ public class arrowShow : MonoBehaviour
     
     public int currentXindex;
     public int currentYindex;
+
+
+//属性方式
+    public static arrowShow Instance
+    {
+        get
+        {
+            if(instance == null)
+                instance = new arrowShow();
+            return instance;
+        }
+    }
+    
+    public void HideAllArrows()
+    {
+        leftArrow.SetActive(false);
+        rightArrow.SetActive(false);
+        upArrow.SetActive(false);
+        downArrow.SetActive(false);
+    }
+
+    public void ShowAllArrows()
+    {
+        ShowArrow(currentXindex,currentYindex);
+    }
     
     
+
     private void Start()
     {
         
