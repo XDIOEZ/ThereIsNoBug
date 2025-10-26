@@ -124,8 +124,9 @@ public class LittleGamePanel : BasePanel
                 }
             }
             CardMove(E_MoveWay.Out,cardObj);
+            BronCard(2);
         }
-        else if(3==x&& x<6)
+        else if(3<=x&& x<6)
         {
             for (int i = 3; i < 6; i++)
             {
@@ -135,8 +136,9 @@ public class LittleGamePanel : BasePanel
                 }
             }
             CardMove(E_MoveWay.Out,cardObj);
+            BronCard(3);
         }
-        else if(6==x&& x<9)
+        else if(6<=x&& x<9)
         {
             for (int i = 6; i < 9; i++)
             {
@@ -146,6 +148,7 @@ public class LittleGamePanel : BasePanel
                 }
             }
             CardMove(E_MoveWay.Out,cardObj);
+            //TODO：结束小游戏
         }
     }
 }
