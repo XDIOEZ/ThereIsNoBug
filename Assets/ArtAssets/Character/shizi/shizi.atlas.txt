@@ -1,0 +1,62 @@
+
+shizi.png
+size: 1936,1743
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+shizi0
+  rotate: 180
+  xy: 0, 309
+  size: 917, 737
+  orig: 917, 737
+  offset: 0, 0
+  index: -1
+shizi1
+  rotate: 180
+  xy: 1012, 615
+  size: 923, 731
+  orig: 923, 731
+  offset: 0, 0
+  index: -1
+shizi2
+  rotate: false
+  xy: 1662, 1231
+  size: 244, 175
+  orig: 244, 175
+  offset: 0, 0
+  index: -1
+shizi3
+  rotate: 270
+  xy: 1283, 215
+  size: 401, 592
+  orig: 433, 592
+  offset: 0, 0
+  index: -1
+shizi4
+  rotate: true
+  xy: 1637, 1406
+  size: 338, 183
+  orig: 338, 217
+  offset: 0, 0
+  index: -1
+shizi5
+  rotate: 180
+  xy: 866, 1
+  size: 697, 628
+  orig: 747, 628
+  offset: 50, 0
+  index: -1
+shizi6
+  rotate: 180
+  xy: 494, 13
+  size: 633, 364
+  orig: 658, 384
+  offset: 25, 0
+  index: -1
+shizi7
+  rotate: false
+  xy: 0, 998
+  size: 1639, 746
+  orig: 2024, 918
+  offset: 385, 172
+  index: -1
