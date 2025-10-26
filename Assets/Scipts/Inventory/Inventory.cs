@@ -65,11 +65,7 @@ public class Inventory : MonoSingleton<Inventory>
         int index = 0;
         if (itemInInventory.Count > 0)
         {
-            for (int i = 0; itemInInventory[i].GetComponent<InventoryComponent>().index != index; i++)
-            {
-                index = i + 1;
-            }
-            item.GetComponent<InventoryComponent>().index = index + 1;
+            item.GetComponent<InventoryComponent>().index = FoundIndex(0);
         }
         itemInInventory.Add(item.GetComponent<Item>());
         item.transform.SetParent(transform);
@@ -77,6 +73,21 @@ public class Inventory : MonoSingleton<Inventory>
         //显示在物品栏中
         UIMgr.Instance().GetPanel<GamePanel>("GamePanel").GetItem(item.GetComponent<Item>());
         return item.GetComponent<Item>();
+    }
+
+    private int FoundIndex(int itemIndex)
+    {
+        int index = -1;
+        if (itemInInventory.Count <= itemIndex)
+        {
+            return itemIndex;
+        }
+        if (itemInInventory[itemIndex].GetComponent<InventoryComponent>().index==itemIndex)
+        {
+            index = FoundIndex(itemIndex + 1);
+            return index;
+        }
+        return itemIndex + 1;
     }
 
     public void RemoveItem(int id)

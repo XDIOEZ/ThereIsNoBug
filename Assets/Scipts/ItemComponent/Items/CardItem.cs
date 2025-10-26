@@ -24,6 +24,6 @@ public class CardItem : Item
     public void ShowCard()
     {
         //todo:展示卡片
-        Inventory.Instance.ResetInventory();
+        StartCoroutine(CountTime());
     }
 }

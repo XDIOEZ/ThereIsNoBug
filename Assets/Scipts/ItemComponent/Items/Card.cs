@@ -1,18 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Card : MonoBehaviour
+public class Card : Item
 {
-    // Start is called before the first frame update
-    void Start()
+    InteractableComponent interactableComponent;
+
+    private void Start()
     {
-        
+        interactableComponent = GetComponent<InteractableComponent>();
+        interactableComponent.OnInteract += Used;
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void Used()
     {
-        
+        base.Used();
     }
 }
+]

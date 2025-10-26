@@ -46,15 +46,15 @@ public class LittleGamePanel : BasePanel
                 break;
             case"Image3":
                 CardOut(3);
-                Inventory.Instance.AddItem(0).GetComponent<CardItem>().SetCard(index,3);
+                Inventory.Instance.AddItem(3).GetComponent<CardItem>().SetCard(index,3);
                 break;
             case"Image4":
                 CardOut(4);
-                Inventory.Instance.AddItem(0).GetComponent<CardItem>().SetCard(index,3);
+                Inventory.Instance.AddItem(3).GetComponent<CardItem>().SetCard(index,3);
                 break;
             case"Image5":
                 CardOut(5);
-                Inventory.Instance.AddItem(0).GetComponent<CardItem>().SetCard(index,3);
+                Inventory.Instance.AddItem(3).GetComponent<CardItem>().SetCard(index,3);
                 break;
             case"Image6":
                 CardOut(6);
@@ -137,7 +137,7 @@ public class LittleGamePanel : BasePanel
                 }
             }
             CardMove(E_MoveWay.Out,cardObj);
-            BronCard(3);
+            //BronCard(3);
         }
         else if(6<=x&& x<9)
         {

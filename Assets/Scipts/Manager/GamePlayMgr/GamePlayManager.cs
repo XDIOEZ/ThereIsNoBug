@@ -46,7 +46,6 @@ public class GamePlayManager : MonoSingleton<GamePlayManager>
                     hit.collider.gameObject.GetComponent<InteractableComponent>().Interact(Inventory.Instance.nowItem);
                 }
                 StartCoroutine(CountTime());
-
             }
         }
     }

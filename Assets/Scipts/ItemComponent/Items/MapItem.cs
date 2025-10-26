@@ -17,6 +17,6 @@ public class MapItem : Item
     {
         base.Used();
         GamePlayManager.Instance.ShowMap();
-        Inventory.Instance.ResetInventory();
+        StartCoroutine(CountTime());
     }
 }
