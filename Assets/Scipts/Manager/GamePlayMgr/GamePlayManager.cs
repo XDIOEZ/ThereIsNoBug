@@ -28,10 +28,12 @@ public class GamePlayManager : MonoSingleton<GamePlayManager>
             {
                 Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             
-                RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero,interactableLayer);
+                RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
             
-                if (hit.collider != null)
+                Debug.Log(hit.collider.name);
+                if (hit.collider != null&& hit.collider.gameObject.GetComponent<InteractableComponent>())
                 {
+                    Debug.Log("interactable");
                     hit.collider.gameObject.GetComponent<InteractableComponent>().Interact();
                 }
             }

@@ -541,7 +541,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &745756111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -556,7 +556,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemInInventory: []
   nowItem: {fileID: 0}
-  textAsset: {fileID: 0}
+  textAsset: {fileID: 4900000, guid: 42528655851f6be4e995d99cb7b3de93, type: 3}
   isFirst: 1
 --- !u!4 &745756112
 Transform:

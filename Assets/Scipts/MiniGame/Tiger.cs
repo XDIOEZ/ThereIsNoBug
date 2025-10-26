@@ -53,9 +53,11 @@ public class Tiger : MonoBehaviour
         // 如果射线击中了老虎且满足惊醒条件
         if (hit.collider != null && hit.collider.gameObject == gameObject)
         {
+            Debug.Log("click tiger");
             // 只有当音量大于0.01f且老虎未惊醒时，点击老虎才会惊醒它
             if (AudioManager.Instance.bgmVolume > 0.01f && !isTigerAwake)
             {
+                Debug.Log("wake");
                 WakeUpTiger();
             }
         }

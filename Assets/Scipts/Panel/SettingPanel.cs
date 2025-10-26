@@ -36,6 +36,7 @@ public class SettingPanel:BasePanel
         switch (sliderName)
         {
             case "MusicSlider":
+                AudioManager.Instance.SetBGMVolume(value);
                 print("音量大小为"+value);
                 break;
             case "SoundSlider":
