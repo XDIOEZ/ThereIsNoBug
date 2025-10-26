@@ -23,16 +23,19 @@ public class Inventory : MonoSingleton<Inventory>
         if (!GamePlayManager.Instance.isOnInventory)
         {
             nowItem = itemInInventory.FirstOrDefault(item => item.GetComponent<InventoryComponent>().index == itemIndex);
-            GamePlayManager.Instance.isOnInventory = true;
+
             if (nowItem == null)
             {
                 Debug.Log("No item selected");
                 ResetInventory();
+                return;
             }
             else
             {
                 Debug.Log(nowItem.GetName());
             }
+            nowItem.GetComponent<InventoryComponent>().Used();
+            GamePlayManager.Instance.isOnInventory = true;
         }
         else
         {
@@ -44,6 +47,7 @@ public class Inventory : MonoSingleton<Inventory>
     {
         nowItem = null;
         GamePlayManager.Instance.isOnInventory = false;
+        Debug.Log("Reset Inventory");
     }
     
     public void UseItem()
@@ -52,7 +56,7 @@ public class Inventory : MonoSingleton<Inventory>
         ResetInventory();
     }
     
-    public void AddItem(int id)
+    public Item AddItem(int id)
     {
         Debug.Log("Add item");
         string path = ItemUtils.GetItemInfo(id).PrePath;
@@ -72,6 +76,7 @@ public class Inventory : MonoSingleton<Inventory>
         itemInInventory.OrderBy(x=>x.GetComponent<InventoryComponent>().index);
         //显示在物品栏中
         UIMgr.Instance().GetPanel<GamePanel>("GamePanel").GetItem(item.GetComponent<Item>());
+        return item.GetComponent<Item>();
     }
 
     public void RemoveItem(int id)
@@ -122,5 +127,10 @@ public class Inventory : MonoSingleton<Inventory>
     private void InitItems()
     {
         ItemUtils.Init(textAsset);
+    }
+
+    IEnumerator CountTime()
+    {
+        yield return new WaitForSeconds(0.05f);
     }
 }

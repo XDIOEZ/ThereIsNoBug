@@ -12,6 +12,7 @@ public enum E_MoveWay
 public class LittleGamePanel : BasePanel
 {
     public List<Image> Images = new List<Image>();
+    private int index = -1;
     protected override void Awake()
     {
         base.Awake();
@@ -33,27 +34,27 @@ public class LittleGamePanel : BasePanel
                 break;
             case"Image0":
                 CardOut(0);
-                Inventory.Instance.AddItem(0);
+                index = 0;
                 break;
             case"Image1":
                 CardOut(1);
-                Inventory.Instance.AddItem(0);
+                index = 1;
                 break;
             case"Image2":
                 CardOut(2);
-                Inventory.Instance.AddItem(0);
+                index = 2;
                 break;
             case"Image3":
                 CardOut(3);
-                Inventory.Instance.AddItem(0);
+                Inventory.Instance.AddItem(0).GetComponent<CardItem>().SetCard(index,3);
                 break;
             case"Image4":
                 CardOut(4);
-                Inventory.Instance.AddItem(0);
+                Inventory.Instance.AddItem(0).GetComponent<CardItem>().SetCard(index,3);
                 break;
             case"Image5":
                 CardOut(5);
-                Inventory.Instance.AddItem(0);
+                Inventory.Instance.AddItem(0).GetComponent<CardItem>().SetCard(index,3);
                 break;
             case"Image6":
                 CardOut(6);
