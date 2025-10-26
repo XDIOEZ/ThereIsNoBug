@@ -9,7 +9,7 @@ public class GamePanel : BasePanel
     private Canvas canvas;
     private Image DialogImg;
     private Text SpeakText;
-    public GameObject 测试用;
+    public Vector3 测试用;
     protected override void Awake()
     {
         base.Awake();
@@ -75,7 +75,7 @@ public class GamePanel : BasePanel
                 UIMgr.Instance().ShowPanel<BasePanel>("LittleGamePanel", E_UI_Layer.Top);
                 break;
             case "对话框生成测试":
-                InitDialogBox("姑姑嘎嘎",测试用.transform.position);
+                InitDialogBox("姑姑嘎嘎",测试用);
                 break;
             case "对话框关闭测试":
                 CloseDialogBox();
