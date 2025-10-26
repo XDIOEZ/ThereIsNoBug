@@ -1,0 +1,111 @@
+
+zhanpushi.png
+size: 1866,1781
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+zhanpushi0
+  rotate: 270
+  xy: 0, 513
+  size: 321, 1671
+  orig: 363, 1671
+  offset: 42, 0
+  index: -1
+zhanpushi1
+  rotate: 180
+  xy: 1505, 502
+  size: 339, 1280
+  orig: 339, 1334
+  offset: 0, 54
+  index: -1
+zhanpushi10
+  rotate: true
+  xy: 0, 888
+  size: 171, 409
+  orig: 196, 492
+  offset: 13, 26
+  index: -1
+zhanpushi11
+  rotate: false
+  xy: 1523, 1310
+  size: 139, 472
+  orig: 184, 517
+  offset: 0, 45
+  index: -1
+zhanpushi12
+  rotate: false
+  xy: 0, 1057
+  size: 514, 724
+  orig: 641, 724
+  offset: 87, 0
+  index: -1
+zhanpushi13
+  rotate: false
+  xy: 159, 1
+  size: 513, 383
+  orig: 513, 383
+  offset: 0, 0
+  index: -1
+zhanpushi14
+  rotate: false
+  xy: 1256, 880
+  size: 267, 902
+  orig: 267, 993
+  offset: 0, 0
+  index: -1
+zhanpushi2
+  rotate: false
+  xy: 729, 796
+  size: 320, 331
+  orig: 320, 345
+  offset: 0, 0
+  index: -1
+zhanpushi3
+  rotate: false
+  xy: 1349, 12
+  size: 516, 353
+  orig: 565, 400
+  offset: 49, 6
+  index: -1
+zhanpushi4
+  rotate: false
+  xy: 442, 707
+  size: 476, 1076
+  orig: 476, 1077
+  offset: 0, 1
+  index: -1
+zhanpushi5
+  rotate: false
+  xy: 917, 790
+  size: 386, 992
+  orig: 452, 1054
+  offset: 66, 62
+  index: -1
+zhanpushi6
+  rotate: 270
+  xy: 0, 369
+  size: 275, 703
+  orig: 288, 724
+  offset: 9, 21
+  index: -1
+zhanpushi7
+  rotate: true
+  xy: 671, 261
+  size: 352, 485
+  orig: 352, 500
+  offset: 0, 2
+  index: -1
+zhanpushi8
+  rotate: false
+  xy: 864, 744
+  size: 280, 134
+  orig: 284, 137
+  offset: 1, 1
+  index: -1
+zhanpushi9
+  rotate: true
+  xy: 1153, 307
+  size: 206, 485
+  orig: 206, 485
+  offset: 0, 0
+  index: -1

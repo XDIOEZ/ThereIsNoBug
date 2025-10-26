@@ -140,7 +140,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 358401868519468111, guid: 97a46349905fd2248bb668d41b2a12eb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1075169389606924675, guid: 97a46349905fd2248bb668d41b2a12eb, type: 3}
       propertyPath: m_Positions.Array.size
@@ -529,7 +529,7 @@ MonoBehaviour:
     m_Bits: 64
   isOnInventory: 0
   map: {fileID: 1847238240}
-  newGameEvent: {fileID: 0}
+  newGameEvent: {fileID: 11400000, guid: 55b85c9bec9d0a84fbb847a2d1ea0697, type: 2}
 --- !u!1 &745756110
 GameObject:
   m_ObjectHideFlags: 0

@@ -35,6 +35,8 @@ public class arrowShow : MonoBehaviour
         }
     }
     
+    
+    //移动UI图标隐藏
     public void HideAllArrows()
     {
         leftArrow.SetActive(false);
@@ -42,6 +44,7 @@ public class arrowShow : MonoBehaviour
         upArrow.SetActive(false);
         downArrow.SetActive(false);
     }
+    //移动UI图标显现
 
     public void ShowAllArrows()
     {

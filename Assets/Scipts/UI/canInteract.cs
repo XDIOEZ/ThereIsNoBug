@@ -13,9 +13,5 @@ public class canInteract : MonoBehaviour
         {
             this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
         }
-        else
-        {
-            this.gameObject.GetComponent<BoxCollider2D>().enabled = true;
-        }
     }
 }
