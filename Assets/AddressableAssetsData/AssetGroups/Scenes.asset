@@ -17,6 +17,11 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: a1343f1ee578df5419a69fa5fe1941b0
   m_SerializeEntries:
+  - m_GUID: 2afe12342cf2a0a44b318c46b638176b
+    m_Address: Persistence
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8c9cfa26abfee488c85f1582747f6a02
     m_Address: MainMenu
     m_ReadOnly: 0
@@ -28,7 +33,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b4c9d8794e16ce2478b6ade68ce671cc
-    m_Address: Assets/Scenes/SceneTest2.unity
+    m_Address: SceneTest2
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

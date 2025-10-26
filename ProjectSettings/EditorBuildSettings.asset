@@ -6,10 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Renderer/Transparency_Test.unity
-    guid: 42c782cc44846a049a416221af232795
-  - enabled: 0
-    path: Assets/Scenes/MainMenu.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
+    path: Assets/Scenes/initialization.unity
+    guid: fd0ee155ee43bb040b19de911146e03d
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: f50a244bcfb0ccb4ca29f63610f1a5de, type: 2}
