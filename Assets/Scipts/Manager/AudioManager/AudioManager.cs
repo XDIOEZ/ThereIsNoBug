@@ -45,6 +45,8 @@ public class AudioManager : MonoBehaviour
 
     // 用于管理多个BGM播放
     private List<AudioSource> bgmSources = new List<AudioSource>();
+    public SettingPanel settingPanel;
+    public const string SettingPanelName = "SettingPanel";
 
     #endregion
 
@@ -83,6 +85,54 @@ public class AudioManager : MonoBehaviour
         {
             bgmSources.Add(bgmSource);
         }
+    }
+
+public void Start()
+{
+    UIMgr.Instance().PanelOpened += _ =>
+    {
+        if(_ != SettingPanelName)
+        {
+            return;
+        }
+        settingPanel = UIMgr.Instance().GetPanel<SettingPanel>(_);
+        SyncSlider(settingPanel);
+        
+        // TODO 遍历settingPanel子对象 获取两个对象1.MusicToggle 2.SoundToggle 并绑定事件在值改变的时候 切换BgmVolume 和 SfxVolume到0 或者100
+        if (settingPanel != null)
+        {
+            // 遍历settingPanel的所有子对象，查找MusicToggle和SoundToggle
+            Transform panelTransform = settingPanel.transform;
+            for (int i = 0; i < panelTransform.childCount; i++)
+            {
+                Transform child = panelTransform.GetChild(i);
+                UnityEngine.UI.Toggle toggle = child.GetComponent<UnityEngine.UI.Toggle>();
+                
+                if (toggle != null)
+                {
+                    if (child.name == "MusicToggle")
+                    {
+                        toggle.onValueChanged.AddListener((isOn) =>
+                        {
+                            SetBGMVolume(isOn ? 1f : 0f);
+                        });
+                    }
+                    else if (child.name == "SoundToggle")
+                    {
+                        toggle.onValueChanged.AddListener((isOn) =>
+                        {
+                            SetSFXVolume(isOn ? 1f : 0f);
+                        });
+                    }
+                }
+            }
+        }
+    };
+}
+
+    public void OnDestroy()
+    {
+        Release(settingPanel);
     }
 
     private void Update()
@@ -594,16 +644,46 @@ private IEnumerator RecycleAudioSource(AudioSource audioSource, float delay)
     #endregion
 
     #region UI控制
-    [Button("打开UI")]
-    public void OpenUI()
+[Button("打开UI")]
+public void OpenUI()
+{
+    UIMgr.Instance().ShowPanel<BasePanel>("SettingPanel", E_UI_Layer.System, _ =>
     {
-        UIMgr.Instance().ShowPanel<BasePanel>("SettingPanel", E_UI_Layer.System, _ =>
+        SettingPanel setting = _ as SettingPanel;
+        SyncSlider(setting);
+    });
+}
+
+    public void SyncSlider(SettingPanel setting)
+    {
+        // 设置背景音乐滑块
+        setting.MusicSlider.value = bgmVolume;
+        setting.MusicSlider.maxValue = 1;
+        setting.MusicSlider.onValueChanged.AddListener(SetBGMVolume);
+
+        // 设置音效滑块
+        setting.SoundSlider.value = sfxVolume;
+        setting.SoundSlider.maxValue = 1;
+        setting.SoundSlider.onValueChanged.AddListener(SetSFXVolume);
+    }
+
+    public void Release(SettingPanel setting)
+    {
+        // 移除监听事件
+        if (setting != null)
         {
-            SettingPanel setting = _ as SettingPanel;
-            setting.MusicSlider.value = bgmVolume;
-            setting.MusicSlider.maxValue = 1;
-            setting.MusicSlider.onValueChanged.AddListener(SetBGMVolume);
-        });
+            // 移除背景音乐滑块监听事件
+            if (setting.MusicSlider != null)
+            {
+                setting.MusicSlider.onValueChanged.RemoveListener(SetBGMVolume);
+            }
+
+            // 移除音效滑块监听事件
+            if (setting.SoundSlider != null)
+            {
+                setting.SoundSlider.onValueChanged.RemoveListener(SetSFXVolume);
+            }
+        }
     }
 
 [Button("关闭UI")]
@@ -616,11 +696,7 @@ public void CloseUI()
     {
         // 转换为SettingPanel类型
         SettingPanel setting = panel as SettingPanel;
-        // 移除监听事件
-        if (setting != null && setting.MusicSlider != null)
-        {
-            setting.MusicSlider.onValueChanged.RemoveListener(SetBGMVolume);
-        }
+        Release(setting);
     }
 }
 

@@ -115,10 +115,11 @@ public class UIMgr : BaseMgrNoMono<UIMgr>
                 callBack(panel);
 
             panel.ShowMe();
-            //TODO：面板打开事件
-            PanelOpened?.Invoke(panelName);
             //把面板存起来
             panelDic.Add(panelName, panel);
+
+            //TODO：面板打开事件
+            PanelOpened?.Invoke(panelName);
         });
     }
 
