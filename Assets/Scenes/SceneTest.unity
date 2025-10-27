@@ -528,11 +528,54 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8280756523755529846, guid: 4003c810a44fb5c4fa6a5ae01c4010ae, type: 3}
+      propertyPath: _OnStart.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8280756523755529846, guid: 4003c810a44fb5c4fa6a5ae01c4010ae, type: 3}
+      propertyPath: _OnStart.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8280756523755529846, guid: 4003c810a44fb5c4fa6a5ae01c4010ae, type: 3}
+      propertyPath: _OnStart.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 157793448}
+    - target: {fileID: 8280756523755529846, guid: 4003c810a44fb5c4fa6a5ae01c4010ae, type: 3}
+      propertyPath: _OnStart.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8280756523755529846, guid: 4003c810a44fb5c4fa6a5ae01c4010ae, type: 3}
+      propertyPath: _OnStart.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: StopBGM
+      objectReference: {fileID: 0}
+    - target: {fileID: 8280756523755529846, guid: 4003c810a44fb5c4fa6a5ae01c4010ae, type: 3}
+      propertyPath: _OnStart.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: BaseAudio, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8280756523755529846, guid: 4003c810a44fb5c4fa6a5ae01c4010ae, type: 3}
+      propertyPath: _OnStart.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+      value: "\u5F00\u5934"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8280756523755529846, guid: 4003c810a44fb5c4fa6a5ae01c4010ae, type: 3}
+      propertyPath: _OnStart.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4003c810a44fb5c4fa6a5ae01c4010ae, type: 3}
+--- !u!114 &157793448 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2723179054571289980, guid: 4003c810a44fb5c4fa6a5ae01c4010ae, type: 3}
+  m_PrefabInstance: {fileID: 157793447}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 896ff4bd7b2b6da4ebd1f9537a19ec81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &166366918
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3637,7 +3680,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1947374668}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!114 &1947374677
 MonoBehaviour:
   m_ObjectHideFlags: 0

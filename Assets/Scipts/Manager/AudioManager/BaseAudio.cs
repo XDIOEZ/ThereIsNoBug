@@ -6,7 +6,7 @@ public class BaseAudio : MonoBehaviour
 {
     public void PlayBGM(string name)
     {
-        AudioManager.Instance.PlayBGM(name);
+        AudioManager.Instance.PlayBGM(name,true, 5f);
     }
     
     public void PlaySFX(string name)
@@ -21,7 +21,7 @@ public class BaseAudio : MonoBehaviour
     
     public void StopBGM(string name)
     {
-        AudioManager.Instance.StopBGM(name);
+        AudioManager.Instance.StopBGM(name, 3f);
     }
     
     /// <summary>

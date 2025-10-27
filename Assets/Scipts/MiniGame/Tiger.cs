@@ -83,29 +83,48 @@ public class Tiger : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 检测玩家是否点击了老虎
-    /// </summary>
-    private void CheckTigerClick()
+/// <summary>
+/// 检测玩家是否点击了老虎
+/// </summary>
+private void CheckTigerClick()
+{
+    if (currentPosition.Instance.Y_currentindex != 2)
+        return;
+
+    // 首先检查是否点击在UI上，如果点击在UI上则直接返回
+    if (IsPointerOverUI())
+        return;
+
+    Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
+
+    // 如果射线击中了老虎且满足惊醒条件
+    if (hit.collider != null && hit.collider.gameObject == gameObject)
     {
-        if (currentPosition.Instance.Y_currentindex != 2)
-            return;
-
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
-
-        // 如果射线击中了老虎且满足惊醒条件
-        if (hit.collider != null && hit.collider.gameObject == gameObject)
+        Debug.Log("click tiger");
+        // 只有当音量大于0.01f且老虎未惊醒时，点击老虎才会惊醒它
+        if (AudioManager.Instance.bgmVolume > 0.01f && !isTigerAwake)
         {
-            Debug.Log("click tiger");
-            // 只有当音量大于0.01f且老虎未惊醒时，点击老虎才会惊醒它
-            if (AudioManager.Instance.bgmVolume > 0.01f && !isTigerAwake)
-            {
-                Debug.Log("wake");
-                WakeUpTiger();
-            }
+            Debug.Log("wake");
+            WakeUpTiger();
         }
     }
+}
+
+/// <summary>
+/// 检测鼠标是否点击在UI上
+/// </summary>
+/// <returns>如果点击在UI上返回true，否则返回false</returns>
+private bool IsPointerOverUI()
+{
+    // 使用EventSystem检测是否点击在UI上
+    if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+    {
+        return true;
+    }
+    
+    return false;
+}
 
     /// <summary>
     /// 惊醒老虎
