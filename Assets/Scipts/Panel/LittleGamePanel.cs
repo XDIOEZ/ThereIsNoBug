@@ -33,28 +33,28 @@ public class LittleGamePanel : BasePanel
                 UIMgr.Instance().HidePanel("LittleGamePanel");
                 break;
             case"Image0":
-                CardOut(0,3);
-                index = 102;
+                CardOut(0,102);
+                //index = 102;
                 break;
             case"Image1":
-                CardOut(1,3);
-                index = 103;
+                CardOut(1,103);
+                //index = 103;
                 break;
             case"Image2":
-                CardOut(2,3);
-                index = 104;
+                CardOut(2,104);
+                //index = 104;
                 break;
             case"Image3":
-                CardOut(3,3);
-                Inventory.Instance.AddItem(110).GetComponent<CardItem>().SetCard(index,105);
+                CardOut(3,105);
+                //Inventory.Instance.AddItem(110).GetComponent<CardItem>().SetCard(index,105);
                 break;
             case"Image4":
-                CardOut(4,3);
-                Inventory.Instance.AddItem(110).GetComponent<CardItem>().SetCard(index,106);
+                CardOut(4,106);
+                //Inventory.Instance.AddItem(110).GetComponent<CardItem>().SetCard(index,106);
                 break;
             case"Image5":
-                CardOut(5,3);
-                Inventory.Instance.AddItem(110).GetComponent<CardItem>().SetCard(index,107);
+                CardOut(5,107);
+                //Inventory.Instance.AddItem(110).GetComponent<CardItem>().SetCard(index,107);
                 break;
         }
     }
@@ -133,7 +133,6 @@ public class LittleGamePanel : BasePanel
                 }
             }
             CardMove(E_MoveWay.Out,cardObj);
-            //BronCard(3);
             //TODO：结束小游戏
         }
     }
@@ -148,7 +147,14 @@ public class LittleGamePanel : BasePanel
         rt.DOAnchorPos(new Vector3(posx,-700,0),1).OnComplete(() =>
         {
             print("添加卡牌到背包");
-            Inventory.Instance.AddItem(id).GetComponent<CardItem>().SetCard(index,id);
+            if (0<=x&&x<3)
+            {
+                index=id;
+            }
+            else
+            {
+                Inventory.Instance.AddItem(110).GetComponent<CardItem>().SetCard(index,id);
+            }
         });
     }
 }
