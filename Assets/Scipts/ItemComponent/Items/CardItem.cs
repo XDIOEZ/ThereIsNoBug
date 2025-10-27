@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CardItem : Item
 {
-    public int first;
+    public int first ;
     public int second;
     InventoryComponent inventoryComponent;
 
@@ -23,7 +23,9 @@ public class CardItem : Item
 
     public void ShowCard()
     {
-        //todo:展示卡片
+        GamePlayManager.Instance.ShowCard();
+        GamePlayManager.Instance.ChangeCardID(first,second);
+        GamePlayManager.Instance.ChangeCard();
         StartCoroutine(CountTime());
     }
 }

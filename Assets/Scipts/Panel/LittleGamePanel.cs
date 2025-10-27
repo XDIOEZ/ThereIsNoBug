@@ -33,40 +33,28 @@ public class LittleGamePanel : BasePanel
                 UIMgr.Instance().HidePanel("LittleGamePanel");
                 break;
             case"Image0":
-                CardOut(0);
-                index = 0;
+                CardOut(0,3);
+                index = 102;
                 break;
             case"Image1":
-                CardOut(1);
-                index = 1;
+                CardOut(1,3);
+                index = 103;
                 break;
             case"Image2":
-                CardOut(2);
-                index = 2;
+                CardOut(2,3);
+                index = 104;
                 break;
             case"Image3":
-                CardOut(3);
-                Inventory.Instance.AddItem(3).GetComponent<CardItem>().SetCard(index,3);
+                CardOut(3,3);
+                Inventory.Instance.AddItem(110).GetComponent<CardItem>().SetCard(index,105);
                 break;
             case"Image4":
-                CardOut(4);
-                Inventory.Instance.AddItem(3).GetComponent<CardItem>().SetCard(index,3);
+                CardOut(4,3);
+                Inventory.Instance.AddItem(110).GetComponent<CardItem>().SetCard(index,106);
                 break;
             case"Image5":
-                CardOut(5);
-                Inventory.Instance.AddItem(3).GetComponent<CardItem>().SetCard(index,3);
-                break;
-            case"Image6":
-                CardOut(6);
-                Inventory.Instance.AddItem(0);
-                break;
-            case"Image7":
-                CardOut(7);
-                Inventory.Instance.AddItem(0);
-                break;
-            case"Image8":
-                CardOut(8);
-                Inventory.Instance.AddItem(0);
+                CardOut(5,3);
+                Inventory.Instance.AddItem(110).GetComponent<CardItem>().SetCard(index,107);
                 break;
         }
     }
@@ -112,7 +100,7 @@ public class LittleGamePanel : BasePanel
 /// 移走卡牌
 /// </summary>
 /// <param name="x">选择的卡牌序号</param>
-    public void CardOut(int x)
+    public void CardOut(int x,int id)
     {
         List<GameObject> cardObj = new List<GameObject>(); 
         if (0 <= x && x<3)
@@ -125,7 +113,7 @@ public class LittleGamePanel : BasePanel
                 }
                 else
                 {
-                    CardGet(i);
+                    CardGet(i,id);
                 }
             }
             CardMove(E_MoveWay.Out,cardObj);
@@ -141,37 +129,26 @@ public class LittleGamePanel : BasePanel
                 }
                 else
                 {
-                    CardGet(i);
+                    CardGet(i,id);
                 }
             }
             CardMove(E_MoveWay.Out,cardObj);
             //BronCard(3);
             //TODO：结束小游戏
         }
-        // else if(6<=x&& x<9)
-        // {
-        //     for (int i = 6; i < 9; i++)
-        //     {
-        //         if (i!=x)
-        //         {
-        //             cardObj.Add(Images[i].gameObject);
-        //         }
-        //     }
-        //     CardMove(E_MoveWay.Out,cardObj);
-        //     //TODO：结束小游戏
-        // }
     }
     /// <summary>
     /// 获得的卡牌向下移走
     /// </summary>
-    public void CardGet(int x)
+    public void CardGet(int x,int id)
     {
         print("获得卡牌"+x);
         var rt = Images[x].GetComponent<RectTransform>();
         float posx = rt.anchoredPosition.x;
         rt.DOAnchorPos(new Vector3(posx,-700,0),1).OnComplete(() =>
         {
-            //TODO:将卡牌加入背包
+            print("添加卡牌到背包");
+            Inventory.Instance.AddItem(id).GetComponent<CardItem>().SetCard(index,id);
         });
     }
 }

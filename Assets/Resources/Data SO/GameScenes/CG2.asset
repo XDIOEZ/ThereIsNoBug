@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0af2a360c73960c4082397cd9f6d0ce1, type: 3}
-  m_Name: CGfirst
+  m_Name: CG2
   m_EditorClassIdentifier: 
-  sceneType: 1
+  sceneType: 0
   sceneReference:
-    m_AssetGUID: b4c9d8794e16ce2478b6ade68ce671cc
+    m_AssetGUID: a1ec3f68b56e65a4a9e3a974b4e1d661
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0

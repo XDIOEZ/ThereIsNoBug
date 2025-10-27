@@ -14,7 +14,7 @@ public class CG1 : MonoBehaviour
     public VideoClip[] videoClip;
     public GameObject videoCanvas;
     public Image fadeImage;
-    public GameSceneSO flowerScene;
+    public GameSceneSO nextScene;
     
     
     public void PlayVideo(int index)
@@ -40,7 +40,7 @@ public class CG1 : MonoBehaviour
     {
         videoCanvas.SetActive(false);
         fadeImage.DOBlendableColor(new Color(0, 0, 0, 1), 2f);
-        SceneLoadManager.GetInstance().LoadScene(flowerScene,new Vector3(0,0,0),true);
+        SceneLoadManager.GetInstance().LoadScene(nextScene,new Vector3(0,0,0),true);
     }
     
 }

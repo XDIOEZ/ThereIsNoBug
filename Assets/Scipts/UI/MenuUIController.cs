@@ -32,8 +32,8 @@ public class MenuUIController : MonoBehaviour
     {
         if (menuRoot != null)
         {
-            // 立刻隐藏并禁用交互
-            menuRoot.alpha = 0f;
+            // 立刻禁用交互
+            //menuRoot.alpha = 0f;
             menuRoot.interactable = false;
             menuRoot.blocksRaycasts = false;
         }
