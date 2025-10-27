@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 6964230910753975373}
   - component: {fileID: 2628068807930689110}
   - component: {fileID: 5998733928903099072}
+  - component: {fileID: 9103960039638152362}
   m_Layer: 0
   m_Name: Tiger
   m_TagString: interact
@@ -150,7 +151,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.32, y: 0.32, z: 0.32}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5273675351374522753}
@@ -300,7 +301,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.2565956, y: 5.923976}
+  m_Offset: {x: -3.450139, y: 5.923976}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -311,7 +312,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 40.419434, y: 17.077421}
+  m_Size: {x: 46.80652, y: 17.077421}
   m_EdgeRadius: 0
 --- !u!114 &5998733928903099072
 MonoBehaviour:
@@ -325,3 +326,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 896ff4bd7b2b6da4ebd1f9537a19ec81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FadeInTime: 5
+  FadeOutTime: 5
+--- !u!114 &9103960039638152362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7166880554787128850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ac0a06c77e2d49438c58685b1fffa1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whereCanInteract: 2
