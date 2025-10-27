@@ -123,6 +123,10 @@ public class LittleGamePanel : BasePanel
                 {
                     cardObj.Add(Images[i].gameObject);
                 }
+                else
+                {
+                    CardGet(i);
+                }
             }
             CardMove(E_MoveWay.Out,cardObj);
             BronCard(2);
@@ -135,21 +139,39 @@ public class LittleGamePanel : BasePanel
                 {
                     cardObj.Add(Images[i].gameObject);
                 }
-            }
-            CardMove(E_MoveWay.Out,cardObj);
-            //BronCard(3);
-        }
-        else if(6<=x&& x<9)
-        {
-            for (int i = 6; i < 9; i++)
-            {
-                if (i!=x)
+                else
                 {
-                    cardObj.Add(Images[i].gameObject);
+                    CardGet(i);
                 }
             }
             CardMove(E_MoveWay.Out,cardObj);
+            //BronCard(3);
             //TODO：结束小游戏
         }
+        // else if(6<=x&& x<9)
+        // {
+        //     for (int i = 6; i < 9; i++)
+        //     {
+        //         if (i!=x)
+        //         {
+        //             cardObj.Add(Images[i].gameObject);
+        //         }
+        //     }
+        //     CardMove(E_MoveWay.Out,cardObj);
+        //     //TODO：结束小游戏
+        // }
+    }
+    /// <summary>
+    /// 获得的卡牌向下移走
+    /// </summary>
+    public void CardGet(int x)
+    {
+        print("获得卡牌"+x);
+        var rt = Images[x].GetComponent<RectTransform>();
+        float posx = rt.anchoredPosition.x;
+        rt.DOAnchorPos(new Vector3(posx,-700,0),1).OnComplete(() =>
+        {
+            //TODO:将卡牌加入背包
+        });
     }
 }
