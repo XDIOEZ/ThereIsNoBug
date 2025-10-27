@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 896ff4bd7b2b6da4ebd1f9537a19ec81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FadeInTime: 10
+  FadeOutTime: 10
 --- !u!114 &8280756523755529846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,6 +75,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: BGM_Forest_Test
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2723179054571289980}
+        m_TargetAssemblyTypeName: BaseAudio, Assembly-CSharp
+        m_MethodName: StopBGM
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: "\u5F00\u5934"
           m_BoolArgument: 0
         m_CallState: 2
   _OnEnable:

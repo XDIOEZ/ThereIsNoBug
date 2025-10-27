@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class BaseAudio : MonoBehaviour
 {
+    [Tooltip("淡入时间")]
+    public float FadeInTime = 5;
+    [Tooltip("淡出时间")]
+    public float FadeOutTime = 5;
     public void PlayBGM(string name)
     {
-        AudioManager.Instance.PlayBGM(name,true, 5f);
+        AudioManager.Instance.PlayBGM(name,true, FadeInTime);
     }
     
     public void PlaySFX(string name)
@@ -21,7 +25,7 @@ public class BaseAudio : MonoBehaviour
     
     public void StopBGM(string name)
     {
-        AudioManager.Instance.StopBGM(name, 3f);
+        AudioManager.Instance.StopBGM(name, FadeOutTime);
     }
     
     /// <summary>
