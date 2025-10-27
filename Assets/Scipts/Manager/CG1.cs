@@ -38,7 +38,7 @@ public class CG1 : MonoBehaviour
     
     void EndReached(VideoPlayer vp)
     {
-        videoCanvas.SetActive(false);
+        //videoCanvas.SetActive(false);
         fadeImage.DOBlendableColor(new Color(0, 0, 0, 1), 2f);
         SceneLoadManager.GetInstance().LoadScene(nextScene,new Vector3(0,0,0),true);
     }

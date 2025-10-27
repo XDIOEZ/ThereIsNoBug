@@ -539,6 +539,11 @@ MonoBehaviour:
   map: {fileID: 1847238240}
   card: {fileID: 1265390935}
   newGameEvent: {fileID: 11400000, guid: 55b85c9bec9d0a84fbb847a2d1ea0697, type: 2}
+  moveUpEvent: {fileID: 0}
+  moveDownEvent: {fileID: 0}
+  moveLeftEvent: {fileID: 0}
+  moveRightEvent: {fileID: 0}
+  arrived: {fileID: 0}
 --- !u!1 &745756110
 GameObject:
   m_ObjectHideFlags: 0
