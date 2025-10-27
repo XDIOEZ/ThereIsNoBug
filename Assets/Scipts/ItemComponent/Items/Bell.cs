@@ -8,12 +8,27 @@ public class Bell : Item
 {
     private InteractableComponent interactableComponent;
     public UnityEvent OnInteract;
+    
+    public GameObject skeletonPrefab;
 
     private void Start()
     {
         interactableComponent = GetComponent<InteractableComponent>();
         interactableComponent.OnInteract += Used;
     }
+
+    public void Update()
+    {
+        if(currentPosition.Instance.Y_currentindex!=3)
+        {
+            skeletonPrefab.SetActive(false);
+        }
+        else
+        {
+            skeletonPrefab.SetActive(true);
+        }
+    }
+
 
     protected override void Used()
     {

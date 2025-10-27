@@ -1,0 +1,76 @@
+
+dabaizhong.png
+size: 210,819
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+posun
+  rotate: false
+  xy: 96, 98
+  size: 87, 91
+  orig: 87, 91
+  offset: 0, 0
+  index: -1
+zhong0
+  rotate: false
+  xy: 96, 15
+  size: 84, 83
+  orig: 86, 84
+  offset: 1, 1
+  index: -1
+zhong1
+  rotate: true
+  xy: 0, 97
+  size: 92, 96
+  orig: 93, 96
+  offset: 1, 0
+  index: -1
+zhong2
+  rotate: true
+  xy: 0, 189
+  size: 66, 186
+  orig: 68, 186
+  offset: 1, 0
+  index: -1
+zhong3
+  rotate: false
+  xy: 0, 373
+  size: 210, 446
+  orig: 224, 456
+  offset: 7, 10
+  index: -1
+zhong4
+  rotate: false
+  xy: 151, 255
+  size: 34, 80
+  orig: 36, 81
+  offset: 1, 0
+  index: -1
+zhong5
+  rotate: true
+  xy: 0, 0
+  size: 34, 80
+  orig: 36, 81
+  offset: 1, 0
+  index: -1
+zhong6
+  rotate: false
+  xy: 151, 335
+  size: 35, 24
+  orig: 37, 25
+  offset: 1, 1
+  index: -1
+zhong7
+  rotate: false
+  xy: 0, 34
+  size: 68, 63
+  orig: 68, 68
+  offset: 0, 2
+  index: -1
+zhong8
+  rotate: true
+  xy: 0, 255
+  size: 118, 151
+  orig: 120, 152
+  offset: 2, 1
+  index: -1
