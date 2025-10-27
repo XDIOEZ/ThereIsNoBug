@@ -35,7 +35,7 @@ public class Item : MonoBehaviour
     {
         return ItemUtils.GetItemInfo(id).Description;
     }
-    protected IEnumerator CountTime()
+    protected virtual IEnumerator CountTime()
     {
         yield return new WaitForSeconds(0.1f);
         Inventory.Instance.ResetInventory();

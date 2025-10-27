@@ -21,19 +21,18 @@ public class GamePlayManager : MonoSingleton<GamePlayManager>
     {
         arrived.MapPoints.Clear();
         moveUpEvent.OnEventRaised += GoUp;
+        moveUpEvent.OnEventRaised += map.CloseMap;
         moveDownEvent.OnEventRaised += GoDown;
+        moveDownEvent.OnEventRaised += map.CloseMap;
         moveLeftEvent.OnEventRaised += GoLeft;
+        moveLeftEvent.OnEventRaised += map.CloseMap;
         moveRightEvent.OnEventRaised += GoRight;
+        moveRightEvent.OnEventRaised += map.CloseMap;
+        newGameEvent.OnEventRaised += AddMap;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            //test
-            Inventory.Instance.AddItem(101);
-        }
-        
         if (!isOnInventory)
         {
             if (Input.GetMouseButtonDown(0))
@@ -72,6 +71,11 @@ public class GamePlayManager : MonoSingleton<GamePlayManager>
         }
     }
 
+    private void AddMap()
+    {
+        Inventory.Instance.AddItem(101);
+    }
+    
     public void ShowMap()
     {
         if (map.gameObject.activeInHierarchy)

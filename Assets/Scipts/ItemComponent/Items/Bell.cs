@@ -20,4 +20,17 @@ public class Bell : Item
         base.Used();
         OnInteract?.Invoke();
     }
+
+    private void Click()
+    {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = Resources.Load<Sprite>("Art/Bell");
+        StartCoroutine(CountTime());
+    }
+
+    protected override IEnumerator CountTime()
+    {
+        yield return new WaitForSeconds(0.1f);
+        GetComponent<BoxCollider2D>().enabled = false;
+    }
 }

@@ -9,12 +9,13 @@ public class Map : MonoBehaviour
     public VoidEventSO resetEvent;
     public MapPointsSO arrived;
     public float lineSize;
-    public float size;
     public GameObject nowPoint;
     public GameObject point;
     private LineRenderer lineRenderer;
     private bool isFirst = true;
-    
+    public float x;
+    public float y;
+    public Vector2 size;
     private void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
@@ -26,7 +27,7 @@ public class Map : MonoBehaviour
         gameObject.SetActive(true);
         DrawMap();
         gameObject.transform.position = Camera.main.ViewportToWorldPoint(
-            new Vector3(0.75f, 0.25f, Camera.main.nearClipPlane + 1f));
+            new Vector3(x, y, Camera.main.nearClipPlane + 1f));
     }
 
     public void CloseMap()
@@ -35,7 +36,12 @@ public class Map : MonoBehaviour
         
         foreach (var child in children)
         {
-            Destroy(child.gameObject);
+            child.gameObject.TryGetComponent<SpriteRenderer>(out var spriteRenderer);
+            if (spriteRenderer.sprite.name != "Map")
+            {
+                Destroy(child.gameObject);
+            }
+
         }
         gameObject.SetActive(false);
     }
