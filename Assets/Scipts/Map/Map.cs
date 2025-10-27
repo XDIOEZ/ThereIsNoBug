@@ -6,10 +6,6 @@ using UnityEngine;
 
 public class Map : MonoBehaviour
 {
-    public VoidEventSO moveUpEvent;
-    public VoidEventSO moveDownEvent;
-    public VoidEventSO moveLeftEvent;
-    public VoidEventSO moveRightEvent;
     public VoidEventSO resetEvent;
     public MapPointsSO arrived;
     public float lineSize;
@@ -17,15 +13,11 @@ public class Map : MonoBehaviour
     public GameObject nowPoint;
     public GameObject point;
     private LineRenderer lineRenderer;
+    private bool isFirst = true;
     
     private void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        arrived.MapPoints.Clear();
-        moveUpEvent.OnEventRaised += GoUp;
-        moveDownEvent.OnEventRaised += GoDown;
-        moveLeftEvent.OnEventRaised += GoLeft;
-        moveRightEvent.OnEventRaised += GoRight;
         resetEvent.OnEventRaised += ReverseMap;
     }
 
@@ -51,95 +43,13 @@ public class Map : MonoBehaviour
     public void ReverseMap()
     {
         lineRenderer.positionCount = 0;
-        arrived.MapPoints.Clear();
         arrived.MapPoints.Add(new MapPoint(new Vector2(3,0), 1));
     }
-    
-    public void GoUp()
-    {
-        MapPoint mapPoint = new MapPoint(SceneLoadManager.GetInstance().currentPosition,1);
-        MapPoint _mapPoint = arrived.MapPoints.FirstOrDefault(mapPoint => mapPoint.pos == SceneLoadManager.GetInstance().currentPosition);
-        if (arrived.MapPoints.FirstOrDefault(mapPoint => mapPoint.pos == new Vector2(SceneLoadManager.GetInstance().currentPosition.x , SceneLoadManager.GetInstance().currentPosition.y + 1 )) != null)
-        {
-            return;
-        }
-        if (_mapPoint != null)
-        {
-            if (!_mapPoint.dirs.Contains(1))
-            {
-                _mapPoint.dirs.Add(1);
-            }
-        }
-        else
-        {
-            arrived.MapPoints.Add(mapPoint);
-        }
-    }
-    public void GoDown()
-    {
-        MapPoint mapPoint = new MapPoint(SceneLoadManager.GetInstance().currentPosition,3);
-        MapPoint _mapPoint = arrived.MapPoints.FirstOrDefault(mapPoint => mapPoint.pos == SceneLoadManager.GetInstance().currentPosition);
-        if (arrived.MapPoints.FirstOrDefault(mapPoint => mapPoint.pos == new Vector2(SceneLoadManager.GetInstance().currentPosition.x , SceneLoadManager.GetInstance().currentPosition.y - 1 )) != null)
-        {
-            return;
-        }
-        if (_mapPoint != null)
-        {
-            if (!_mapPoint.dirs.Contains(3))
-            {
-                _mapPoint.dirs.Add(3);
-            }
-        }
-        else
-        {
-            arrived.MapPoints.Add(mapPoint);
-        }
-    }
-    public void GoLeft()
-    {
-        MapPoint mapPoint = new MapPoint(SceneLoadManager.GetInstance().currentPosition,0);
-        MapPoint _mapPoint = arrived.MapPoints.FirstOrDefault(mapPoint => mapPoint.pos == SceneLoadManager.GetInstance().currentPosition);
-        if (arrived.MapPoints.FirstOrDefault(mapPoint => mapPoint.pos == new Vector2(SceneLoadManager.GetInstance().currentPosition.x - 1 , SceneLoadManager.GetInstance().currentPosition.y)) != null)
-        {
-            return;
-        }
-        if (_mapPoint != null)
-        {
-            if (!_mapPoint.dirs.Contains(0))
-            {
-                _mapPoint.dirs.Add(0);
-            }
-        }
-        else
-        {
-            arrived.MapPoints.Add(mapPoint);
-        }
-    }
-    public void GoRight()
-    {
-        MapPoint mapPoint = new MapPoint(SceneLoadManager.GetInstance().currentPosition,2);
-        MapPoint _mapPoint = arrived.MapPoints.FirstOrDefault(mapPoint => mapPoint.pos == SceneLoadManager.GetInstance().currentPosition);
-        if (arrived.MapPoints.FirstOrDefault(mapPoint => mapPoint.pos == new Vector2(SceneLoadManager.GetInstance().currentPosition.x + 1, SceneLoadManager.GetInstance().currentPosition.y )) != null)
-        {
-            return;
-        }
-        if (_mapPoint != null)
-        {
-            if (!_mapPoint.dirs.Contains(2))
-            {
-                _mapPoint.dirs.Add(2);
-            }
-        }
-        else
-        {
-            arrived.MapPoints.Add(mapPoint);
-        }
-    }
-    
+
     private void DrawMap()
     {
+        isFirst = false;
         if(lineRenderer == null)
-            
             lineRenderer = GetComponent<LineRenderer>();
         if (arrived.MapPoints.Count != 0)
         {

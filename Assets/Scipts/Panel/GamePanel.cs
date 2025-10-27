@@ -219,6 +219,8 @@ public class GamePanel : BasePanel
     /// <param name="index"></param>
     private void ToggleSelectByUI(int index)
     {
+        // 同步背包当前选中（若有背包逻辑）
+        Inventory.Instance?.SelectItem(index);
         if (uiSelectedIndex == index)
         {
             print("取消选中道具栏"+index);
@@ -233,8 +235,7 @@ public class GamePanel : BasePanel
             print("选中道具栏"+index);
             // 选中新索引
             uiSelectedIndex = index;
-            // 同步背包当前选中（若有背包逻辑）
-            Inventory.Instance?.SelectItem(index);
+
         }
 
         UpdateSelectionHighlight();

@@ -15,7 +15,7 @@ public class AnotherKey : Item
     protected override void Used()
     {
         base.Used();
-        Inventory.Instance.AddItem(1);
+        Inventory.Instance.AddItem(112);
         Destroy(this.gameObject);
     }
 }

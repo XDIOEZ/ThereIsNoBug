@@ -2,10 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Bell : Item
 {
     private InteractableComponent interactableComponent;
+    public UnityEvent OnInteract;
 
     private void Start()
     {
@@ -16,6 +18,6 @@ public class Bell : Item
     protected override void Used()
     {
         base.Used();
-        Instantiate(Resources.Load<GameObject>("Prefabs/InventoryItem/KeyItem"));
+        OnInteract?.Invoke();
     }
 }
