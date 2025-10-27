@@ -7,6 +7,8 @@ using UnityEngine.Events;
 public class FlowerChange : MonoBehaviour
 {
     [TextArea(2, 5)] public string Tip;
+    
+    public GameSceneSO firstScene;
     //这是管理位于子对象上的花朵对象 他们的名字为 红 、黄 、蓝 、紫 、绿 、 青 ,橙 紫
     public List<FlowerDrag> Flowers = new List<FlowerDrag>();
 
@@ -296,13 +298,20 @@ public class FlowerChange : MonoBehaviour
     private void OnGameWin()
     {
         // 示例：将管理器上的Sprite Renderer设置为绿色
-        SpriteRenderer renderer = GetComponent<SpriteRenderer>();
-        if (renderer != null)
-        {
-            renderer.color = Color.green;
-        }
-        OnWin.Invoke();
+        // SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+        // if (renderer != null)
+        // {
+        //     renderer.color = Color.green;
+        //     renderer.sortingOrder = 1;
+        // }
+        // OnWin.Invoke();
         // 可以在这里添加其他胜利逻辑
+        
+        
+        //加载下一个场景的CG
+        SceneLoadManager.GetInstance().LoadScene(firstScene,new Vector3(0,0,0),true);
+        
+        
         // 例如禁用花朵拖拽、显示胜利界面等
     }
     

@@ -387,7 +387,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 77
   m_TargetDisplay: 0
 --- !u!224 &92119090
 RectTransform:
@@ -429,19 +429,19 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1633225650}
     m_Modifications:
     - target: {fileID: 2207941283948212273, guid: a80fe16a699fb554dbe71c5615f741a3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.10666625
       objectReference: {fileID: 0}
     - target: {fileID: 2207941283948212273, guid: a80fe16a699fb554dbe71c5615f741a3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1.2324177
       objectReference: {fileID: 0}
     - target: {fileID: 2207941283948212273, guid: a80fe16a699fb554dbe71c5615f741a3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.08341486
       objectReference: {fileID: 0}
     - target: {fileID: 2207941283948212273, guid: a80fe16a699fb554dbe71c5615f741a3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -449,15 +449,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2207941283948212273, guid: a80fe16a699fb554dbe71c5615f741a3, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2207941283948212273, guid: a80fe16a699fb554dbe71c5615f741a3, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2207941283948212273, guid: a80fe16a699fb554dbe71c5615f741a3, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2207941283948212273, guid: a80fe16a699fb554dbe71c5615f741a3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -480,6 +480,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a80fe16a699fb554dbe71c5615f741a3, type: 3}
+--- !u!4 &145407405 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2207941283948212273, guid: a80fe16a699fb554dbe71c5615f741a3, type: 3}
+  m_PrefabInstance: {fileID: 145407404}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &217560505
 GameObject:
   m_ObjectHideFlags: 0
@@ -686,7 +691,7 @@ MonoBehaviour:
   loadLastSceneEvent: {fileID: 11400000, guid: 9267e2e3e865a944fa606d55fb21b3e0, type: 2}
   afterScneLoadEvent: {fileID: 11400000, guid: 2226170425dd69443875ca92a34f9105, type: 2}
   fadeEvent: {fileID: 11400000, guid: e2dbd81b67091d5498a8bed7f6d7be1f, type: 2}
-  menuLoadScene: {fileID: 11400000, guid: 3673f6dc52301f046b0b0000822ed7a0, type: 2}
+  menuLoadScene: {fileID: 11400000, guid: 5e4cff89b12b3b5419bec461d74d3dfc, type: 2}
   menuScene: {fileID: 11400000, guid: 33edba7370c2f5b4da1838cd1e8c3403, type: 2}
   currentPosition: {x: 0, y: 0}
   fadeDuration: 2
@@ -721,6 +726,7 @@ Transform:
   m_Children:
   - {fileID: 1494324037}
   - {fileID: 217560506}
+  - {fileID: 145407405}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1847238240 stripped
@@ -743,4 +749,3 @@ SceneRoots:
   - {fileID: 57966785}
   - {fileID: 745756112}
   - {fileID: 1177234480}
-  - {fileID: 145407404}

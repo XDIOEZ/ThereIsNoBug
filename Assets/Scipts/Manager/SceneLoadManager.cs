@@ -80,7 +80,7 @@ public class SceneLoadManager : SingletonMono<SceneLoadManager>
     
     
     //从一个场景加载另一个场景
-    private void LoadScene(GameSceneSO sceneToLoad, Vector3 positionToGo, bool isFade)
+    public void LoadScene(GameSceneSO sceneToLoad, Vector3 positionToGo, bool isFade)
     {
         //防止重复加载
         if(_isLoading)

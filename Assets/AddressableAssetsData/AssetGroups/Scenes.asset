@@ -22,6 +22,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2da22ced57ae49a4c961fee9786a7cb9
+    m_Address: FlowerMiniGame_New
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8c9cfa26abfee488c85f1582747f6a02
     m_Address: MainMenu
     m_ReadOnly: 0
@@ -33,7 +38,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b4c9d8794e16ce2478b6ade68ce671cc
-    m_Address: SceneTest2
+    m_Address: CGfirst
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
