@@ -34,21 +34,27 @@ public class LittleGamePanel : BasePanel
                 break;
             case"Image0":
                 CardOut(0,3);
+                index = 102;
                 break;
             case"Image1":
                 CardOut(1,3);
+                index = 103;
                 break;
             case"Image2":
                 CardOut(2,3);
+                index = 104;
                 break;
             case"Image3":
                 CardOut(3,3);
+                Inventory.Instance.AddItem(110).GetComponent<CardItem>().SetCard(index,105);
                 break;
             case"Image4":
                 CardOut(4,3);
+                Inventory.Instance.AddItem(110).GetComponent<CardItem>().SetCard(index,106);
                 break;
             case"Image5":
                 CardOut(5,3);
+                Inventory.Instance.AddItem(110).GetComponent<CardItem>().SetCard(index,107);
                 break;
         }
     }

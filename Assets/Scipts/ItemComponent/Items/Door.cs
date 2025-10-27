@@ -20,14 +20,16 @@ public class Door : Item
     protected override void UsedWithItem(Item item)
     {
         base.UsedWithItem(item);
-        if (item.id == 1)
+        if (item.id == 111)
         {
             isFirstKey = true;
+            Inventory.Instance.RemoveItem(item.id);
         }
 
-        if (item.id == 4)
+        if (item.id == 112)
         {
             isSecondKey = true;
+            Inventory.Instance.RemoveItem(item.id);
         }
 
         if (isFirstKey && isSecondKey)

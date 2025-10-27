@@ -27,7 +27,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1537825109757003294}
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: 0feb462f87100924188ba807ea46dbc8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7e6a614481688c9429c63187109396be, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -94,7 +94,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1537825109757003294}
   - component: {fileID: 3759706809459427073}
-  - component: {fileID: 7601161981286009069}
   - component: {fileID: -8461849716781826090}
   m_Layer: 0
   m_Name: Card
@@ -151,7 +150,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.30171156, y: -0.5698981}
+  m_Offset: {x: 0.012578964, y: -0.02303338}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -162,20 +161,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.1815195, y: 5.771492}
+  m_Size: {x: 2.522068, y: 4.225185}
   m_EdgeRadius: 0
---- !u!114 &7601161981286009069
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2825751879599346807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3606eb58bd7675439db6caeeed73dd0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-8461849716781826090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,4 +175,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffea31365b23612458086907a795429c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
+  spriteRenderer: {fileID: 7208276844684919404}
+  first: 0
+  second: 0

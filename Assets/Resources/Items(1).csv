@@ -1,0 +1,22 @@
+﻿ID,Name,Description,ImagePath,PrefabPath
+101,地图, ,,Resources/Prefabs/Map
+102,卡牌, ,,
+103,卡牌, ,,
+104,卡牌, ,,
+105,卡牌, ,,
+106,卡牌, ,,
+107,卡牌, ,,
+108,钥匙, ,,
+109,钥匙, ,,
+201,占卜师, ,ArtAssets/Character/tap-角色-占卜师,Prefab/GameItem/Fortune_Teller
+301,钟, ,,
+302,狮子, ,ArtAssets/Character/聚光灯动物,Prefab/GameItem/Tiger
+303,门, ,,
+304,打开的门, ,,
+305,包裹1, ,ArtAssets/Item/1号,Prefab/GameItem/FlowerBox
+306,包裹2, ,ArtAssets/Item/2号,Prefab/GameItem/FlowerBox
+307,包裹3, ,ArtAssets/Item/3号,Prefab/GameItem/FlowerBox
+308,包裹4, ,ArtAssets/Item/4号,Prefab/GameItem/FlowerBox
+309,包裹5, ,ArtAssets/Item/5号,Prefab/GameItem/FlowerBox
+310,包裹6, ,ArtAssets/Item/6号,Prefab/GameItem/FlowerBox
+311,小羊, ,ArtAssets/Character/Tap-小羊,
