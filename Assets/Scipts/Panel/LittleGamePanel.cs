@@ -80,7 +80,7 @@ public class LittleGamePanel : BasePanel
             {
                 var rt = cardList[i].GetComponent<RectTransform>();
                 float posx = rt.anchoredPosition.x;
-                rt.DOAnchorPos(new Vector3(posx, 0, 0), 2);
+                rt.DOAnchorPos(new Vector3(posx, 0, 0), 1.5f);
             }
         }
         else
@@ -90,7 +90,7 @@ public class LittleGamePanel : BasePanel
                 cardList[i].GetComponent<Button>().onClick.RemoveAllListeners();
                 var rt = cardList[i].GetComponent<RectTransform>();
                 float posx = rt.anchoredPosition.x;
-                rt.DOAnchorPos(new Vector3(posx, 700, 0), 1);
+                rt.DOAnchorPos(new Vector3(posx, 900, 0), 1);
 
 
             }
@@ -133,7 +133,7 @@ public class LittleGamePanel : BasePanel
                 }
             }
             CardMove(E_MoveWay.Out,cardObj);
-            //TODO：结束小游戏
+
         }
     }
     /// <summary>
@@ -144,7 +144,7 @@ public class LittleGamePanel : BasePanel
         print("获得卡牌"+x);
         var rt = Images[x].GetComponent<RectTransform>();
         float posx = rt.anchoredPosition.x;
-        rt.DOAnchorPos(new Vector3(posx,-700,0),1).OnComplete(() =>
+        rt.DOAnchorPos(new Vector3(posx,-900,0),1).OnComplete(() =>
         {
             print("添加卡牌到背包");
             if (0<=x&&x<3)
@@ -154,6 +154,8 @@ public class LittleGamePanel : BasePanel
             else
             {
                 Inventory.Instance.AddItem(110).GetComponent<CardItem>().SetCard(index,id);
+                //TODO：结束小游戏
+                UIMgr.Instance().HidePanel("LittleGamePanel");
             }
         });
     }
