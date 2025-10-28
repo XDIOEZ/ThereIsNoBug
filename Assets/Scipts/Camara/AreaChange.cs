@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public class AreaChange : MonoBehaviour
@@ -40,6 +41,9 @@ public class AreaChange : MonoBehaviour
     
     void Start()
     {
+        Scene loadScene = SceneManager.GetSceneByName("SceneTest");
+        SceneManager.SetActiveScene(loadScene);
+        
         if (mainCamera == null)
             mainCamera = Camera.main;
         mainCamera.transform.position = new Vector3(30, 0, 0);

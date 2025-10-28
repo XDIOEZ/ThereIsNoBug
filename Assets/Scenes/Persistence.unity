@@ -426,12 +426,13 @@ MonoBehaviour:
   isOnInventory: 0
   map: {fileID: 669896668}
   card: {fileID: 1265390935}
-  newGameEvent: {fileID: 11400000, guid: 848dd272cb29477418a5691a2eead6a0, type: 2}
+  resetGameEvent: {fileID: 0}
   moveUpEvent: {fileID: 11400000, guid: c940ca9e1aa683f43ac8c00e20cca832, type: 2}
   moveDownEvent: {fileID: 11400000, guid: 4eeaee5eecadfb44798ac013ccbffe48, type: 2}
   moveLeftEvent: {fileID: 11400000, guid: 3ae3a1b1ab83b6c47a0fea530a2eedc0, type: 2}
   moveRightEvent: {fileID: 11400000, guid: 39b418cc37feebf4eaab4d2b50305982, type: 2}
   arrived: {fileID: 11400000, guid: 2287119f1a8a4cd4d878a7f84c85cb8e, type: 2}
+  isGameOver: 0
 --- !u!1001 &669896667
 PrefabInstance:
   m_ObjectHideFlags: 0
