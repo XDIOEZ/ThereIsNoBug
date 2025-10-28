@@ -69,7 +69,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5cbd34bcd3f945748b30e2a3e74a11df, type: 3}
   - {fileID: 8300000, guid: fc648101d65772b4aa07cbed9d005627, type: 3}
   - {fileID: 8300000, guid: 1f3606220dc8b9241b1ac833ba447b25, type: 3}
-  - {fileID: 8300000, guid: 126175190199f7543ac5a8454f54c14f, type: 3}
+  - {fileID: 8300000, guid: 738487e8dcb40d647bbd5a2d12e04e1b, type: 3}
   OnAudioSettingsChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -84,6 +84,8 @@ MonoBehaviour:
   isMuted: 0
   audioSourcePrefab: {fileID: 8938656753846244773, guid: bad80208222a70844b77713f122599db, type: 3}
   settingPanel: {fileID: 0}
+  musicToggle: {fileID: 0}
+  soundToggle: {fileID: 0}
 --- !u!82 &711383393866795231
 AudioSource:
   m_ObjectHideFlags: 0
