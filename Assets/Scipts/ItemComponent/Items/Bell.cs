@@ -30,6 +30,18 @@ public class Bell : Item
         {
             skeletonPrefab.SetActive(true);
         }
+        
+        
+        if (Input.GetMouseButtonDown(0)) // 检测鼠标左键点击
+        {
+            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+        
+            if (hit.collider != null && hit.collider.gameObject == gameObject)
+            {
+                Click();
+            }
+        }
+        
     }
 
 
@@ -45,6 +57,7 @@ public class Bell : Item
         Debug.Log("BellClick");
         skeletonAnimation.state.SetAnimation(0, "posun1", false);
         PlayAnimationWaitLastAnimation("posun2");
+        OnInteract?.Invoke();
         //StartCoroutine(CountTime());
     }
 
