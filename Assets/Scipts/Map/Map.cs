@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using DG.Tweening;
 
 public class Map : MonoBehaviour
 {
@@ -27,11 +28,16 @@ public class Map : MonoBehaviour
         gameObject.SetActive(true);
         DrawMap();
         gameObject.transform.position = Camera.main.ViewportToWorldPoint(
-            new Vector3(x, y, Camera.main.nearClipPlane + 1f));
+            new Vector3(x, y - 0.5f, Camera.main.nearClipPlane + 1f));
+        gameObject.transform.DOMoveY(Camera.main.ViewportToWorldPoint(
+            new Vector3(x, y, Camera.main.nearClipPlane + 1f)).y,1);
+
     }
 
     public void CloseMap()
     {
+        gameObject.transform.DOMoveY(Camera.main.ViewportToWorldPoint(
+            new Vector3(x, y - 0.5f, Camera.main.nearClipPlane + 1f)).y, 1);
         var children = transform.Cast<Transform>().ToList();
         
         foreach (var child in children)
