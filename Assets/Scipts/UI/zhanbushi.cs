@@ -16,6 +16,9 @@ public class zhanbushi : MonoBehaviour
 
     private void Update()
     {
+        
+        
+        
         if (currentPosition.Instance.Y_currentindex == 1)
         {
             skeletonAnimation.SetActive(true);
@@ -23,6 +26,11 @@ public class zhanbushi : MonoBehaviour
         else
         {
             skeletonAnimation.SetActive(false);
+        }
+        
+        if (Inventory.Instance.nowItem.id == 110)
+        {
+            this.gameObject.GetComponent<canInteract>().enabled = true;
         }
     }
 }
