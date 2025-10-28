@@ -34,7 +34,7 @@ public class Door : Item
 
         if (isFirstKey && isSecondKey)
         {
-            GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>("TestArt/saki");
+            GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>("Art/OpenedDoor");
         }
     }
 

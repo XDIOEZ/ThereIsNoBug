@@ -17,18 +17,30 @@ public class GamePlayManager : MonoSingleton<GamePlayManager>
     public VoidEventSO moveRightEvent;
     public MapPointsSO arrived;
 
+    private void OnEnable()
+    {
+        moveUpEvent.OnEventRaised += GoUp;
+        moveUpEvent.OnEventRaised += map.CloseMap;
+        moveUpEvent.OnEventRaised += card.CloseCard;
+        
+        moveDownEvent.OnEventRaised += GoDown;
+        moveDownEvent.OnEventRaised += map.CloseMap;
+        moveDownEvent.OnEventRaised += card.CloseCard;
+        
+        moveLeftEvent.OnEventRaised += GoLeft;
+        moveLeftEvent.OnEventRaised += map.CloseMap;
+        moveLeftEvent.OnEventRaised += card.CloseCard;
+        
+        moveRightEvent.OnEventRaised += GoRight;
+        moveRightEvent.OnEventRaised += map.CloseMap;
+        moveRightEvent.OnEventRaised += card.CloseCard;
+        
+        newGameEvent.OnEventRaised += AddMap;
+    }
+
     private void Start()
     {
         arrived.MapPoints.Clear();
-        moveUpEvent.OnEventRaised += GoUp;
-        moveUpEvent.OnEventRaised += map.CloseMap;
-        moveDownEvent.OnEventRaised += GoDown;
-        moveDownEvent.OnEventRaised += map.CloseMap;
-        moveLeftEvent.OnEventRaised += GoLeft;
-        moveLeftEvent.OnEventRaised += map.CloseMap;
-        moveRightEvent.OnEventRaised += GoRight;
-        moveRightEvent.OnEventRaised += map.CloseMap;
-        newGameEvent.OnEventRaised += AddMap;
     }
 
     private void Update()

@@ -70,8 +70,9 @@ public class Inventory : MonoSingleton<Inventory>
         itemInInventory.Add(item.GetComponent<Item>());
         item.transform.SetParent(transform);
         itemInInventory.OrderBy(x=>x.GetComponent<InventoryComponent>().index);
+        Item _item = item.GetComponent<Item>();
         //显示在物品栏中
-        UIMgr.Instance().GetPanel<GamePanel>("GamePanel").GetItem(item.GetComponent<Item>());
+        UIMgr.Instance().GetPanel<GamePanel>("GamePanel").GetItem(_item);
         return item.GetComponent<Item>();
     }
 
