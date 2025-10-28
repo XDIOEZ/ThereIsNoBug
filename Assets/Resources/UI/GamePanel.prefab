@@ -147,6 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FadeInTime: 5
   FadeOutTime: 5
+  PrePlayTime: 0
 --- !u!1 &881257123872967630
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,7 +391,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 729a0c7451204a0468f7885178e3111e, type: 3}
+    m_Font: {fileID: 12800000, guid: 7158ea292bc45894bbf1a73e12f860fe, type: 3}
     m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
@@ -655,6 +656,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FadeInTime: 5
   FadeOutTime: 5
+  PrePlayTime: 0
 --- !u!1 &3041566795338223855
 GameObject:
   m_ObjectHideFlags: 0
@@ -898,6 +900,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FadeInTime: 5
   FadeOutTime: 5
+  PrePlayTime: 0
 --- !u!1 &4693878366995777991
 GameObject:
   m_ObjectHideFlags: 0
@@ -1045,6 +1048,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FadeInTime: 5
   FadeOutTime: 5
+  PrePlayTime: 0
 --- !u!1 &5428661774088719536
 GameObject:
   m_ObjectHideFlags: 0
@@ -1268,6 +1272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FadeInTime: 5
   FadeOutTime: 5
+  PrePlayTime: 0
 --- !u!1 &6954691985353768076
 GameObject:
   m_ObjectHideFlags: 0
@@ -1415,3 +1420,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FadeInTime: 5
   FadeOutTime: 5
+  PrePlayTime: 0
