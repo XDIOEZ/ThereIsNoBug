@@ -3404,6 +3404,10 @@ PrefabInstance:
       propertyPath: id
       value: 201
       objectReference: {fileID: 0}
+    - target: {fileID: 5687073462193412881, guid: 489e68c8ce5c56147b4dc15c26fc5338, type: 3}
+      propertyPath: zhanbushi
+      value: 
+      objectReference: {fileID: 5899964753354722375}
     - target: {fileID: 6981394957027007378, guid: 489e68c8ce5c56147b4dc15c26fc5338, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -3433,6 +3437,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 489e68c8ce5c56147b4dc15c26fc5338, type: 3}
+--- !u!114 &5899964753354722375 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7952743282537092716, guid: 489e68c8ce5c56147b4dc15c26fc5338, type: 3}
+  m_PrefabInstance: {fileID: 5899964753354722374}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48f8ec82f09501f4e82bdab0a6ec00e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

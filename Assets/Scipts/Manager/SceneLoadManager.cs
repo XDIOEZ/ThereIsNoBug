@@ -130,7 +130,9 @@ public class SceneLoadManager : SingletonMono<SceneLoadManager>
     private void OnLoadCompleted(AsyncOperationHandle<SceneInstance> obj)
     {
         _currentScene = _sceneToLoad;
-
+        
+        Scene loadScene = SceneManager.GetSceneByName("SceneTest");
+        SceneManager.SetActiveScene(loadScene);
         // 仅在非主菜单场景显示玩家，并在黑屏时设置坐标
         // if (player)
         // {
