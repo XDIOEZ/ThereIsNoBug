@@ -43,13 +43,12 @@ public class Inventory : MonoSingleton<Inventory>
                 Debug.Log(nowItem.GetName());
             }
             nowItem.GetComponent<InventoryComponent>().Used();
-            GamePlayManager.Instance.isOnInventory = true;
         }
     }
 
     public void ResetInventory()
     {
-        nowItem = null;
+        //nowItem = null;
         GamePlayManager.Instance.isOnInventory = false;
         Debug.Log("Reset Inventory");
     }

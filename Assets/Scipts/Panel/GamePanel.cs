@@ -218,6 +218,7 @@ public class GamePanel : BasePanel
         isPropBoxshow = false;
         //print(isPropBoxshow);
         PropImgrt.DOAnchorPos(hidePos, 0.5f);
+        lastUIIndex = -1;
     }
 
     #endregion
@@ -243,7 +244,6 @@ public class GamePanel : BasePanel
             if (lastUIIndex == index && lastUIIndex != -1)
             {
                 lastUIIndex = -1;
-                uiSelectedIndex = -1;
                 GamePlayManager.Instance.isOnInventory = false;
                 return;
             }

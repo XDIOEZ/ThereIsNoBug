@@ -52,17 +52,17 @@ public class GamePlayManager : MonoSingleton<GamePlayManager>
                     Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             
                     RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
-            
-                    if (hit.collider != null&& hit.collider.gameObject.GetComponent<Card>())
-                    {
-                        Debug.Log("Card");
-                        ChangeCard();
-                    }
+                    
                     //Debug.Log(hit.collider.name);
                     if (hit.collider != null&& hit.collider.gameObject.GetComponent<InteractableComponent>())
                     {
                         Debug.Log("interactable");
                         hit.collider.gameObject.GetComponent<InteractableComponent>().Interact();
+                        if (Inventory.Instance.nowItem!=null)
+                        {
+                            hit.collider.gameObject.GetComponent<InteractableComponent>().Interact(Inventory.Instance.nowItem);
+                        }
+                        
                     }
                 }
             }
@@ -85,7 +85,23 @@ public class GamePlayManager : MonoSingleton<GamePlayManager>
 
             if (Input.GetMouseButtonDown(0))
             {
-                if (UIMgr.Instance().GetPanel<GamePanel>("GamePanel").uiSelectedIndex != -1)
+                if (Inventory.Instance.nowItem != null && Inventory.Instance.nowItem.TryGetComponent<CardItem>(out var component))
+                {
+                    Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            
+                    RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
+            
+                    if (hit.collider != null&& hit.collider.gameObject.GetComponent<Card>())
+                    {
+                        Debug.Log("Card");
+                        ChangeCard();
+                    }
+                    else
+                    {
+                        UIMgr.Instance().GetPanel<GamePanel>("GamePanel").ToggleSelectByUI(UIMgr.Instance().GetPanel<GamePanel>("GamePanel").uiSelectedIndex);
+                    }
+                }
+                else if (UIMgr.Instance().GetPanel<GamePanel>("GamePanel").uiSelectedIndex != -1)
                 {
                     UIMgr.Instance().GetPanel<GamePanel>("GamePanel").ToggleSelectByUI(UIMgr.Instance().GetPanel<GamePanel>("GamePanel").uiSelectedIndex);
                 }
