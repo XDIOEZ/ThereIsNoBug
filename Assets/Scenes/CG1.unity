@@ -614,9 +614,10 @@ MonoBehaviour:
   videoPlayer: {fileID: 1885318364}
   videoClip:
   - {fileID: 32900000, guid: cbc32fddf1730df4dabb5672618d8016, type: 3}
-  videoCanvas: {fileID: 277075047}
+  videoCanvas: {fileID: 0}
   fadeImage: {fileID: 72760958}
   nextScene: {fileID: 11400000, guid: cf259a553862a664fac3162e2d599387, type: 2}
+  loadMainSeneEvent: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

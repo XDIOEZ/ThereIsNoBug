@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class FlowerChange : MonoBehaviour
 {
     [TextArea(2, 5)] public string Tip;
     
-    public GameSceneSO firstScene;
+    [FormerlySerializedAs("firstScene")] public GameSceneSO nextScene;
     //这是管理位于子对象上的花朵对象 他们的名字为 红 、黄 、蓝 、紫 、绿 、 青 ,橙 紫
     public List<FlowerDrag> Flowers = new List<FlowerDrag>();
 
@@ -309,7 +310,7 @@ public class FlowerChange : MonoBehaviour
         
         
         //加载下一个场景的CG
-        SceneLoadManager.GetInstance().LoadScene(firstScene,new Vector3(0,0,0),true);
+        SceneLoadManager.GetInstance().LoadScene(nextScene,new Vector3(0,0,0),true);
         
         
         // 例如禁用花朵拖拽、显示胜利界面等

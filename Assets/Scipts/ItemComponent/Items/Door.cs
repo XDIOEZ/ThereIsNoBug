@@ -8,6 +8,8 @@ public class Door : Item
     public bool isFirstKey;
     public bool isSecondKey;
 
+    public GameSceneSO nextScene;
+    
     InteractableComponent interactableComponent;
     
     private void Start()
@@ -44,6 +46,8 @@ public class Door : Item
         if (isFirstKey && isSecondKey)
         {
             Debug.Log("Game Pass");
+            SceneLoadManager.GetInstance().LoadScene(nextScene,new Vector3(0,0,0),true);
+            UIMgr.Instance().HidePanel("GamePanel");
         }
     }
 }

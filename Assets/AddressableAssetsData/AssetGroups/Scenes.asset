@@ -32,13 +32,13 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a1ec3f68b56e65a4a9e3a974b4e1d661
-    m_Address: CG2
+  - m_GUID: abbb2c5e34eecdc44933a274b81f3ea6
+    m_Address: SceneTest
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: abbb2c5e34eecdc44933a274b81f3ea6
-    m_Address: SceneTest
+  - m_GUID: ae863c9a3484b424faa9471b7b8a74fe
+    m_Address: CG2
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

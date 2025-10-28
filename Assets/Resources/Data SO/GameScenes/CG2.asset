@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0af2a360c73960c4082397cd9f6d0ce1, type: 3}
   m_Name: CG2
   m_EditorClassIdentifier: 
-  sceneType: 0
+  sceneType: 1
   sceneReference:
-    m_AssetGUID: a1ec3f68b56e65a4a9e3a974b4e1d661
+    m_AssetGUID: ae863c9a3484b424faa9471b7b8a74fe
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0

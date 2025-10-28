@@ -485,11 +485,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   videoPlayer: {fileID: 6273103}
   videoClip:
-  - {fileID: 32900000, guid: 802ff857f5fbed748adfb505f8d0a8f4, type: 3}
+  - {fileID: 32900000, guid: 0bab512b8bb03bd408ecb2f990839c1d, type: 3}
   videoCanvas: {fileID: 262977405}
   fadeImage: {fileID: 568264777}
   nextScene: {fileID: 11400000, guid: 3673f6dc52301f046b0b0000822ed7a0, type: 2}
-  loadMainSeneEvent: {fileID: 11400000, guid: 848dd272cb29477418a5691a2eead6a0, type: 2}
+  loadMainSeneEvent: {fileID: 0}
 --- !u!1 &2042460909
 GameObject:
   m_ObjectHideFlags: 0
