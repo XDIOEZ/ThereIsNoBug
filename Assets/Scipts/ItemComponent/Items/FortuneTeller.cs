@@ -22,5 +22,8 @@ public class FortuneTeller : Item
             Inventory.Instance.RemoveItem(110);
         }
         UIMgr.Instance().ShowPanel<BasePanel>("LittleGamePanel", E_UI_Layer.Top);
+        this.gameObject.GetComponent<canInteract>().enabled = false;
+        this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        
     }
 }
