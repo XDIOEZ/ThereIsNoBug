@@ -9,8 +9,8 @@
 110,物品栏卡牌,,Art/twoCardIcon,Prefabs/InventoryItem/CardItem
 108,钥匙1, ,Art/tigerKey,Prefabs/Interactable/Key
 109,钥匙2, ,Art/tigerKey,Prefabs/Interactable/AnotherKey
-111,物品栏钥匙1,,Art/tigerKey,Prefabs/InventoryItem/KeyItem1
-112,物品栏钥匙1,,Art/tigerKey,Prefabs/InventoryItem/KeyItem2
+111,物品栏钥匙1,,Art/Key1,Prefabs/InventoryItem/KeyItem1
+112,物品栏钥匙2,,Art/Key2,Prefabs/InventoryItem/KeyItem2
 201,占卜师, ,ArtAssets/Character/tap-角色-占卜师,Prefabs/Interactable/Fortune_Teller
 301,钟, ,Art/Bell,Prefabs/Interactable/Bell
 302,狮子, ,ArtAssets/Character/聚光灯动物,Prefab/GameItem/Tiger

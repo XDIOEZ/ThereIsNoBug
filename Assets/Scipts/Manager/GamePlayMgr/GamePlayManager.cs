@@ -96,7 +96,11 @@ public class GamePlayManager : MonoSingleton<GamePlayManager>
                         Debug.Log("Card");
                         ChangeCard();
                     }
-                    else
+                    else if (hit.collider != null&& hit.collider.gameObject.GetComponent<FortuneTeller>())
+                    {
+                        //todo: 拿着塔罗牌点击占卜师
+                    }
+                    else 
                     {
                         UIMgr.Instance().GetPanel<GamePanel>("GamePanel").ToggleSelectByUI(UIMgr.Instance().GetPanel<GamePanel>("GamePanel").uiSelectedIndex);
                     }

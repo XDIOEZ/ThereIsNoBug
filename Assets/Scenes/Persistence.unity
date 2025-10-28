@@ -620,7 +620,7 @@ MonoBehaviour:
   itemInInventory: []
   items: []
   nowItem: {fileID: 0}
-  textAsset: {fileID: 4900000, guid: b66c2e02362244e47a8737359ee113eb, type: 3}
+  textAsset: {fileID: 4900000, guid: 5bb61b9679241ad4582973a39837f4bd, type: 3}
   isFirst: 1
 --- !u!4 &745756112
 Transform:
