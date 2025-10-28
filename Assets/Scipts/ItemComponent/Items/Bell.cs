@@ -13,6 +13,7 @@ public class Bell : Item
     
     public SkeletonAnimation skeletonAnimation; // 骨骼动画组件
     public GameObject skeletonPrefab;
+    
 
     private void Start()
     {
