@@ -29,14 +29,14 @@ public class zhanbushi : MonoBehaviour
         
         if (Inventory.Instance.nowItem.id == 110)
         {
-            this.gameObject.GetComponent<BoxCollider2D>().enabled = true;
             this.gameObject.GetComponent<canInteract>().enabled = true;
             //flag = true;
         }
-        else
+        else if(!Inventory.Instance.nowItem)
         {
-            this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            Debug.Log("cancel interact");
             this.gameObject.GetComponent<canInteract>().enabled = false;
+            this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
         }
     }
 }

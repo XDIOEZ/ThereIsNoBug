@@ -21,6 +21,8 @@ public class FortuneTeller : Item
 
     protected override void Used()
     {
+        if (!Inventory.Instance.nowItem && isFirst == false)
+            return;
         StartCoroutine(CountTime());
 
     }
@@ -35,6 +37,7 @@ public class FortuneTeller : Item
             this.gameObject.GetComponent<canInteract>().enabled = false;
             zhanbushi.flag = false;
         }
+
         
         yield return new WaitForSeconds(2f);
         //todo:跳转到卡牌游戏界面
