@@ -16,6 +16,8 @@ public class CG1 : MonoBehaviour
     public Image fadeImage;
     public GameSceneSO nextScene;
     
+    public VoidEventSO loadMainSeneEvent;
+    
     
     public void PlayVideo(int index)
     {
@@ -41,6 +43,7 @@ public class CG1 : MonoBehaviour
         //videoCanvas.SetActive(false);
         fadeImage.DOBlendableColor(new Color(0, 0, 0, 1), 2f);
         SceneLoadManager.GetInstance().LoadScene(nextScene,new Vector3(0,0,0),true);
+        loadMainSeneEvent.RaiseEvent();
     }
     
 }

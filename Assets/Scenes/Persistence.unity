@@ -429,7 +429,7 @@ MonoBehaviour:
   isOnInventory: 0
   map: {fileID: 669896668}
   card: {fileID: 1265390935}
-  newGameEvent: {fileID: 11400000, guid: 55b85c9bec9d0a84fbb847a2d1ea0697, type: 2}
+  newGameEvent: {fileID: 11400000, guid: 848dd272cb29477418a5691a2eead6a0, type: 2}
   moveUpEvent: {fileID: 11400000, guid: c940ca9e1aa683f43ac8c00e20cca832, type: 2}
   moveDownEvent: {fileID: 11400000, guid: 4eeaee5eecadfb44798ac013ccbffe48, type: 2}
   moveLeftEvent: {fileID: 11400000, guid: 3ae3a1b1ab83b6c47a0fea530a2eedc0, type: 2}
@@ -825,7 +825,7 @@ MonoBehaviour:
   afterScneLoadEvent: {fileID: 11400000, guid: 2226170425dd69443875ca92a34f9105, type: 2}
   fadeEvent: {fileID: 11400000, guid: e2dbd81b67091d5498a8bed7f6d7be1f, type: 2}
   menuLoadScene: {fileID: 11400000, guid: 5e4cff89b12b3b5419bec461d74d3dfc, type: 2}
-  menuScene: {fileID: 11400000, guid: 3673f6dc52301f046b0b0000822ed7a0, type: 2}
+  menuScene: {fileID: 11400000, guid: 33edba7370c2f5b4da1838cd1e8c3403, type: 2}
   currentPosition: {x: 0, y: 0}
   fadeDuration: 2
 --- !u!1 &1633225649

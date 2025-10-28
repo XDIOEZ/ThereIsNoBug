@@ -24,7 +24,7 @@ public class SceneLoadManager : SingletonMono<SceneLoadManager>
     
     [Header("事件监听")]
     public SceneLoadEventSO loadEventSO;
-    [FormerlySerializedAs("dayJumpEvent")] public VoidEventSO newGameEvent;
+    public VoidEventSO newGameEvent;
     public VoidEventSO loadLastSceneEvent;
     
     [Header("事件广播")]
