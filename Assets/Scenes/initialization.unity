@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   persistentScene:
-    m_AssetGUID: 2afe12342cf2a0a44b318c46b638176b
+    m_AssetGUID: 1c0b3d7163df4984c8c5eda48c9ad0aa
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0

@@ -1,13 +1,8 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using UnityEditor.Build.Reporting;
 using UnityEngine;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
 public class SceneLoadManager : SingletonMono<SceneLoadManager>
 {
