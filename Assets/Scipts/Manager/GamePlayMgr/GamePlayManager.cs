@@ -78,9 +78,19 @@ public class GamePlayManager : MonoSingleton<GamePlayManager>
                     {
                         hit.collider.gameObject.GetComponent<InteractableComponent>().Interact(Inventory.Instance.nowItem);
                     }
+                    UIMgr.Instance().GetPanel<GamePanel>("GamePanel").ToggleSelectByUI(UIMgr.Instance().GetPanel<GamePanel>("GamePanel").uiSelectedIndex);
                     StartCoroutine(CountTime());
                 }
             }
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (UIMgr.Instance().GetPanel<GamePanel>("GamePanel").uiSelectedIndex != -1)
+                {
+                    UIMgr.Instance().GetPanel<GamePanel>("GamePanel").ToggleSelectByUI(UIMgr.Instance().GetPanel<GamePanel>("GamePanel").uiSelectedIndex);
+                }
+            }
+            
         }
 
     }

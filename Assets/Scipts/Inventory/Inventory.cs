@@ -45,10 +45,6 @@ public class Inventory : MonoSingleton<Inventory>
             nowItem.GetComponent<InventoryComponent>().Used();
             GamePlayManager.Instance.isOnInventory = true;
         }
-        else
-        {
-            ExchangeItem(nowItem , itemIndex);
-        }
     }
 
     public void ResetInventory()
@@ -58,11 +54,11 @@ public class Inventory : MonoSingleton<Inventory>
         Debug.Log("Reset Inventory");
     }
     
-    public void UseItem()
-    {
-        nowItem.gameObject.GetComponent<InventoryComponent>().Used();
-        ResetInventory();
-    }
+    // public void UseItem()
+    // {
+    //     nowItem.gameObject.GetComponent<InventoryComponent>().Used();
+    //     ResetInventory();
+    // }
     
     public Item AddItem(int id)
     {
@@ -120,30 +116,30 @@ public class Inventory : MonoSingleton<Inventory>
         }
     }
 
-    public void ExchangeItem(Item item ,int index)
-    {
-        Debug.Log("Exchanging item");
-        if (itemInInventory.FirstOrDefault(item => item.GetComponent<InventoryComponent>().index == index) != null)
-        {
-            int _index = item.GetComponent<InventoryComponent>().index;
-            Item _item = itemInInventory.FirstOrDefault(item => item.GetComponent<InventoryComponent>().index == index);
-            _item.GetComponent<InventoryComponent>().index = _index;
-            item.GetComponent<InventoryComponent>().index = index;
-            itemInInventory.OrderBy(x=>x.GetComponent<InventoryComponent>().index);
-            //物品栏中交换
-            GamePanel gamePanel = UIMgr.Instance().GetPanel<GamePanel>("GamePanel");
-            gamePanel.ChangeSprite(index, item);
-            gamePanel.ChangeSprite(_index,_item);
-        }
-        else
-        {
-            UIMgr.Instance().GetPanel<GamePanel>("GamePanel").RemoveItem(item);
-            item.GetComponent<InventoryComponent>().index =  index;
-            UIMgr.Instance().GetPanel<GamePanel>("GamePanel").GetItem(item.GetComponent<Item>());
-        }
-        ResetInventory();
-    }
-    
+    // public void ExchangeItem(Item item ,int index)
+    // {
+    //     Debug.Log("Exchanging item");
+    //     if (itemInInventory.FirstOrDefault(item => item.GetComponent<InventoryComponent>().index == index) != null)
+    //     {
+    //         int _index = item.GetComponent<InventoryComponent>().index;
+    //         Item _item = itemInInventory.FirstOrDefault(item => item.GetComponent<InventoryComponent>().index == index);
+    //         _item.GetComponent<InventoryComponent>().index = _index;
+    //         item.GetComponent<InventoryComponent>().index = index;
+    //         itemInInventory.OrderBy(x=>x.GetComponent<InventoryComponent>().index);
+    //         //物品栏中交换
+    //         GamePanel gamePanel = UIMgr.Instance().GetPanel<GamePanel>("GamePanel");
+    //         gamePanel.ChangeSprite(index, item);
+    //         gamePanel.ChangeSprite(_index,_item);
+    //     }
+    //     else
+    //     {
+    //         UIMgr.Instance().GetPanel<GamePanel>("GamePanel").RemoveItem(item);
+    //         item.GetComponent<InventoryComponent>().index =  index;
+    //         UIMgr.Instance().GetPanel<GamePanel>("GamePanel").GetItem(item.GetComponent<Item>());
+    //     }
+    //     ResetInventory();
+    // }
+    //
     private void InitItems()
     {
         ItemUtils.Init(textAsset);

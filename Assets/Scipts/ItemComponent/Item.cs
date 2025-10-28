@@ -9,9 +9,9 @@ public class Item : MonoBehaviour
     {
         Inventory.Instance.items.Add(this);
     }
-
+    
     public int id;
-
+    
     protected virtual void Used()
     {
             
@@ -21,7 +21,7 @@ public class Item : MonoBehaviour
     {
         
     }
-
+    
     public string GetPrePath()
     {
         return ItemUtils.GetItemInfo(id).PrePath;

@@ -18,7 +18,8 @@ public class GamePanel : BasePanel
     public bool isPropBoxshow = false;
     private bool isFirst = true;
     
-    private int uiSelectedIndex = -1;//当前 UI 选中索引（-1 表示无选中）
+    public int lastUIIndex = -1;
+    public int uiSelectedIndex = -1;//当前 UI 选中索引（-1 表示无选中）
     protected override void Awake()
     {
         base.Awake();
@@ -158,7 +159,7 @@ public class GamePanel : BasePanel
     
             // 屏幕坐标 -> Canvas 本地坐标（ScreenSpace-Overlay 时传 null camera）
             RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, screenPoint, null, out Vector2 localPoint);
-    
+            
             // 确保 DialogImg 是 Canvas 的直接子物体
             RectTransform dialogRect = DialogImg.rectTransform;
             if (dialogRect.parent != canvasRect)
@@ -198,7 +199,7 @@ public class GamePanel : BasePanel
         seq.Append(PropImgrt.DOAnchorPos(realPos, 0.5f))
             .AppendCallback(() =>
             {
-                print("动画完成");
+                //print("动画完成");
                 print(isPropBoxshow);
                 if (!isPropBoxshow)
                 {
@@ -224,27 +225,37 @@ public class GamePanel : BasePanel
     /// UI 选中切换
     /// </summary>
     /// <param name="index"></param>
-    private void ToggleSelectByUI(int index)
+    public void ToggleSelectByUI(int index)
     {
         // 同步背包当前选中（若有背包逻辑）
-        Inventory.Instance?.SelectItem(index);
         if (uiSelectedIndex == index)
         {
             print("取消选中道具栏"+index);
             // 取消选中
             uiSelectedIndex = -1;
+            GamePlayManager.Instance.isOnInventory = false;
             //UpdateSelectionHighlight(uiSelectedIndex);
             // TODO：若需要同步背包状态，取消背包当前选中
-            
+            Debug.Log("3");
         }
         else
         {
+            if (lastUIIndex == index && lastUIIndex != -1)
+            {
+                lastUIIndex = -1;
+                uiSelectedIndex = -1;
+                GamePlayManager.Instance.isOnInventory = false;
+                return;
+            }
+
+            Debug.Log("1");
             print("选中道具栏"+index);
             // 选中新索引
+            lastUIIndex  = index;
             uiSelectedIndex = index;
 
         }
-
+        Inventory.Instance?.SelectItem(index);
         UpdateSelectionHighlight();
     }
     private void GetNormalColor(Image img)
