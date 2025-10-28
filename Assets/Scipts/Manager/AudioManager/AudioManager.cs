@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 /// <summary>
 /// 通用音频管理器（AudioManager）
@@ -47,6 +48,9 @@ public class AudioManager : MonoBehaviour
     private List<AudioSource> bgmSources = new List<AudioSource>();
     public SettingPanel settingPanel;
     public const string SettingPanelName = "SettingPanel";
+
+    public Toggle musicToggle;
+    public Toggle soundToggle;
 
     #endregion
 
@@ -112,16 +116,20 @@ public void Start()
                 {
                     if (child.name == "MusicToggle")
                     {
+                        musicToggle = toggle;
                         toggle.onValueChanged.AddListener((isOn) =>
                         {
                             SetBGMVolume(isOn ? 1f : 0f);
+                            SyncSlider(settingPanel);
                         });
                     }
                     else if (child.name == "SoundToggle")
                     {
+                        soundToggle = toggle;
                         toggle.onValueChanged.AddListener((isOn) =>
                         {
                             SetSFXVolume(isOn ? 1f : 0f);
+                            SyncSlider(settingPanel);
                         });
                     }
                 }
@@ -138,7 +146,30 @@ public void Start()
     private void Update()
     {
         /*// 检测音量或静音状态是否发生变化
+         * 
         CheckAudioSettingsChanges();*/
+
+        if (musicToggle && bgmSource != null)
+        {
+            if (bgmVolume == 0)
+            {
+                musicToggle.isOn = false;
+            }else
+            {
+                musicToggle.isOn = true;
+            }
+        
+
+
+            if(sfxVolume == 0)
+            {
+                soundToggle.isOn = false;
+            }else
+            {
+                soundToggle.isOn = true;
+            }
+        
+        }
     }
 
     /// <summary>
@@ -665,6 +696,8 @@ public void OpenUI()
         setting.SoundSlider.value = sfxVolume;
         setting.SoundSlider.maxValue = 1;
         setting.SoundSlider.onValueChanged.AddListener(SetSFXVolume);
+
+      
     }
 
     public void Release(SettingPanel setting)
