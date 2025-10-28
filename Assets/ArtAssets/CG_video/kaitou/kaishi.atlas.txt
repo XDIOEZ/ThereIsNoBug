@@ -1,0 +1,250 @@
+
+kaishi.png
+size: 2041,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Body
+  rotate: 270
+  xy: 0, 129
+  size: 545, 664
+  orig: 650, 664
+  offset: 0, 0
+  index: -1
+Eye1
+  rotate: false
+  xy: 565, 1186
+  size: 108, 58
+  orig: 108, 58
+  offset: 0, 0
+  index: -1
+Eye2
+  rotate: false
+  xy: 1003, 1036
+  size: 114, 52
+  orig: 117, 54
+  offset: 3, 0
+  index: -1
+Hair_01
+  rotate: false
+  xy: 1095, 0
+  size: 336, 262
+  orig: 355, 262
+  offset: 19, 0
+  index: -1
+Hair_03
+  rotate: true
+  xy: 777, 1
+  size: 204, 281
+  orig: 204, 281
+  offset: 0, 0
+  index: -1
+Hair_04
+  rotate: 270
+  xy: 0, 672
+  size: 573, 780
+  orig: 573, 780
+  offset: 0, 0
+  index: -1
+L_LegS
+  rotate: false
+  xy: 1781, 925
+  size: 215, 558
+  orig: 215, 558
+  offset: 0, 0
+  index: -1
+L_hand
+  rotate: false
+  xy: 727, 991
+  size: 110, 96
+  orig: 113, 108
+  offset: 3, 6
+  index: -1
+R_Arm
+  rotate: true
+  xy: 1497, 1
+  size: 374, 543
+  orig: 374, 543
+  offset: 0, 0
+  index: -1
+R_LegB
+  rotate: true
+  xy: 1781, 1821
+  size: 227, 233
+  orig: 236, 233
+  offset: 0, 0
+  index: -1
+R_LegS
+  rotate: 270
+  xy: 664, 27
+  size: 391, 490
+  orig: 391, 490
+  offset: 0, 0
+  index: -1
+Skirt_01
+  rotate: true
+  xy: 1705, 375
+  size: 443, 300
+  orig: 443, 300
+  offset: 0, 0
+  index: -1
+Skirt_02
+  rotate: 180
+  xy: 1500, 255
+  size: 299, 832
+  orig: 299, 832
+  offset: 0, 0
+  index: -1
+Skirt_03
+  rotate: true
+  xy: 766, 267
+  size: 822, 834
+  orig: 848, 953
+  offset: 26, 18
+  index: -1
+Skirt_04
+  rotate: false
+  xy: 1383, 242
+  size: 200, 146
+  orig: 200, 158
+  offset: 0, 12
+  index: -1
+Skirt_05
+  rotate: false
+  xy: 0, 1244
+  size: 704, 804
+  orig: 704, 804
+  offset: 0, 0
+  index: -1
+Skirt_12
+  rotate: false
+  xy: 1339, 755
+  size: 150, 107
+  orig: 150, 119
+  offset: 0, 0
+  index: -1
+cg01_0
+  rotate: false
+  xy: 1781, 1482
+  size: 192, 338
+  orig: 192, 338
+  offset: 0, 0
+  index: -1
+cg01_1
+  rotate: true
+  xy: 703, 1087
+  size: 961, 541
+  orig: 961, 541
+  offset: 0, 0
+  index: -1
+cg01_10
+  rotate: true
+  xy: 1244, 1087
+  size: 961, 537
+  orig: 961, 537
+  offset: 0, 0
+  index: -1
+cg01_2
+  rotate: false
+  xy: 774, 915
+  size: 63, 76
+  orig: 63, 76
+  offset: 0, 0
+  index: -1
+cg01_3
+  rotate: false
+  xy: 642, 1109
+  size: 46, 78
+  orig: 46, 78
+  offset: 0, 0
+  index: -1
+cg01_4
+  rotate: false
+  xy: 0, 698
+  size: 72, 38
+  orig: 72, 38
+  offset: 0, 0
+  index: -1
+cg01_5
+  rotate: false
+  xy: 876, 946
+  size: 127, 142
+  orig: 127, 142
+  offset: 0, 0
+  index: -1
+cg01_7
+  rotate: false
+  xy: 394, 633
+  size: 359, 39
+  orig: 361, 41
+  offset: 1, 1
+  index: -1
+cg01_8
+  rotate: true
+  xy: 356, 0
+  size: 138, 259
+  orig: 138, 259
+  offset: 0, 0
+  index: -1
+
+kaishi2.png
+size: 1875,478
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Hair_02
+  rotate: 270
+  xy: 1284, 1
+  size: 276, 286
+  orig: 276, 323
+  offset: 0, 28
+  index: -1
+Hat
+  rotate: false
+  xy: 0, 97
+  size: 433, 382
+  orig: 433, 382
+  offset: 0, 0
+  index: -1
+Head
+  rotate: true
+  xy: 433, 96
+  size: 383, 352
+  orig: 482, 399
+  offset: 83, 47
+  index: -1
+L_ArmB
+  rotate: 270
+  xy: 1066, 27
+  size: 452, 341
+  orig: 478, 442
+  offset: 0, 0
+  index: -1
+L_LegB
+  rotate: false
+  xy: 784, 96
+  size: 285, 296
+  orig: 286, 297
+  offset: 0, 1
+  index: -1
+cg01_011
+  rotate: true
+  xy: 1737, 70
+  size: 408, 137
+  orig: 408, 137
+  offset: 0, 0
+  index: -1
+cg01_6
+  rotate: true
+  xy: 1569, 113
+  size: 366, 168
+  orig: 366, 168
+  offset: 0, 0
+  index: -1
+cg01_9
+  rotate: false
+  xy: 0, 4
+  size: 961, 92
+  orig: 961, 92
+  offset: 0, 0
+  index: -1

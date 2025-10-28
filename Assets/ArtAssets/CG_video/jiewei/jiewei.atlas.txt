@@ -1,0 +1,458 @@
+
+jiewei.png
+size: 2040,2047
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+END
+  rotate: false
+  xy: 231, 4
+  size: 274, 28
+  orig: 274, 28
+  offset: 0, 0
+  index: -1
+Eye1
+  rotate: false
+  xy: 1040, 27
+  size: 108, 58
+  orig: 108, 58
+  offset: 0, 0
+  index: -1
+Eye2
+  rotate: true
+  xy: 1974, 464
+  size: 114, 52
+  orig: 117, 54
+  offset: 3, 0
+  index: -1
+L_hand
+  rotate: true
+  xy: 1927, 6
+  size: 110, 96
+  orig: 113, 108
+  offset: 3, 6
+  index: -1
+jiewei1_1
+  rotate: true
+  xy: 231, 32
+  size: 53, 309
+  orig: 53, 310
+  offset: 0, 0
+  index: -1
+jiewei1_10
+  rotate: true
+  xy: 942, 17
+  size: 68, 98
+  orig: 69, 99
+  offset: 0, 0
+  index: -1
+jiewei1_11
+  rotate: true
+  xy: 1974, 577
+  size: 66, 35
+  orig: 68, 35
+  offset: 2, 0
+  index: -1
+jiewei1_12
+  rotate: false
+  xy: 724, 1
+  size: 108, 84
+  orig: 108, 84
+  offset: 0, 0
+  index: -1
+jiewei1_14
+  rotate: false
+  xy: 0, 341
+  size: 1511, 854
+  orig: 3332, 854
+  offset: 0, 0
+  index: -1
+jiewei1_2
+  rotate: true
+  xy: 1148, 16
+  size: 69, 88
+  orig: 70, 88
+  offset: 0, 0
+  index: -1
+jiewei1_3
+  rotate: false
+  xy: 1974, 387
+  size: 65, 77
+  orig: 66, 79
+  offset: 1, 1
+  index: -1
+jiewei1_4
+  rotate: true
+  xy: 1847, 1739
+  size: 307, 174
+  orig: 308, 175
+  offset: 1, 1
+  index: -1
+jiewei1_9
+  rotate: true
+  xy: 832, 14
+  size: 71, 110
+  orig: 75, 126
+  offset: 3, 3
+  index: -1
+jiewei2_0
+  rotate: true
+  xy: 1510, 387
+  size: 808, 464
+  orig: 4477, 464
+  offset: 0, 0
+  index: -1
+jiewei2_10
+  rotate: false
+  xy: 1846, 1194
+  size: 165, 545
+  orig: 167, 545
+  offset: 1, 0
+  index: -1
+jiewei2_11
+  rotate: true
+  xy: 1927, 116
+  size: 271, 100
+  orig: 271, 100
+  offset: 0, 0
+  index: -1
+jiewei2_12
+  rotate: true
+  xy: 1927, 116
+  size: 271, 100
+  orig: 271, 100
+  offset: 0, 0
+  index: -1
+jiewei2_13
+  rotate: false
+  xy: 1680, 7
+  size: 244, 90
+  orig: 245, 90
+  offset: 0, 0
+  index: -1
+jiewei2_19
+  rotate: false
+  xy: 0, 213
+  size: 1283, 128
+  orig: 1283, 128
+  offset: 0, 0
+  index: -1
+jiewei2_20
+  rotate: false
+  xy: 0, 85
+  size: 1283, 128
+  orig: 1283, 128
+  offset: 0, 0
+  index: -1
+jiewei2_21
+  rotate: false
+  xy: 0, 1194
+  size: 1848, 853
+  orig: 4012, 853
+  offset: 0, 0
+  index: -1
+jiewei2_3
+  rotate: false
+  xy: 1283, 13
+  size: 397, 84
+  orig: 397, 86
+  offset: 0, 1
+  index: -1
+jiewei2_5
+  rotate: false
+  xy: 540, 18
+  size: 184, 67
+  orig: 184, 67
+  offset: 0, 0
+  index: -1
+jiewei2_7
+  rotate: false
+  xy: 1283, 97
+  size: 644, 244
+  orig: 645, 244
+  offset: 1, 0
+  index: -1
+jiewei2_8
+  rotate: false
+  xy: 0, 11
+  size: 231, 74
+  orig: 231, 74
+  offset: 0, 0
+  index: -1
+
+jiewei2.png
+size: 2048,2034
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Body
+  rotate: 180
+  xy: 1503, 46
+  size: 545, 664
+  orig: 650, 664
+  offset: 0, 0
+  index: -1
+L_LegS
+  rotate: false
+  xy: 1819, 711
+  size: 215, 558
+  orig: 215, 558
+  offset: 0, 0
+  index: -1
+Skirt_01
+  rotate: false
+  xy: 388, 35
+  size: 443, 300
+  orig: 443, 300
+  offset: 0, 0
+  index: -1
+Skirt_02
+  rotate: false
+  xy: 1511, 1202
+  size: 299, 832
+  orig: 299, 832
+  offset: 0, 0
+  index: -1
+Skirt_12
+  rotate: false
+  xy: 1810, 1279
+  size: 150, 107
+  orig: 150, 119
+  offset: 0, 0
+  index: -1
+jiewei1_0
+  rotate: true
+  xy: 1511, 794
+  size: 408, 308
+  orig: 434, 308
+  offset: 0, 0
+  index: -1
+jiewei1_5
+  rotate: false
+  xy: 0, 22
+  size: 388, 312
+  orig: 390, 314
+  offset: 1, 1
+  index: -1
+jiewei1_7
+  rotate: false
+  xy: 1769, 1657
+  size: 275, 377
+  orig: 326, 379
+  offset: 0, 1
+  index: -1
+jiewei2_15
+  rotate: true
+  xy: 1810, 1386
+  size: 271, 226
+  orig: 271, 226
+  offset: 0, 0
+  index: -1
+jiewei2_16
+  rotate: true
+  xy: 805, 50
+  size: 155, 548
+  orig: 158, 555
+  offset: 2, 7
+  index: -1
+jiewei2_18
+  rotate: false
+  xy: 831, 248
+  size: 254, 86
+  orig: 254, 86
+  offset: 0, 0
+  index: -1
+jiewei2_6
+  rotate: false
+  xy: 1353, 0
+  size: 147, 334
+  orig: 147, 334
+  offset: 0, 0
+  index: -1
+jingtou1
+  rotate: false
+  xy: 0, 1184
+  size: 1511, 850
+  orig: 1511, 850
+  offset: 0, 0
+  index: -1
+jingtou2
+  rotate: false
+  xy: 0, 334
+  size: 1511, 850
+  orig: 1511, 850
+  offset: 0, 0
+  index: -1
+
+jiewei3.png
+size: 2048,2004
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+DUZI
+  rotate: true
+  xy: 1153, 22
+  size: 152, 493
+  orig: 152, 493
+  offset: 0, 0
+  index: -1
+Hair_03
+  rotate: false
+  xy: 779, 851
+  size: 204, 281
+  orig: 204, 281
+  offset: 0, 0
+  index: -1
+Hair_04
+  rotate: true
+  xy: 0, 579
+  size: 573, 780
+  orig: 573, 780
+  offset: 0, 0
+  index: -1
+Hat
+  rotate: false
+  xy: 1402, 1623
+  size: 433, 382
+  orig: 433, 382
+  offset: 0, 0
+  index: -1
+Head
+  rotate: false
+  xy: 962, 955
+  size: 383, 352
+  orig: 482, 399
+  offset: 83, 47
+  index: -1
+L_ArmB
+  rotate: 180
+  xy: 1549, 2
+  size: 452, 341
+  orig: 478, 442
+  offset: 0, 0
+  index: -1
+L_LegB
+  rotate: false
+  xy: 329, 282
+  size: 285, 296
+  orig: 286, 297
+  offset: 0, 1
+  index: -1
+R_Arm
+  rotate: false
+  xy: 0, 95
+  size: 374, 543
+  orig: 374, 543
+  offset: 0, 0
+  index: -1
+R_LegS
+  rotate: false
+  xy: 1563, 308
+  size: 391, 490
+  orig: 391, 490
+  offset: 0, 0
+  index: -1
+Skirt_03
+  rotate: 270
+  xy: 780, 89
+  size: 822, 834
+  orig: 848, 953
+  offset: 26, 18
+  index: -1
+Skirt_04
+  rotate: true
+  xy: 893, 321
+  size: 200, 146
+  orig: 200, 158
+  offset: 0, 12
+  index: -1
+Skirt_05
+  rotate: false
+  xy: 1344, 797
+  size: 704, 804
+  orig: 704, 804
+  offset: 0, 0
+  index: -1
+jiewei1_13
+  rotate: false
+  xy: 614, 313
+  size: 279, 265
+  orig: 281, 267
+  offset: 1, 1
+  index: -1
+jiewei1_6
+  rotate: true
+  xy: 0, 1188
+  size: 195, 161
+  orig: 197, 163
+  offset: 1, 1
+  index: -1
+jiewei1_8
+  rotate: true
+  xy: 1835, 1601
+  size: 403, 183
+  orig: 404, 183
+  offset: 1, 0
+  index: -1
+jiewei2_17
+  rotate: true
+  xy: 374, 120
+  size: 162, 511
+  orig: 163, 511
+  offset: 0, 0
+  index: -1
+jiewei2_2
+  rotate: false
+  xy: 0, 1151
+  size: 1403, 854
+  orig: 1431, 854
+  offset: 28, 0
+  index: -1
+jiewei2_4
+  rotate: false
+  xy: 0, 4
+  size: 162, 246
+  orig: 163, 247
+  offset: 0, 1
+  index: -1
+
+jiewei4.png
+size: 276,1684
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Hair_01
+  rotate: true
+  xy: 0, 513
+  size: 336, 262
+  orig: 355, 262
+  offset: 19, 0
+  index: -1
+Hair_02
+  rotate: false
+  xy: 0, 228
+  size: 276, 286
+  orig: 276, 323
+  offset: 0, 28
+  index: -1
+R_LegB
+  rotate: true
+  xy: 0, 1
+  size: 227, 233
+  orig: 236, 233
+  offset: 0, 0
+  index: -1
+jiewei2_14
+  rotate: false
+  xy: 0, 848
+  size: 165, 408
+  orig: 167, 423
+  offset: 1, 3
+  index: -1
+jiewei2_9
+  rotate: false
+  xy: 0, 1256
+  size: 165, 428
+  orig: 167, 440
+  offset: 1, 0
+  index: -1
