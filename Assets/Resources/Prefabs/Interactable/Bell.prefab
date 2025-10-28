@@ -88,7 +88,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: "\u949F\u6446"
+          m_StringArgument: "\u949F\u6446_MP3"
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 601781038286940936}
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FadeInTime: 5
   FadeOutTime: 5
-  PrePlayTime: 1.5
+  PrePlayTime: 1.9
 --- !u!114 &7044404719001171765
 MonoBehaviour:
   m_ObjectHideFlags: 0

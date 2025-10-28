@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,6 +16,7 @@ public class AnotherKey : Item
     {
         base.Used();
         Inventory.Instance.AddItem(112);
+        AudioManager.Instance.PlaySFX("道具拾取音效");
         Destroy(this.gameObject);
     }
 }

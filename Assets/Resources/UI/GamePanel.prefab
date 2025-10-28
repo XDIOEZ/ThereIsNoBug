@@ -630,7 +630,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5696721175296198078}
         m_TargetAssemblyTypeName: BaseAudio, Assembly-CSharp
         m_MethodName: PlaySFX
         m_Mode: 5
@@ -876,7 +876,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5696721175296198078}
         m_TargetAssemblyTypeName: BaseAudio, Assembly-CSharp
         m_MethodName: PlaySFX
         m_Mode: 5
@@ -1024,7 +1024,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5696721175296198078}
         m_TargetAssemblyTypeName: BaseAudio, Assembly-CSharp
         m_MethodName: PlaySFX
         m_Mode: 5
@@ -1248,7 +1248,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5696721175296198078}
         m_TargetAssemblyTypeName: BaseAudio, Assembly-CSharp
         m_MethodName: PlaySFX
         m_Mode: 5
@@ -1396,7 +1396,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5696721175296198078}
         m_TargetAssemblyTypeName: BaseAudio, Assembly-CSharp
         m_MethodName: PlaySFX
         m_Mode: 5
