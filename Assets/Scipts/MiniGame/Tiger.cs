@@ -11,6 +11,7 @@ public class Tiger : MonoBehaviour
     [Header("游戏设置")]
     public float eatSheepTime = 1f;
     public float AudioOffsetValue = 1f;
+    public bool CanTakeKey = false;
 
     [Header("事件")]
     public UnityEvent onPass;
@@ -74,12 +75,16 @@ public class Tiger : MonoBehaviour
         if (AudioManager.Instance.bgmVolume <= 0.01f)
         {
             Debug.Log("Game Pass");
+            
             onPass?.Invoke();
+
+            CanTakeKey = true;
         }
         else if (AudioManager.Instance.bgmVolume >= 0.01f)
         {
             Debug.Log("Game Fail");
             onfail?.Invoke();
+            CanTakeKey = false;
         }
     }
 

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,7 +21,7 @@ public class key : MonoBehaviour
         else if (AudioManager.Instance.bgmVolume >= 0.01f)
         {
             //Debug.Log("canNotPick");
-            this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+         //   this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
         }
     }
     
