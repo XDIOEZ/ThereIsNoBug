@@ -22,18 +22,18 @@ public class Door : Item
     protected override void UsedWithItem(Item item)
     {
         base.UsedWithItem(item);
-        if (item.id == 111)
+        if (item.id == 111 || item.id == 112)
         {
-            isFirstKey = true;
-            Inventory.Instance.RemoveItem(item.id);
-        }
-
-        if (item.id == 112)
-        {
+            if (isFirstKey == false)
+            {
+                isFirstKey = true;
+                Inventory.Instance.RemoveItem(item.id);
+                return;
+            }
             isSecondKey = true;
             Inventory.Instance.RemoveItem(item.id);
         }
-
+        
         if (isFirstKey && isSecondKey)
         {
             GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>("Art/OpenedDoor");
@@ -46,6 +46,7 @@ public class Door : Item
         if (isFirstKey && isSecondKey)
         {
             Debug.Log("Game Pass");
+            GamePlayManager.Instance.isGameOver = true;
             SceneLoadManager.GetInstance().LoadScene(nextScene,new Vector3(0,0,0),true);
             UIMgr.Instance().HidePanel("GamePanel");
         }

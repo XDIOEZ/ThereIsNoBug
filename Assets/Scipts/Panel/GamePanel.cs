@@ -236,6 +236,7 @@ public class GamePanel : BasePanel
             uiSelectedIndex = -1;
             GamePlayManager.Instance.isOnInventory = false;
             //UpdateSelectionHighlight(uiSelectedIndex);
+            Inventory.Instance.nowItem = null;
             // TODO：若需要同步背包状态，取消背包当前选中
             Debug.Log("3");
         }
@@ -245,6 +246,7 @@ public class GamePanel : BasePanel
             {
                 lastUIIndex = -1;
                 GamePlayManager.Instance.isOnInventory = false;
+                Inventory.Instance.nowItem = null;
                 return;
             }
 

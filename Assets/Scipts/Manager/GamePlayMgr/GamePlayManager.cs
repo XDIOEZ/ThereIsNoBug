@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class GamePlayManager : MonoSingleton<GamePlayManager> 
 {
@@ -10,13 +11,14 @@ public class GamePlayManager : MonoSingleton<GamePlayManager>
     public bool isOnInventory;
     public Map map;
     public Card card;
-    public VoidEventSO newGameEvent;
+    public VoidEventSO resetGameEvent;
     public VoidEventSO moveUpEvent;
     public VoidEventSO moveDownEvent;
     public VoidEventSO moveLeftEvent;
     public VoidEventSO moveRightEvent;
     public MapPointsSO arrived;
-
+    public bool isGameOver = false;
+    
     private void OnEnable()
     {
         moveUpEvent.OnEventRaised += GoUp;
@@ -43,7 +45,7 @@ public class GamePlayManager : MonoSingleton<GamePlayManager>
 
     private void Update()
     {
-        if (Camera.main != null)
+        if (Camera.main != null && SceneManager.GetActiveScene().name == "SceneTest" && !isGameOver)
         {
             if (!isOnInventory)
             {

@@ -91,6 +91,11 @@ public class Inventory : MonoSingleton<Inventory>
             index = FoundIndex(itemIndex + 1);
             return index;
         }
+
+        if (itemIndex == 0)
+        {
+            return 0;
+        }
         return itemIndex + 1;
     }
 
@@ -102,6 +107,7 @@ public class Inventory : MonoSingleton<Inventory>
             itemInInventory.Remove(item);
             //物品栏中移除
             UIMgr.Instance().GetPanel<GamePanel>("GamePanel").RemoveItem(item);
+            Destroy(item.gameObject);
         }
     }
     
