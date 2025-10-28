@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,14 +8,21 @@ using UnityEngine;
 public class Inventory : MonoSingleton<Inventory>
 {
     public List<Item> itemInInventory;
+    public List<Item> items;
     public Item nowItem;
     public TextAsset textAsset;
     public bool isFirst = true;
-    
+
+    private void OnEnable()
+    {
+        items = new List<Item>(24);
+    }
+
     void Start()
     {
         InitItems();
         itemInInventory = new List<Item>(6);
+
     }
 
     public void SelectItem(int itemIndex)

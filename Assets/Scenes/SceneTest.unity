@@ -3328,6 +3328,10 @@ PrefabInstance:
       propertyPath: _animationName
       value: animation
       objectReference: {fileID: 0}
+    - target: {fileID: 5687073462193412881, guid: 489e68c8ce5c56147b4dc15c26fc5338, type: 3}
+      propertyPath: id
+      value: 201
+      objectReference: {fileID: 0}
     - target: {fileID: 6981394957027007378, guid: 489e68c8ce5c56147b4dc15c26fc5338, type: 3}
       propertyPath: m_Mesh
       value: 

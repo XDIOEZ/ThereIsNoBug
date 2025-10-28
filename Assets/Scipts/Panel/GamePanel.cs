@@ -16,6 +16,7 @@ public class GamePanel : BasePanel
     private Vector2 hidePos;
     private Vector2 realPos;
     public bool isPropBoxshow = false;
+    private bool isFirst = true;
     
     private int uiSelectedIndex = -1;//当前 UI 选中索引（-1 表示无选中）
     protected override void Awake()
@@ -187,7 +188,13 @@ public class GamePanel : BasePanel
     public void PropBoxIn()
     {
         Sequence seq = DOTween.Sequence();
-
+        
+        if (isFirst)
+        {
+            isFirst = false;
+            Inventory.Instance.AddItem(101);
+        }
+        
         seq.Append(PropImgrt.DOAnchorPos(realPos, 0.5f))
             .AppendCallback(() =>
             {

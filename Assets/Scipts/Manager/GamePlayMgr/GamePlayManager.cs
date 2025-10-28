@@ -34,8 +34,6 @@ public class GamePlayManager : MonoSingleton<GamePlayManager>
         moveRightEvent.OnEventRaised += GoRight;
         moveRightEvent.OnEventRaised += map.CloseMap;
         moveRightEvent.OnEventRaised += card.CloseCard;
-        
-        newGameEvent.OnEventRaised += AddMap;
     }
 
     private void Start()
@@ -45,47 +43,46 @@ public class GamePlayManager : MonoSingleton<GamePlayManager>
 
     private void Update()
     {
-        if (!isOnInventory)
+        if (Camera.main != null)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (!isOnInventory)
             {
-                Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            
-                RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
-            
-                if (hit.collider != null&& hit.collider.gameObject.GetComponent<Card>())
+                if (Input.GetMouseButtonDown(0))
                 {
-                    Debug.Log("Card");
-                    ChangeCard();
+                    Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            
+                    RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
+            
+                    if (hit.collider != null&& hit.collider.gameObject.GetComponent<Card>())
+                    {
+                        Debug.Log("Card");
+                        ChangeCard();
+                    }
+                    //Debug.Log(hit.collider.name);
+                    if (hit.collider != null&& hit.collider.gameObject.GetComponent<InteractableComponent>())
+                    {
+                        Debug.Log("interactable");
+                        hit.collider.gameObject.GetComponent<InteractableComponent>().Interact();
+                    }
                 }
-                //Debug.Log(hit.collider.name);
-                if (hit.collider != null&& hit.collider.gameObject.GetComponent<InteractableComponent>())
+            }
+            else
+            {
+                if (Input.GetMouseButtonDown(0))
                 {
-                    Debug.Log("interactable");
-                    hit.collider.gameObject.GetComponent<InteractableComponent>().Interact();
+                    Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            
+                    RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero,interactableLayer);
+            
+                    if (hit.collider != null)
+                    {
+                        hit.collider.gameObject.GetComponent<InteractableComponent>().Interact(Inventory.Instance.nowItem);
+                    }
+                    StartCoroutine(CountTime());
                 }
             }
         }
-        else
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            
-                RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero,interactableLayer);
-            
-                if (hit.collider != null)
-                {
-                    hit.collider.gameObject.GetComponent<InteractableComponent>().Interact(Inventory.Instance.nowItem);
-                }
-                StartCoroutine(CountTime());
-            }
-        }
-    }
 
-    private void AddMap()
-    {
-        Inventory.Instance.AddItem(101);
     }
     
     public void ShowMap()
@@ -212,5 +209,4 @@ public class GamePlayManager : MonoSingleton<GamePlayManager>
             arrived.MapPoints.Add(mapPoint);
         }
     }
-    
 }

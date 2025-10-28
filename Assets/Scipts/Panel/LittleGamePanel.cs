@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
@@ -135,6 +136,8 @@ public class LittleGamePanel : BasePanel
             CardMove(E_MoveWay.Out,cardObj);
 
         }
+
+
     }
     /// <summary>
     /// 获得的卡牌向下移走
@@ -154,9 +157,24 @@ public class LittleGamePanel : BasePanel
             else
             {
                 Inventory.Instance.AddItem(110).GetComponent<CardItem>().SetCard(index,id);
+                if (x == 4 && id == 106)
+                {
+                    Debug.Log("1");
+                    UIMgr.Instance().GetPanel<GamePanel>("GamePanel").InitDialogBox("很好！你抓住了命运的关键——这两张牌的特别之处，正是你接下来要追寻的线索。",
+                        transform.position + new Vector3(0.5f, 1f));
+                }
+                else if (x >= 3)
+                {
+                    Debug.Log("2");
+                    UIMgr.Instance().GetPanel<GamePanel>("GamePanel").InitDialogBox("牌里藏着迷雾而非真相…不算明智的选择…",
+                        transform.position + new Vector3(0.5f, 1f));
+                }
                 //TODO：结束小游戏
+                //Inventory.Instance.items.FirstOrDefault(x => x.id == 201).GetComponent<FortuneTeller>().GetBack();
                 UIMgr.Instance().HidePanel("LittleGamePanel");
+
             }
         });
+
     }
 }

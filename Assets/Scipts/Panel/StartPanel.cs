@@ -10,7 +10,6 @@ public class StartPanel: BasePanel
         switch (btnName)
         {
             case "StartBtn":
-                
                 UIMgr.Instance().HidePanel("StartPanel");
                 UIMgr.Instance().ShowPanel<BasePanel>("GamePanel", E_UI_Layer.Mid);
                 break;

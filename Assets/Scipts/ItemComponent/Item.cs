@@ -1,9 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Item : MonoBehaviour
 {
+    private void Start()
+    {
+        Inventory.Instance.items.Add(this);
+    }
+
     public int id;
 
     protected virtual void Used()

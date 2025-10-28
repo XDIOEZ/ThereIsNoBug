@@ -117,7 +117,7 @@ public class UIMgr : BaseMgrNoMono<UIMgr>
             panel.ShowMe();
             //把面板存起来
             panelDic.Add(panelName, panel);
-
+            Debug.Log("GamePanel");
             //TODO：面板打开事件
             PanelOpened?.Invoke(panelName);
         });
