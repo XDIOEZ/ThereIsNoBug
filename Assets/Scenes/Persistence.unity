@@ -369,10 +369,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7801704103298061341, guid: a80fe16a699fb554dbe71c5615f741a3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2008071936}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a80fe16a699fb554dbe71c5615f741a3, type: 3}
 --- !u!4 &145407405 stripped
 Transform:
@@ -862,19 +859,6 @@ Transform:
   - {fileID: 145407405}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2008071932 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7801704103298061341, guid: a80fe16a699fb554dbe71c5615f741a3, type: 3}
-  m_PrefabInstance: {fileID: 145407404}
-  m_PrefabAsset: {fileID: 0}
---- !u!81 &2008071936
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2008071932}
-  m_Enabled: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

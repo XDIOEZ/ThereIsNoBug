@@ -8,15 +8,21 @@ public class BaseAudio : MonoBehaviour
     public float FadeInTime = 5;
     [Tooltip("淡出时间")]
     public float FadeOutTime = 5;
-    public void PlayBGM(string name)
-    {
-        AudioManager.Instance.PlayBGM(name,true, FadeInTime);
-    }
-    
-    public void PlaySFX(string name)
-    {
-        AudioManager.Instance.PlaySFX(name);
-    }
+    [Tooltip("提前播放多少秒")]
+    public float PrePlayTime = 0;
+public void PlayBGM(string name)
+{
+    // 计算实际开始时间：如果PrePlayTime为3，则从第3秒开始播放
+    float startTime = PrePlayTime;
+    AudioManager.Instance.PlayBGMFromTime(name, startTime);
+}
+
+public void PlaySFX(string name)
+{
+    // 计算实际开始时间：如果PrePlayTime为3，则从第3秒开始播放
+    float startTime = PrePlayTime;
+    AudioManager.Instance.PlaySFXFromTime(name, startTime);
+}
     
     public void SwitchBGM(string name)
     {
