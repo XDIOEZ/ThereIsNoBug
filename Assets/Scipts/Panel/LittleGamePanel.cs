@@ -157,11 +157,11 @@ public class LittleGamePanel : BasePanel
             else
             {
                 Inventory.Instance.AddItem(110).GetComponent<CardItem>().SetCard(index,id);
-                if (x == 4 && id == 106)
+                if (x == 4 && id == 106&&index==102)
                 {
                     Debug.Log("1");
                     UIMgr.Instance().GetPanel<GamePanel>("GamePanel").InitDialogBox("很好！你抓住了命运的关键——这两张牌的特别之处，正是你接下来要追寻的线索。",
-                        transform.position + new Vector3(0.5f, 1f));
+                        GameObject.Find("areas2").transform.Find("占卜师").transform.position+ new Vector3(0.5f, 1f));
                 }
                 else if (x >= 3)
                 {

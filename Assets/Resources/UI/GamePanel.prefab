@@ -689,9 +689,9 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1303015337574476808}
-  - {fileID: 291487259367824066}
   - {fileID: 2945567668063794333}
   - {fileID: 18422105162303881}
+  - {fileID: 291487259367824066}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -753,6 +753,8 @@ MonoBehaviour:
   PropImgrt: {fileID: 0}
   realPropboxposobj: {fileID: 2567268588504729279}
   isPropBoxshow: 0
+  lastUIIndex: -1
+  uiSelectedIndex: -1
 --- !u!1 &3793986247888539178
 GameObject:
   m_ObjectHideFlags: 0
@@ -1084,7 +1086,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 380, y: 320.75}
   m_SizeDelta: {x: 870, y: 351}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5754986500535664060

@@ -9,6 +9,7 @@ using UnityEngine;
 public class FortuneTeller : Item
 {
     InteractableComponent interactableComponent;
+    private bool isFirst = true;
     private void Start()
     {
         interactableComponent = GetComponent<InteractableComponent>();
@@ -23,7 +24,11 @@ public class FortuneTeller : Item
 
     protected override IEnumerator CountTime()
     {
-        UIMgr.Instance().GetPanel<GamePanel>("GamePanel").InitDialogBox("每三张牌里藏着唯一的指引，选出其中“与众不同”的…它们会帮你看清前路的方向。",transform.position + new Vector3(0.5f,1f));
+        if (isFirst)
+        {
+            UIMgr.Instance().GetPanel<GamePanel>("GamePanel").InitDialogBox("每三张牌里藏着唯一的指引，选出其中“与众不同”的…它们会帮你看清前路的方向。",transform.position + new Vector3(0.5f,1f));
+            isFirst = false;
+        }
         yield return new WaitForSeconds(2f);
         //todo:跳转到卡牌游戏界面
         if (Inventory.Instance.itemInInventory.FirstOrDefault(x => x.id == 110))

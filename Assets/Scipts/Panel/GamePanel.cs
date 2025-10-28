@@ -117,7 +117,7 @@ public class GamePanel : BasePanel
         public void RemoveItem(Item item)
         {
             int _index = item.GetComponent<InventoryComponent>().index;
-            itemImages[_index].sprite = null;
+            itemImages[_index].sprite = ResMgr.Instance().Load<Sprite>("Art/tap-ui-物品栏小框框");
         }
 
     #endregion
@@ -129,7 +129,7 @@ public class GamePanel : BasePanel
     /// </summary>
     /// <param name="speak"></param>
     /// <param name="pos"></param>
-        public void InitDialogBox(string speak, Vector3 pos)
+        public void InitDialogBox(string speak, Vector3 pos=default)
         {
             if (canvas == null)
             {
@@ -153,22 +153,22 @@ public class GamePanel : BasePanel
                 return;
             }
     
-            // 世界坐标 -> 屏幕坐标
-            Camera worldCam = Camera.main;
-            Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(worldCam, pos);
-    
-            // 屏幕坐标 -> Canvas 本地坐标（ScreenSpace-Overlay 时传 null camera）
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, screenPoint, null, out Vector2 localPoint);
-            
-            // 确保 DialogImg 是 Canvas 的直接子物体
-            RectTransform dialogRect = DialogImg.rectTransform;
-            if (dialogRect.parent != canvasRect)
-            {
-                dialogRect.SetParent(canvasRect, false);
-            }
-    
+            // // 世界坐标 -> 屏幕坐标
+            // Camera worldCam = Camera.main;
+            // Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(worldCam, pos);
+            //
+            // // 屏幕坐标 -> Canvas 本地坐标（ScreenSpace-Overlay 时传 null camera）
+            // RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, screenPoint, null, out Vector2 localPoint);
+            //
+            // // 确保 DialogImg 是 Canvas 的直接子物体
+            // RectTransform dialogRect = DialogImg.rectTransform;
+            // if (dialogRect.parent != canvasRect)
+            // {
+            //     dialogRect.SetParent(canvasRect, false);
+            // }
+            //
             DialogImg.gameObject.SetActive(true);
-            dialogRect.anchoredPosition = localPoint;
+            // dialogRect.anchoredPosition = localPoint;
             if (SpeakText != null) SpeakText.text = speak;
             StartCoroutine(CloseDialogBox());
         }
