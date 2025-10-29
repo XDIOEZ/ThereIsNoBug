@@ -169,6 +169,7 @@ public class LittleGamePanel : BasePanel
                     UIMgr.Instance().GetPanel<GamePanel>("GamePanel").InitDialogBox("牌里藏着迷雾而非真相…不算明智的选择…",
                         transform.position + new Vector3(0.5f, 1f));
                 }
+                UIMgr.Instance().GetPanel<GamePanel>("GamePanel").StartFourSpeak();
                 //TODO：结束小游戏
                 //Inventory.Instance.items.FirstOrDefault(x => x.id == 201).GetComponent<FortuneTeller>().GetBack();
                 UIMgr.Instance().HidePanel("LittleGamePanel");
@@ -177,4 +178,6 @@ public class LittleGamePanel : BasePanel
         });
 
     }
+
+
 }

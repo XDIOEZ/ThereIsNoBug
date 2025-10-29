@@ -97,14 +97,14 @@ public class GamePlayManager : MonoSingleton<GamePlayManager>
                     {
                         Debug.Log("Card");
                         ChangeCard();
+
                     }
                     else if (hit.collider != null&& hit.collider.gameObject.GetComponent<FortuneTeller>())
                     {
                         //todo: 拿着塔罗牌点击占卜师
                         ShowCard();
                         //Inventory.Instance.RemoveItem(110);
-                        UIMgr.Instance().GetPanel<GamePanel>("GamePanel").InitDialogBox("若对这份指引存疑，可把牌交还于我——命运的路口…你仍有重新来过的机会…",
-                            transform.position + new Vector3(0.5f, 1f));
+                        
                     }
                     else 
                     {
