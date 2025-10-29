@@ -8,6 +8,8 @@ public class Tiger : MonoBehaviour
 {
     #region Variables
 
+    public static Tiger Instance;
+
     [Header("游戏设置")]
     public float eatSheepTime = 1f;
     public float AudioOffsetValue = 1f;
@@ -31,27 +33,46 @@ public class Tiger : MonoBehaviour
 
     void Start()
     {
+        Instance = this;
         AudioManager.Instance.OnAudioSettingsChanged.AddListener(CheckIsPass);
         skeletonPrefab.SetActive(false);
     }
 
-    void Update()
+void Update()
+{
+    if(currentPosition.Instance.Y_currentindex!=2)
     {
-        if(currentPosition.Instance.Y_currentindex!=2)
-        {
-            skeletonPrefab.SetActive(false);
-        }
-        else
-        {
-            skeletonPrefab.SetActive(true);
-        }
-        
-        // 2D射线检测点击老虎
-        if (Input.GetMouseButtonDown(0))
-        {
-            CheckTigerClick();
-        }
+        skeletonPrefab.SetActive(false);
     }
+    else
+    {
+        skeletonPrefab.SetActive(true);
+    }
+    
+    // 2D射线检测点击老虎
+    if (Input.GetMouseButtonDown(0))
+    {
+
+        CheckTigerClick();
+    }
+}
+
+/// <summary>
+/// 强制将老虎切换为睡眠状态
+/// </summary>
+public void ForceTigerToSleep()
+{
+    // 只有当老虎处于惊醒状态时才需要强制切换
+    if (isTigerAwake)
+    {
+        isTigerAwake = false;
+        Debug.Log("Tiger forced to sleep");
+        onTigerSleep?.Invoke();
+        
+        // 停止可能正在运行的睡眠协程，避免重复触发
+        StopCoroutine(PutTigerToSleep());
+    }
+}
 
     void OnDisable()
     {
@@ -91,7 +112,7 @@ public class Tiger : MonoBehaviour
 /// <summary>
 /// 检测玩家是否点击了老虎
 /// </summary>
-private void CheckTigerClick()
+public void CheckTigerClick()
 {
     if (currentPosition.Instance.Y_currentindex != 2)
         return;
@@ -107,6 +128,7 @@ private void CheckTigerClick()
     if (hit.collider != null && hit.collider.gameObject == gameObject)
     {
         Debug.Log("click tiger");
+            AudioManager.Instance.PlaySFX_("狮子吼",5f);
         // 只有当音量大于0.01f且老虎未惊醒时，点击老虎才会惊醒它
         if (AudioManager.Instance.bgmVolume > 0.01f && !isTigerAwake)
         {

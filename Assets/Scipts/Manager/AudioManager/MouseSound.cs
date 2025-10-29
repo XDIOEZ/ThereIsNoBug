@@ -29,24 +29,40 @@ public class MouseSound : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (AudioManager.Instance.bgmVolume <= 0f || SceneManager.GetActiveScene().name != "SceneTest")
+        //检查是不是在老虎的 场景 在老虎的场景下才播放音效
+        if(currentPosition.Instance.Y_currentindex == 2 && currentPosition.Instance.X_currentindex == 1)
         {
-            return;
+
+
+             if (AudioManager.Instance.bgmVolume <= 0f || SceneManager.GetActiveScene().name != "SceneTest")
+             {
+                 return;
+             }
+             audioSource.volume = AudioManager.Instance.bgmVolume;
+             // 检查鼠标是否移动
+             if (HasMouseMoved())
+             {
+                 // 检查是否满足播放条件
+                 if (CanPlaySound())
+                 {
+                     PlayMouseSound();
+                 }
+                 
+                 // 更新鼠标位置
+                 lastMousePosition = Input.mousePosition;
+             }
+
+
         }
-        // 检查鼠标是否移动
-        if (HasMouseMoved())
+        else
         {
-            // 检查是否满足播放条件
-            if (CanPlaySound())
-            {
-                PlayMouseSound();
-            }
-            
-            // 更新鼠标位置
-            lastMousePosition = Input.mousePosition;
+            Tiger.Instance.ForceTigerToSleep();
         }
+
+
+
     }
-    
+
     /// <summary>
     /// 检查鼠标是否移动
     /// </summary>
@@ -88,6 +104,7 @@ public class MouseSound : MonoBehaviour
             // 不再检查是否正在播放，直接播放
             audioSource.Play();
             lastPlayTime = Time.time;
+            Tiger.Instance.CheckTigerClick();
         }
     }
 }
