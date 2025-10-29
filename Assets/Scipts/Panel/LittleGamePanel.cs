@@ -4,6 +4,8 @@ using System.Linq;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 public enum E_MoveWay
 {
     In,
@@ -12,6 +14,8 @@ public enum E_MoveWay
 
 public class LittleGamePanel : BasePanel
 {
+    public event UnityAction LittleGameSrartAction;
+    public event UnityAction LittleGameEndAction;
     public List<Image> Images = new List<Image>();
     private int index = -1;
     protected override void Awake()
@@ -22,6 +26,7 @@ public class LittleGamePanel : BasePanel
             Images.Add(GetControl<Image>("Image"+i));
         }
         BronCard(1);
+        LittleGameSrartAction.Invoke();
     }
 
     protected override void OnClick(string btnName)
@@ -172,6 +177,8 @@ public class LittleGamePanel : BasePanel
                 UIMgr.Instance().GetPanel<GamePanel>("GamePanel").StartFourSpeak();
                 //TODO：结束小游戏
                 //Inventory.Instance.items.FirstOrDefault(x => x.id == 201).GetComponent<FortuneTeller>().GetBack();
+                LittleGameEndAction.Invoke();
+                
                 UIMgr.Instance().HidePanel("LittleGamePanel");
 
             }

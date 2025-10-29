@@ -3164,6 +3164,10 @@ PrefabInstance:
       value: 30.819626
       objectReference: {fileID: 0}
     - target: {fileID: 7209133770567021558, guid: 489e68c8ce5c56147b4dc15c26fc5338, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7209133770567021558, guid: 489e68c8ce5c56147b4dc15c26fc5338, type: 3}
       propertyPath: m_Offset.x
       value: -7.519086
       objectReference: {fileID: 0}
