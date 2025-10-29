@@ -21,9 +21,19 @@ public class FortuneTeller : Item
 
     protected override void Used()
     {
-        if (!Inventory.Instance.nowItem && isFirst == false)
+
+        if (Inventory.Instance.nowItem.id == 110)
+        {
+            StartCoroutine(CountTime());
             return;
-        StartCoroutine(CountTime());
+        }
+        else if (isFirst == false)
+        {
+            Debug.Log("台词4");
+            return;
+        }
+        else
+            StartCoroutine(CountTime());
 
     }
 
@@ -46,9 +56,10 @@ public class FortuneTeller : Item
             Inventory.Instance.RemoveItem(110);
         }
         UIMgr.Instance().ShowPanel<BasePanel>("LittleGamePanel", E_UI_Layer.Top);
-
-        this.gameObject.GetComponent<canInteract>().enabled = false;
-        this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        
+        GetBack();
+        // this.gameObject.GetComponent<canInteract>().enabled = false;
+        // this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
     }
 
     public void GetBack()
