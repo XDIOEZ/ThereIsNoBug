@@ -17,8 +17,7 @@ public class Key : Item
     {
         base.Used();
         Inventory.Instance.AddItem(111);
-        this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-        this.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
+        Destroy(this.gameObject);
         AudioManager.Instance.PlaySFX("道具拾取音效");
     }
 }

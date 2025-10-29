@@ -57,7 +57,7 @@ public class AreaTransition : MonoBehaviour
     
     public void MoveToAreaRight()
     {
-        if (currentXAreaIndex < areas.Length - 1 && !_isTransitioning)
+        if (currentXAreaIndex < areas.Length - 1)
         {
             int nextX = currentXAreaIndex + 1;
             int nextY = areaChange.currentYAreaIndex;
@@ -82,7 +82,7 @@ public class AreaTransition : MonoBehaviour
     
     public void MoveToAreaLeft()
     {
-        if (currentXAreaIndex > 0 && !_isTransitioning)
+        if (currentXAreaIndex > 0)
         {
             int nextX = currentXAreaIndex - 1;
             int nextY = areaChange.currentYAreaIndex;
