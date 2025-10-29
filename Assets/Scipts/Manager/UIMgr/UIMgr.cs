@@ -110,13 +110,14 @@ public class UIMgr : BaseMgrNoMono<UIMgr>
 
             //得到预设体身上的面板脚本
             T panel = obj.GetComponent<T>();
-            // 处理面板创建完成后的逻辑
-            if (callBack != null)
-                callBack(panel);
-
-            panel.ShowMe();
             //把面板存起来
             panelDic.Add(panelName, panel);
+
+            panel.ShowMe();
+
+            // 处理面板创建完成后的逻辑
+            if (callBack != null)
+                    callBack(panel);
             Debug.Log("GamePanel");
             //TODO：面板打开事件
             PanelOpened?.Invoke(panelName);
