@@ -7,10 +7,15 @@ public class MapItem : Item
 {
     InventoryComponent inventoryComponent;
 
-    private void Start()
+    private void OnEnable()
     {
         inventoryComponent = GetComponent<InventoryComponent>();
         inventoryComponent.OnUsed += Used;
+    }
+
+    private void Start()
+    {
+
     }
 
     protected override void Used()
