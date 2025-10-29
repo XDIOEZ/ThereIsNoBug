@@ -44,6 +44,7 @@ public class AreaChange : MonoBehaviour
         Scene loadScene = SceneManager.GetSceneByName("SceneTest");
         SceneManager.SetActiveScene(loadScene);
         
+        
         if (mainCamera == null)
             mainCamera = Camera.main;
         mainCamera.transform.position = new Vector3(30, 0, 0);
@@ -187,6 +188,7 @@ public class AreaChange : MonoBehaviour
     public void ResetVisitedY()
     {
         ResetEvent.RaiseEvent();
+        key.Instance.isFirst = false;
         
         for (int i = 0; i < visitedAreas.GetLength(0); i++)
         {

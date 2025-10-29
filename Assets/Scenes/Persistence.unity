@@ -835,8 +835,13 @@ MonoBehaviour:
   loadLastSceneEvent: {fileID: 11400000, guid: 9267e2e3e865a944fa606d55fb21b3e0, type: 2}
   afterScneLoadEvent: {fileID: 11400000, guid: 2226170425dd69443875ca92a34f9105, type: 2}
   fadeEvent: {fileID: 11400000, guid: e2dbd81b67091d5498a8bed7f6d7be1f, type: 2}
+<<<<<<< Updated upstream
   menuLoadScene: {fileID: 11400000, guid: 5e4cff89b12b3b5419bec461d74d3dfc, type: 2}
   menuScene: {fileID: 11400000, guid: 33edba7370c2f5b4da1838cd1e8c3403, type: 2}
+=======
+  menuLoadScene: {fileID: 11400000, guid: 3673f6dc52301f046b0b0000822ed7a0, type: 2}
+  menuScene: {fileID: 11400000, guid: 3673f6dc52301f046b0b0000822ed7a0, type: 2}
+>>>>>>> Stashed changes
   currentPosition: {x: 0, y: 0}
   fadeDuration: 2
 --- !u!1 &1633225649
