@@ -26,25 +26,30 @@ public class Sheep : Item
     protected override void Used()
     {
         base.Used();
-        
-        if(!isShaking)
-            ShakeObject();
-        if (!isOut)
-        {
-            this.gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder++;
-            isOut= true;
-        }
-        else
-        {
-            isOut = false;
-            this.gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder--;
-        }
-            
-            
-        
+        StartCoroutine(Move());
+        // if(!isShaking)
+        //     ShakeObject();
+        // if (!isOut)
+        // {
+        //     this.gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder++;
+        //     isOut= true;
+        // }
+        // else
+        // {
+        //     isOut = false;
+        //     this.gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder--;
+        // }
+
+
+
     }
-    
-    
+
+    IEnumerator Move()
+    {
+        transform.DOMoveY(-6f, 1.5f);
+        yield return new WaitForSeconds(1.5f);
+        gameObject.SetActive(false);
+    }
     
     void ShakeObject()
     {
