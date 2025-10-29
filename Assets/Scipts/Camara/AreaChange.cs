@@ -187,7 +187,7 @@ public class AreaChange : MonoBehaviour
     public void ResetVisitedY()
     {
         ResetEvent.RaiseEvent();
-        
+        key.Instance.isFirst = false;
         for (int i = 0; i < visitedAreas.GetLength(0); i++)
         {
             for (int j = 0; j < visitedAreas.GetLength(1); j++)

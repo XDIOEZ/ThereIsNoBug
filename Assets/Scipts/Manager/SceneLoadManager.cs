@@ -80,7 +80,7 @@ public class SceneLoadManager : SingletonMono<SceneLoadManager>
         //防止重复加载
         if(_isLoading)
             return;
-        Debug.Log("new scene load");
+        //Debug.Log("new scene load");
         _isLoading = true;
         this._sceneToLoad = sceneToLoad;
         this._positionToGo = positionToGo;

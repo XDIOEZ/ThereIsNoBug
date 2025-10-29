@@ -8,7 +8,7 @@ public class zhanbushi : MonoBehaviour
 {
     public GameObject skeletonAnimation;
     
-    public bool flag = false;
+    public bool isFirst = true;
 
     private void Start()
     {
@@ -27,16 +27,44 @@ public class zhanbushi : MonoBehaviour
             skeletonAnimation.SetActive(false);
         }
         
-        if (Inventory.Instance.nowItem.id == 110)
+        
+        var nowItem = Inventory.Instance != null ? Inventory.Instance.nowItem : null;
+
+        if (nowItem != null && !isFirst)
         {
-            this.gameObject.GetComponent<canInteract>().enabled = true;
-            //flag = true;
+            if (nowItem.id == 110)
+            {
+                var interact = GetComponent<canInteract>();
+                if (interact != null) interact.enabled = true;
+            }
+            else
+            {
+                var interact = GetComponent<canInteract>();
+                if (interact != null) interact.enabled = false;
+                var col = GetComponent<BoxCollider2D>();
+                if (col != null) col.enabled = false;
+            }
         }
-        else if(!Inventory.Instance.nowItem)
+        else if(nowItem == null && !isFirst)
         {
             Debug.Log("cancel interact");
-            this.gameObject.GetComponent<canInteract>().enabled = false;
-            this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            var interact = GetComponent<canInteract>();
+            if (interact != null) interact.enabled = false;
+            var col = GetComponent<BoxCollider2D>();
+            if (col != null) col.enabled = false;
         }
+        
+        
+        // if (Inventory.Instance.nowItem.id == 110)
+        // {
+        //     this.gameObject.GetComponent<canInteract>().enabled = true;
+        //     //flag = true;
+        // }
+        // else if(!Inventory.Instance.nowItem)
+        // {
+        //     Debug.Log("cancel interact");
+        //     this.gameObject.GetComponent<canInteract>().enabled = false;
+        //     this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        // }
     }
 }

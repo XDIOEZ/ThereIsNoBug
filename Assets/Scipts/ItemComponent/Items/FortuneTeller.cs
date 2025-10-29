@@ -35,7 +35,7 @@ public class FortuneTeller : Item
             isFirst = false;
             this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
             this.gameObject.GetComponent<canInteract>().enabled = false;
-            zhanbushi.flag = false;
+            zhanbushi.isFirst = false;
         }
 
         
@@ -49,7 +49,6 @@ public class FortuneTeller : Item
 
         this.gameObject.GetComponent<canInteract>().enabled = false;
         this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-        zhanbushi.flag = false;
     }
 
     public void GetBack()
