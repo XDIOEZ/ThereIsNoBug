@@ -411,6 +411,46 @@ public void Start()
     }
 
 /// <summary>
+/// 播放音效（通过实例化载体方式播放）
+/// </summary>
+/// <param name="name">音效名称（AudioClip.name）</param>
+/// <param name="pretime">提前时间（秒）</param>
+[Button("播放音效")]
+public void PlaySFX_(string name, float pretime = 0)
+{
+    if (!sfxDict.TryGetValue(name, out var clip))
+    {
+        Debug.LogWarning($"[AudioManager] 未找到SFX: {name}");
+        return;
+    }
+    
+    // 实例化一个载体对象来播放音效
+    GameObject sfxObject = new GameObject($"SFX_{name}");
+    sfxObject.transform.SetParent(transform);
+    AudioSource tempSource = sfxObject.AddComponent<AudioSource>();
+    
+    // 配置AudioSource
+    tempSource.clip = clip;
+    tempSource.volume = sfxVolume;
+    tempSource.outputAudioMixerGroup = sfxSource != null ? sfxSource.outputAudioMixerGroup : null;
+    
+    // 设置提前播放时间
+    if (pretime > 0 && pretime < clip.length)
+    {
+        tempSource.time = pretime;
+    }
+    
+    tempSource.Play();
+    
+    // 触发播放SFX事件
+    OnPlaySFX?.Invoke(name);
+    
+    // 计算剩余播放时间并销毁对象
+    float remainingTime = clip.length - (pretime > 0 && pretime < clip.length ? pretime : 0);
+    Destroy(sfxObject, remainingTime);
+}
+
+/// <summary>
 /// 从指定时间开始播放背景音乐
 /// </summary>
 /// <param name="name">音乐名</param>
