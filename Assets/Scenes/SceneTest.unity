@@ -1837,10 +1837,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 6964230910753975373, guid: 827b662f902d4dd4aa774f0e4853f93f, type: 3}
-      propertyPath: onPass.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 1516178063}
     - target: {fileID: 7166880554787128850, guid: 827b662f902d4dd4aa774f0e4853f93f, type: 3}
       propertyPath: m_Name
       value: Tiger
@@ -2054,11 +2050,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1516178063 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3894837455203597648, guid: db1e2094a48d40649a06f9eb326cdf32, type: 3}
-  m_PrefabInstance: {fileID: 3557947494202656122}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1516178064 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3200664787157467208, guid: db1e2094a48d40649a06f9eb326cdf32, type: 3}

@@ -87,27 +87,42 @@ public void ForceTigerToSleep()
 
     #region Game Logic
 
-    /// <summary>
-    /// 检查游戏是否通过
-    /// </summary>
-    public void CheckIsPass()
+   /// <summary>
+/// 检查游戏是否通过
+/// </summary>
+public void CheckIsPass()
+{
+    // 如果音量小于等于0.01f，游戏通过
+    if (AudioManager.Instance.bgmVolume <= 0.01f)
     {
-        // 如果音量小于等于0.01f，游戏通过
-        if (AudioManager.Instance.bgmVolume <= 0.01f)
-        {
-            Debug.Log("Game Pass");
-            
-            onPass?.Invoke();
+        Debug.Log("Game Pass");
+        
+        onPass?.Invoke();
 
-            CanTakeKey = true;
-        }
-        else if (AudioManager.Instance.bgmVolume >= 0.01f)
-        {
-            Debug.Log("Game Fail");
-            onfail?.Invoke();
-            CanTakeKey = false;
-        }
+        CanTakeKey = true;
+        
+        // 获取Collider组件并使其失去活性
+        Collider2D collider = GetComponent<Collider2D>();
+            StartCoroutine(PutTigerToSleep());
+            if (collider != null)
+{
+    // 将碰撞体的大小调为0
+    collider.enabled = false;
+    
+    // 或者调整碰撞体大小为0（根据碰撞体类型）
+    if (collider is BoxCollider2D boxCollider)
+    {
+        boxCollider.size = Vector2.zero;
     }
+}
+    }
+   /* else if (AudioManager.Instance.bgmVolume >= 0.01f)
+    {
+        Debug.Log("Game Fail");
+        onfail?.Invoke();
+        CanTakeKey = false;
+    }*/
+}
 
 /// <summary>
 /// 检测玩家是否点击了老虎
