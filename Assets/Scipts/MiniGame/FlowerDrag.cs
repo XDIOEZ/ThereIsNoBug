@@ -20,6 +20,7 @@ public class FlowerDrag : MonoBehaviour
     private bool isDragging = false;
     private FlowerChange flowerManager;
     private Collider2D flowerCollider;
+    private static bool isSwapping = false; // 是否正在交换中
 
     void Start()
     {
@@ -36,7 +37,7 @@ public class FlowerDrag : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (!enableDrag || !flowerCollider.enabled) return;
+        if (!enableDrag || !flowerCollider.enabled || isSwapping) return;
         StartDrag();
     }
 
@@ -56,6 +57,9 @@ public class FlowerDrag : MonoBehaviour
 
     private void StartDrag()
     {
+        // 如果正在交换过程中，不允许开始新的拖拽
+        if (isSwapping) return;
+        
         isDragging = true;
         originalPosition = transform.position;
         clickPosition = transform.position;
@@ -95,6 +99,9 @@ public class FlowerDrag : MonoBehaviour
 
         if (nearestFlower != null && nearestFlower != this)
         {
+            // 开始交换时设置标志位
+            isSwapping = true;
+            
             if (flowerManager != null)
             {
                 flowerManager.SwapFlowersByObjectWithYFixed(gameObject, nearestFlower.gameObject, clickPosition);
@@ -103,6 +110,9 @@ public class FlowerDrag : MonoBehaviour
             {
                 SwapPositionWithYFixed(nearestFlower.gameObject);
             }
+            
+            // 交换完成后重置标志位
+            StartCoroutine(ResetSwapFlag());
         }
         else
         {
@@ -113,6 +123,16 @@ public class FlowerDrag : MonoBehaviour
         {
             Debug.Log("✅ 顺序正确!");
         }
+    }
+
+    /// <summary>
+    /// 重置交换标志位
+    /// </summary>
+    private IEnumerator ResetSwapFlag()
+    {
+        // 等待一小段时间确保交换动画完成
+        yield return new WaitForSeconds(0.4f);
+        isSwapping = false;
     }
 
     /// <summary>
@@ -157,4 +177,9 @@ public class FlowerDrag : MonoBehaviour
     }
 
     public bool IsDragging() => isDragging;
+    
+    /// <summary>
+    /// 检查是否正在交换中
+    /// </summary>
+    public static bool IsSwapping() => isSwapping;
 }
