@@ -17,6 +17,11 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: a1343f1ee578df5419a69fa5fe1941b0
   m_SerializeEntries:
+  - m_GUID: 1c0b3d7163df4984c8c5eda48c9ad0aa
+    m_Address: Persistence
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2da22ced57ae49a4c961fee9786a7cb9
     m_Address: FlowerMiniGame_New
     m_ReadOnly: 0

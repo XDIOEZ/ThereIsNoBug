@@ -4,22 +4,32 @@
     <type fullname="AreaChange" preserve="all" />
     <type fullname="AreaTransition" preserve="all" />
     <type fullname="arrowShow" preserve="all" />
+    <type fullname="AudioManager" preserve="all" />
     <type fullname="AudioVolumeAutoChange" preserve="all" />
     <type fullname="BaseAudio" preserve="all" />
     <type fullname="Bell" preserve="all" />
     <type fullname="BellAudio" preserve="all" />
     <type fullname="canInteract" preserve="all" />
+    <type fullname="Card" preserve="all" />
     <type fullname="CG1" preserve="all" />
     <type fullname="Door" preserve="all" />
+    <type fullname="FadeCanvas" preserve="all" />
+    <type fullname="FadeEventSO" preserve="all" />
     <type fullname="FlowerChange" preserve="all" />
     <type fullname="FlowerDrag" preserve="all" />
     <type fullname="FortuneTeller" preserve="all" />
+    <type fullname="GamePlayManager" preserve="all" />
     <type fullname="GameSceneSO" preserve="all" />
     <type fullname="InteractableComponent" preserve="all" />
+    <type fullname="Inventory" preserve="all" />
     <type fullname="key" preserve="all" />
     <type fullname="Key" preserve="all" />
+    <type fullname="Map" preserve="all" />
+    <type fullname="MapPointsSO" preserve="all" />
     <type fullname="MenuUIController" preserve="all" />
     <type fullname="MouseSound" preserve="all" />
+    <type fullname="SceneLoadEventSO" preserve="all" />
+    <type fullname="SceneLoadManager" preserve="all" />
     <type fullname="Sheep" preserve="all" />
     <type fullname="Tiger" preserve="all" />
     <type fullname="UIText" preserve="all" />
@@ -38,10 +48,26 @@
     <type fullname="UnityEngine.AddressableAssets.Addressables" preserve="all" />
     <type fullname="UnityEngine.AddressableAssets.AssetReference" preserve="nothing" serialized="true" />
   </assembly>
+  <assembly fullname="Unity.RenderPipelines.Core.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="UnityEngine.Rendering.Volume" preserve="all" />
+    <type fullname="UnityEngine.Rendering.VolumeProfile" preserve="all" />
+    <type fullname="UnityEngine.Rendering.BoolParameter" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.Rendering.ClampedFloatParameter" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.Rendering.ClampedIntParameter" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.Rendering.ColorParameter" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.Rendering.MinFloatParameter" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.Rendering.TextureParameter" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.Rendering.Vector2Parameter" preserve="nothing" serialized="true" />
+  </assembly>
   <assembly fullname="Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="UnityEngine.Rendering.Universal.Bloom" preserve="all" />
+    <type fullname="UnityEngine.Rendering.Universal.ChromaticAberration" preserve="all" />
+    <type fullname="UnityEngine.Rendering.Universal.LensDistortion" preserve="all" />
     <type fullname="UnityEngine.Rendering.Universal.Light2D" preserve="all" />
     <type fullname="UnityEngine.Rendering.Universal.UniversalAdditionalCameraData" preserve="all" />
+    <type fullname="UnityEngine.Rendering.Universal.Vignette" preserve="all" />
     <type fullname="UnityEngine.Rendering.Universal.TemporalAA/Settings" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.Rendering.Universal.DownscaleParameter" preserve="nothing" serialized="true" />
   </assembly>
   <assembly fullname="Unity.ResourceManager, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" preserve="all">
     <type fullname="UnityEngine.ResourceManagement.ResourceProviders.AssetBundleProvider" preserve="all" />
@@ -60,6 +86,7 @@
     <type fullname="UnityEngine.CustomRenderTexture" preserve="all" />
     <type fullname="UnityEngine.GameObject" preserve="all" />
     <type fullname="UnityEngine.LightmapSettings" preserve="all" />
+    <type fullname="UnityEngine.LineRenderer" preserve="all" />
     <type fullname="UnityEngine.Material" preserve="all" />
     <type fullname="UnityEngine.MeshFilter" preserve="all" />
     <type fullname="UnityEngine.MeshRenderer" preserve="all" />
@@ -76,6 +103,7 @@
     <type fullname="UnityEngine.Events.UnityEvent" preserve="nothing" serialized="true" />
     <type fullname="UnityEngine.Events.ArgumentCache" preserve="nothing" serialized="true" />
     <type fullname="UnityEngine.Events.PersistentListenerMode" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.Events.UnityEvent`1[System.String]" preserve="nothing" serialized="true" />
   </assembly>
   <assembly fullname="UnityEngine.Physics2DModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="UnityEngine.BoxCollider2D" preserve="all" />
