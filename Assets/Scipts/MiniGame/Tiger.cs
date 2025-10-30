@@ -53,7 +53,7 @@ void Update()
     if (Input.GetMouseButtonDown(0))
     {
 
-        CheckTigerClick();
+        CheckTigerClick(true);
     }
 }
 
@@ -127,7 +127,7 @@ public void CheckIsPass()
 /// <summary>
 /// 检测玩家是否点击了老虎
 /// </summary>
-public void CheckTigerClick()
+public void CheckTigerClick(bool isClick)
 {
     if (currentPosition.Instance.Y_currentindex != 2)
         return;
@@ -143,6 +143,7 @@ public void CheckTigerClick()
     if (hit.collider != null && hit.collider.gameObject == gameObject)
     {
         Debug.Log("click tiger");
+            if(isClick)
             AudioManager.Instance.PlaySFX_("狮子吼",5f);
         // 只有当音量大于0.01f且老虎未惊醒时，点击老虎才会惊醒它
         if (AudioManager.Instance.bgmVolume > 0.01f && !isTigerAwake)

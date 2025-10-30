@@ -104,7 +104,7 @@ public class MouseSound : MonoBehaviour
             // 不再检查是否正在播放，直接播放
             audioSource.Play();
             lastPlayTime = Time.time;
-            Tiger.Instance.CheckTigerClick();
+            Tiger.Instance.CheckTigerClick(false);
         }
     }
 }
