@@ -22,7 +22,7 @@ public class FortuneTeller : Item
     protected override void Used()
     {
 
-        if (Inventory.Instance.nowItem.id == 110)
+        if (Inventory.Instance.nowItem != null&& Inventory.Instance.nowItem.id == 110)
         {
             StartCoroutine(CountTime());
             return;
