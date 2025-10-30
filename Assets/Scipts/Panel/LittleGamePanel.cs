@@ -18,6 +18,11 @@ public class LittleGamePanel : BasePanel
     public event UnityAction LittleGameEndAction;
     public List<Image> Images = new List<Image>();
     private int index = -1;
+    private bool isActive = false;
+    public bool IsActive
+    {
+        get { return isActive; }
+    }
     protected override void Awake()
     {
         base.Awake();
@@ -27,6 +32,9 @@ public class LittleGamePanel : BasePanel
         }
         BronCard(1);
         //LittleGameSrartAction?.Invoke();
+        //TODO:"小游戏开始"
+        isActive = true;
+        print("小游戏开始");
     }
 
     protected override void OnClick(string btnName)
@@ -186,5 +194,11 @@ public class LittleGamePanel : BasePanel
 
     }
 
-
+    override public void HideMe()
+    {
+        base.HideMe();
+        //TODO:"小游戏结束"
+        isActive = false;
+        print("小游戏结束");
+    }
 }
