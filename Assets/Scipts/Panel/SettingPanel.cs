@@ -7,12 +7,19 @@ public class SettingPanel:BasePanel
 {
     public Slider MusicSlider;
     public Slider SoundSlider;
+    private bool isActive = false;
+    public bool IsActive
+    {
+        get { return isActive; }
+    }
 
     protected override void Awake()
     {
         base.Awake();
         MusicSlider = GetControl<Slider>("MusicSlider");
         SoundSlider = GetControl<Slider>("SoundSlider");
+        //TODO:设置界面打开
+        isActive = true;
     }
 
     protected override void OnClick(string btnName)
@@ -54,5 +61,12 @@ public class SettingPanel:BasePanel
                 print("音效大小为"+value);
                 break;
         }
+    }
+
+    public override void HideMe()
+    {
+        base.HideMe();
+        //TODO:设置界面关闭
+        isActive = false;
     }
 }
