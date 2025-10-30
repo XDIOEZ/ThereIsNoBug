@@ -51,6 +51,10 @@ public class GamePlayManager : MonoSingleton<GamePlayManager>
             {
                 if (Input.GetMouseButtonDown(0))
                 {
+                    if(UIMgr.Instance().GetPanel<LittleGamePanel>("LittleGamePanel")&& UIMgr.Instance().GetPanel<LittleGamePanel>("LittleGamePanel").IsActive)
+                        return;
+                    if(UIMgr.Instance().GetPanel<SettingPanel>("SettingPanel")&& UIMgr.Instance().GetPanel<SettingPanel>("SettingPanel").IsActive)
+                        return;
                     Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             
                     RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
@@ -72,6 +76,10 @@ public class GamePlayManager : MonoSingleton<GamePlayManager>
             {
                 if (Input.GetMouseButtonDown(0))
                 {
+                    if(UIMgr.Instance().GetPanel<LittleGamePanel>("LittleGamePanel")&&UIMgr.Instance().GetPanel<LittleGamePanel>("LittleGamePanel").IsActive)
+                        return;
+                    if(UIMgr.Instance().GetPanel<SettingPanel>("SettingPanel")&& UIMgr.Instance().GetPanel<SettingPanel>("SettingPanel").IsActive)
+                        return;
                     Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             
                     RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero,interactableLayer);
@@ -87,6 +95,10 @@ public class GamePlayManager : MonoSingleton<GamePlayManager>
 
             if (Input.GetMouseButtonDown(0))
             {
+                if(UIMgr.Instance().GetPanel<LittleGamePanel>("LittleGamePanel")&&UIMgr.Instance().GetPanel<LittleGamePanel>("LittleGamePanel").IsActive)
+                    return;
+                if(UIMgr.Instance().GetPanel<SettingPanel>("SettingPanel")&& UIMgr.Instance().GetPanel<SettingPanel>("SettingPanel").IsActive)
+                    return;
                 if (Inventory.Instance.nowItem != null && Inventory.Instance.nowItem.TryGetComponent<CardItem>(out var component))
                 {
                     Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -102,7 +114,7 @@ public class GamePlayManager : MonoSingleton<GamePlayManager>
                     else if (hit.collider != null&& hit.collider.gameObject.GetComponent<FortuneTeller>())
                     {
                         //todo: 拿着塔罗牌点击占卜师
-                        ShowCard();
+                        UIMgr.Instance().GetPanel<GamePanel>("GamePanel").ToggleSelectByUI(UIMgr.Instance().GetPanel<GamePanel>("GamePanel").uiSelectedIndex);
                         //Inventory.Instance.RemoveItem(110);
                         
                     }

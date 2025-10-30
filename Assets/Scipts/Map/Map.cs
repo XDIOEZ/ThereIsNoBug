@@ -74,7 +74,7 @@ public class Map : MonoBehaviour
             pointsOnWay.AddRange(DrawWays(new MapPoint(new Vector2(3,0), 1)));
             lineRenderer.startWidth = lineSize;
             lineRenderer.endWidth = lineSize;
-            lineRenderer.sortingOrder = 4;
+            lineRenderer.sortingOrder = 11;
             lineRenderer.positionCount = pointsOnWay.Count;
             for (int i = 0; i < pointsOnWay.Count; i++)
             {
